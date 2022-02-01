@@ -1,0 +1,279 @@
+﻿<!doctype html>
+@using AlmaCMS.Models;
+@using AlmaCMS.Repositories;
+@using AlmaCMS.ViewModels;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/content/images/favicon.png" rel="shortcut icon" type="image/png">
+    <link rel="stylesheet" href="~/Content/profile/css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="~/Content/profile/css/normalize.css">
+    <link rel="stylesheet" href="~/Content/profile/css/font-awesome.min.css">
+    <link href="~/Content/css/custom-bootstrap-margin-padding.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/profile/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/profile/css/transitions.css">
+    <link rel="stylesheet" href="~/Content/profile/css/flags.css">
+    <link rel="stylesheet" href="~/Content/profile/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/profile/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/Content/profile/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/profile/css/scrollbar.css">
+    <link rel="stylesheet" href="~/Content/profile/css/chartist.css">
+    <link rel="stylesheet" href="~/Content/profile/css/main.css">
+    <link rel="stylesheet" href="~/Content/profile/css/dashboard.css">
+    <link rel="stylesheet" href="~/Content/profile/css/color.css">
+    <link rel="stylesheet" href="~/Content/profile/css/responsive.css">
+    <link rel="stylesheet" href="~/Content/profile/css/dbresponsive.css">
+    <link href="~/Content/css/Pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="~/Content/profile/css/Persian.css" rel="stylesheet" />
+    <script src="~/Content/profile/js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link href="~/Content/profile/plugins/placeholder/css/jquery.flying-labels.css" rel="stylesheet" />
+    <style>
+        .modelmenulogo {
+            height: 18px;
+            margin-left: 2px;
+        }
+    </style>
+    @RenderSection("Styles", false)
+</head>
+<body style="direction:rtl">
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    { @Html.AntiForgeryToken()}
+
+    @helper GetCartCount()
+{
+    if (this.Context.Request.Cookies["NSShopCartGLB"] != null)
+    {
+        List<AlmaCMS.ViewModels.VMCartItem> cartitems = new List<AlmaCMS.ViewModels.VMCartItem>();
+        HttpCookie ShoppingCartCoolkie = this.Context.Request.Cookies["NSShopCartGLB"];
+        var jsCartItems = Server.UrlDecode(ShoppingCartCoolkie.Value.ToString());
+        cartitems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AlmaCMS.ViewModels.VMCartItem>>(jsCartItems);
+        if (cartitems.Count > 0)
+        {
+            <span class="order-count" style="float:left;">@cartitems.Count</span>
+        }
+    }
+    else
+    {
+    }
+}
+
+
+
+
+    @helper GetUserName()
+{
+    if (User.IsInRole("Confirmed"))
+    {
+        var db = new DB_AlmaCmsEntities();
+        var RepUserInfo = new AlmaCMS.Repositories.UserInfoRepositiry(db);
+
+        var currentUserInfo = RepUserInfo.GetByUserID(User.Identity.GetUserId());
+
+        if (currentUserInfo != null)
+        {
+            <span>@currentUserInfo.Name</span>
+        }
+        else
+        {
+            Html.Raw("");
+        }
+    }
+    else
+    {
+        Html.Raw("");
+    }
+}
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        <header id="tg-dashboardheader" class="tg-dashboardheader tg-haslayout" style="padding:15px 60px">
+            <nav id="tg-nav" class="tg-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="tg-navigation" class="collapse navbar-collapse tg-navigation" >
+                    <ul>
+                        <li>
+                            <a href="/Home">صفحه اصلی</a>
+                        </li>
+                     
+
+
+                    </ul>
+                </div>
+            </nav>
+            <div class="tg-leftbox">
+
+                <a href="/Cart" class="p-0">
+                    <div class="btn green" type="button" style="color:#fff !important;padding:0 !important;">
+                        <div class="" style="color:#fff !important;  padding: 5px 7px ;background-color:#62b965;float:right;">
+                            <i class="pe-7s-cart" style="color: #fff !important;  padding: 5px;font-size:20px;"></i>
+                        </div>
+                        <div class="" style="padding: 5px 14px;color:#fff !important;float:right;">سبد خرید </div>
+                        @GetCartCount()
+                    </div>
+                </a>
+
+            </div>
+            <div id="tg-sidebarwrapper" class="tg-sidebarwrapper">
+                <span id="tg-btnmenutoggle" class="tg-btnmenutoggle rotate">
+                    <i class="fa fa-angle-left"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="67" viewBox="0 0 20 67">
+                        <metadata>
+                            <?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+                            <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c138 79.159824, 2016/09/14-01:09:01">
+                                <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                    <rdf:Description rdf:about="" />
+                                </rdf:RDF>
+                            </x:xmpmeta>
+                            <?xpacket end="w"?>
+                        </metadata>
+                        <path id="bg" class="cls-1" d="M20,27.652V39.4C20,52.007,0,54.728,0,67.265,0,106.515.026-39.528,0-.216-0.008,12.32,20,15.042,20,27.652Z" />
+                    </svg>
+                </span>
+                <div id="tg-verticalscrollbar" class="tg-verticalscrollbar">
+                    <strong class="tg-logo"><a href="/" target="_blank"><img src="~/Content/image/logo/logo-dark.png" alt="وب سایت"></a></strong>
+                    <div class="tg-user">
+                        <div class="tg-usercontent">
+                            <h3><b style="color:#fff">کاربر محترم : </b></h3>
+                            <a href="/Manage">
+                              <h3>@GetUserName()</h3>
+                                <h3>@User.Identity.Name</h3>
+                            </a>
+                            @*<a href="/Profile/EditInfo"><h4 style="color:#FAA419;">تکمیل اطلاعات</h4></a>*@
+                        </div>
+                    </div>
+                    <nav id="tg-navdashboard" class="tg-navdashboard">
+                        <ul>
+                            <li>
+                                <a href="/UserProfile">
+                                    <i class="icon-chart-bars"></i>
+                                    <span> حساب کاربری</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Profile/EditInfo">
+                                    <i class="icon-cog"></i>
+                                    <span> ویرایش اطلاعات</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Profile/Favorit">
+                                    <i class="icon-license"></i>
+                                    <span> علاقه مندی ها</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/UserProfile/Orders">
+                                    <i class="icon-list"></i>
+                                    <span>تاریخچه سفارشات</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/UserProfile/Payments">
+                                    <i class="icon-list"></i>
+                                    <span>تاریخچه پرداخت ها</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/UserProfile/userbag">
+                                    <i class="icon-list"></i>
+                                    <span>کیف پول</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/UserProfile/Messages">
+                                    <i class="icon-list"></i>
+                                    <span>پیام ها</span>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="/UserProfile/ChangePassword">
+                                    <i class="icon-make-group"></i>
+                                    <span> تغییر رمز عبور</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i class="icon-exit"></i>
+                                    <span>خروج</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        @RenderBody()
+        <footer id="tg-footer" class="tg-footer tg-haslayout">
+            <nav class="tg-footernav">
+                <ul>
+                    <li>
+                        <a href="http://nationalsoft.net/" class="inlineblock">طراحی وب سایت</a>
+                         و 
+                        <a href="http://nationalsoft.net/" class="inlineblock">سئو</a>
+                         : 
+                        <a href="http://nationalsoft.net/" class="inlineblock">نشنال سافت</a>
+                    </li>
+                </ul>
+            </nav>
+            <span class="tg-copyright"> © کليه حقوق اين سايت متعلق به  می‌باشد. </span>
+        </footer>
+
+    </div>
+
+    <script src="~/Content/profile/js/jquery-library.js"></script>
+    <script src="~/Content/profile/js/bootstrap.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&language=en"></script>
+    <script src="~/Content/profile/js/tinymce/tinymce.min.js"></script>
+    <script src="~/Content/profile/js/responsivethumbnailgallery.js"></script>
+    <script src="~/Content/profile/js/jquery.flagstrap.min.js"></script>
+    <script src="~/Content/profile/js/backgroundstretch.js"></script>
+    <script src="~/Content/profile/js/owl.carousel.min.js"></script>
+    <script src="~/Content/profile/js/jquery.vide.min.js"></script>
+    <script src="~/Content/profile/js/jquery.collapse.js"></script>
+    <script src="~/Content/profile/js/scrollbar.min.js"></script>
+    <script src="~/Content/profile/js/chartist.min.js"></script>
+    <script src="~/Content/profile/js/prettyPhoto.js"></script>
+    <script src="~/Content/profile/js/jquery-ui.js"></script>
+    <script src="~/Content/profile/js/countTo.js"></script>
+    <script src="~/Content/profile/js/appear.js"></script>
+    <script src="~/Content/profile/js/gmap3.js"></script>
+    <script src="~/Content/profile/js/main.js"></script>
+    <script src="~/Content/profile/plugins/placeholder/js/jquery.flying-labels.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+    <script>
+        $("input,textarea").fly({ fadeInTime: 100 });
+        $("#CreateYear").fly({ fadeInTime: 100 });
+    </script>
+    @RenderSection("Scripts", false)
+    <script>
+    $.fn.digits = function () {
+        return this.each(function () {
+            $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        })
+    }
+    $(".nsprice").digits();
+    $(".b-goods-price-old").digits();
+    $(".b-goods-price").digits();
+    </script>
+
+</body>
+</html>

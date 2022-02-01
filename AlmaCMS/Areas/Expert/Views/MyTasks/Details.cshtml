@@ -1,0 +1,215 @@
+﻿@model AlmaCMS.Models.VWTaskList
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Expert/Views/Shared/_LayoutDashboardExpert.cshtml";
+    var AnswerList = ViewBag.AnswerList as List<AlmaCMS.Models.VWTaskAnswer>;
+    var TaskDocs = ViewBag.TaskDocs as List<AlmaCMS.Models.TaskDoc>;
+}
+@{
+    var TaskInfo = ViewBag.TaskInfo as AlmaCMS.Models.VWTaskList;
+
+    var DocList = ViewBag.TaskDocs as List<AlmaCMS.Models.TaskDoc>;
+}
+@helper getAnsweDocs(int answerid)
+{
+    AlmaCMS.Models.DB_AlmaCmsEntities db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+    var doclist = db.TaskAnwerDocs.Where(c => c.TaskAnswerId == answerid).ToList();
+    foreach (var item in doclist)
+    {
+        <li><a target="_blank" href="~/UploadedFiles/@item.FileName"><img class="img-thumbnail img-responsive" style="width:70px" alt="@item.Title" src="~/Content/Images/fileicon.png">@item.Title</a></li>
+
+    }
+}
+@helper getUsers(int taskid)
+{
+    AlmaCMS.Models.DB_AlmaCmsEntities db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+    AlmaCMS.Repositories.TasksRepository reptask = new AlmaCMS.Repositories.TasksRepository(db);
+    var userList = reptask.GetDapperTaskUsers(taskid).ToList();
+    foreach (var item in userList)
+    {
+
+        <span class="label label-info">
+            @item.Name
+        </span>
+    }
+}
+<link href="~/Areas/Manage/Content/css/alertify.rtl.min.css" rel="stylesheet" />
+<link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script src="~/ckeditor/adapters/jquery.js"></script>
+<div class="tg-dashboardbanner">
+    <h1>ثبت پاسخ</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/expert/profile">داشبورد</a></li>
+        <li><a href="/expert/mytasks">وظایف</a></li>
+        <li class="tg-active">ثبت وظیفه</li>
+    </ol>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="panel-body">
+                            <div class="col-xs-12 " style="">
+                                <div class="">
+
+
+                                    <input type="hidden" name="TaskId" value="@TaskInfo.id" />
+                                    <div class="col-xs-12 col-md-10 col-lg-10">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4" style="padding-top:6px;">ثبت وضعیت سفارش : </label>
+
+                                            @using (Html.BeginForm("ChangeState", "MyTasks"))
+                                            {       @Html.AntiForgeryToken()
+    <input type="hidden" name="TaskId" value="@TaskInfo.id" />
+                                                <div class="col-md-5">
+                                                    <select class="form-control" name="statusID" id="ddlStatuses">
+
+                                                        @foreach (var item in ViewBag.StatusList as List<AlmaCMS.Models.TaskStatu>)
+                                                        {
+                                                            <option value="@item.id">
+                                                                @item.Title
+                                                            </option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div class="col-xs-12 col-md-3" style="padding-left:0px">
+                                                    <button id="btnfilter" type="submit" class="btn btn-blue btn-block btn-add"><i class="fa fa-check"></i>  ثبت وضعیت</button>
+
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div id="PrintFactor">
+                                        <div class="col-md-12">
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-3 pull-right"><a id="btnReply" href="/Expert/MyTasks/sendAnswer/@TaskInfo.id" class="btn btn-success btn-block  "><i class="fa fa-mail-reply"></i> ثبت پاسخ</a></div>
+                                            </div>
+                                            <div class="clear-fix"></div>
+                                            <div class="col-md-12">
+                                                <label class="control-label">
+                                                    تاریخ ایجاد :
+                                                </label>
+                                                @Model.persiandateinsert
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="control-label">
+                                                    ایجاد کننده :
+                                                </label>
+                                                @Model.CreatorId
+
+                                            </div>
+                                            <label class="control-label">
+                                                عنوان :
+                                            </label>
+                                            @Model.Title
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label">
+                                                کاربران
+                                            </label>
+                                            @getUsers(Model.id)
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label">
+                                                تاریخ ایجاد
+                                            </label>
+                                            @Model.persiandateinsert
+
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label class="control-label">
+                                                تاریخ اتمام مهلت
+                                            </label>
+                                            @Model.persiandateinsert
+
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label class="control-label">
+                                                شرح وظیفه
+                                            </label>
+                                            @Html.Raw(Model.Descriptions)
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="control-label">
+                                                    فایل های پیوست
+                                                </label>
+
+                                            </div>
+                                            <hr>
+                                            <h4><i class="fa fa-paperclip"></i> &nbsp; <strong>پیوست ها <span></span></strong></h4>
+                                            <ul class="list-unstyled list-inline mail-attachment">
+                                                @foreach (var item in DocList)
+                                                {
+
+                                                    <li><a target="_blank" href="~/UploadedFiles/@item.FileName"><img class="img-thumbnail img-responsive" style="width:70px" alt="@item.Title" src="~/Content/Images/fileicon.png">@item.Title</a></li>
+                                                }
+                                            </ul>
+                                            <hr>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    @foreach (var item in AnswerList)
+                    {
+                        <div class="mail-box">
+                            <div class="mail-box-header clearfix">
+                                <h3 class="mail-title">@item.Title </h3>
+                                <div class="pull-right tooltip-demo">
+
+                                </div>
+                                <div class="mail-tools clearfix">
+                                    <h5></h5>
+                                    <p><span class="pull-right">@item.answerpersiandateinsert</span><span>پاسخ از : @item.Name </span></p>
+                                </div>
+                            </div>
+                            <div class="mail-body">
+                                @Html.Raw(item.Descriptions)
+                                <hr>
+                                <h4><i class="fa fa-paperclip"></i> &nbsp; <strong>پیوست ها <span></span></strong></h4>
+                                <ul class="list-unstyled list-inline mail-attachment">
+                                    @getAnsweDocs(item.id)
+                                </ul>
+                                <hr>
+
+                            </div>
+                        </div>
+                    }
+
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>
+

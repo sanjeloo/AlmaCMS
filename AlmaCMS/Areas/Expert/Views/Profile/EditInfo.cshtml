@@ -1,0 +1,81 @@
+﻿@model AlmaCMS.ViewModels.VMUserInfo
+
+@{
+    ViewBag.Title = "ویرایش اطلاعات";
+    Layout = "~/Areas/Expert/Views/Shared/_LayoutDashboardExpert.cshtml";
+}
+<div class="tg-dashboardbanner">
+    <h1>ویرایش اطلاعات</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/expert/Profile">حساب کاربری</a></li>
+        <li class="tg-active">ویرایش اطلاعات</li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:0px;">
+                            <div class="tg-dashboardboxtitle">
+                                <h2> ویرایش اطلاعات </h2>
+                            </div>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="tg-dashboardholder" style="padding-bottom:0px;">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.id)
+                                    @Html.HiddenFor(model => model.UserId)
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "نام و نام خانوادگی" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "تاریخ تولد" } })
+                                            @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.CodeMelli, new { htmlAttributes = new { @class = "form-control", @placeholder = "کد ملی" } })
+                                            @Html.ValidationMessageFor(model => model.CodeMelli, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control",@placeholder="شماره ثابت" } })
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", @placeholder = "شماره موبایل" } })
+                                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "آدرس" } })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12" style="margin-bottom:30px;">
+                                        <button class="tg-btn tg-btnactionregister mt-30" type="submit"><i class="fa fa-check"></i> ثبت اطلاعات</button>
+                                        <button class="tg-btn tg-cancel  mt-30" type="button"><i class="fa fa-times"></i> انصراف</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>

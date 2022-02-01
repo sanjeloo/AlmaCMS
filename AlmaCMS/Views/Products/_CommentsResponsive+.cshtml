@@ -1,0 +1,204 @@
+﻿@model List<AlmaCMS.Models.ProductReview>
+@using AlmaCMS.Helpers;
+<link href="~/Content/css/alertify.rtl.min.css" rel="stylesheet" />
+<section class="section-comment mt-0">
+    @if (Model.Count > 0)
+    {
+        <h2 class="ui-title-inner mt-0">نظرات کاربران - @Model.Count نفر</h2>
+        <ul class="comments-list list-unstyled">
+            @foreach (var item in Model)
+        {
+        <li>
+            <article class="comment clearfix">
+                <div class="comment-face">
+                    <span style="margin-bottom: 0;display: inline-table;" class="starsRateAll stars-sprite-@item.Rate"></span>
+                    <img class="img-responsive" src="~/Content/image/useravatar.jpg" alt="@item.Title">
+                    <p class="comment-datetime">
+                        <time datetime="@item.DateInsert">@item.DateInsert.Value.ToPersianShortDate()</time>
+                    </p>
+                </div>
+                <div class="comment-inner">
+                    <header class="comment-header">
+                        <cite class="comment-author">@item.Name</cite>
+                    </header>
+                    <div class="comment-body">
+                        <span class="comment-author">@item.Title</span>
+                        <p class="colorp">
+                            @item.Comment
+                        </p>
+                    </div>
+                </div>
+            </article>
+            @if (!string.IsNullOrEmpty(item.Answer))
+                {
+                <div style="margin-top:15px;border-radius:5px;padding:5px 10px;border:solid 1px #ccc;background-color:#f7f7f7">
+                    <span style="color:blue;">مدیر سایت : </span>
+                </div>
+                <ul class="children list-unstyled">
+                    <li>
+                        <article class="comment clearfix">
+                            <div class="comment-face">
+                                <img class="img-responsive" src="~/Content/image/posts/face/2.jpg" alt="face">
+                            </div>
+                            <div class="comment-inner">
+                                <header class="comment-header">
+                                    <cite class="comment-author">مدیر سایت</cite><span class="comment-datetime">
+
+                                    </span>
+                                </header>
+                                <div class="comment-body">
+                                    <p class="colorp">
+                                        @item.Answer
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+                }
+
+        </li>
+        }
+        </ul>
+    }
+    else
+    {
+        <h2 class="ui-title-inner">اولین نفری باشید که نظر میدهد !</h2>
+    }
+</section>
+<section class="section-reply-form" id="section-reply-form">
+    <div class="form-reply ui-form-2">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-left width-100"><div id="shop"></div></div>
+                <label for="shop" class="pull-left ml-15" style="padding-top:3px;">امتیاز دهی</label>
+                <div style="display:none">
+                    <select id="ddlRWRate" class="drpdn">
+                        <option value="1">
+                            1
+                        </option>
+                        <option value="2">
+                            2
+                        </option>
+                        <option value="3">
+                            3
+                        </option>
+                        <option value="4">
+                            4
+                        </option>
+                        <option selected value="5">
+                            5
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="txtRWName" id="txtRWName" placeholder="نام">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="txtRWEmail" id="txtRWEmail" placeholder="ایمیل">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="tel" name="txtRWTitle" id="txtRWTitle" placeholder="عنوان">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <textarea class="form-control mb-0" rows="6" name="txtComments" id="txtComments" placeholder="پیام"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="text-left">
+                    <button class="ui-form__btn btn btn-primary color-box-price" onclick="AddProductCommentRes();" id="BtnAddComment">ثبت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Content/js/jquery-1.10.2.min.js"></script>
+<script src="~/Content/js/jquery.validate.min.js"></script>
+<script src="~/Content/js/EmailValidation.js"></script>
+<script>
+    //$('#BtnProductAddComment').click();
+
+    function AddProductCommentRes() {
+
+        var valName = $('#txtRWName').val();
+        var valEmail = $('#txtRWEmail').val();
+        var valTitle = $('#txtRWTitle').val();
+        var valComments = $('#txtComments').val();
+        var valRate = $('#ddlRWRate').val();
+        var valPID = $("#PublicProductID").val();
+        if (valName == '') {
+            alertify.warning('نام را وارد نمایید');
+            $('#txtRWName').focus();
+            return;
+        }
+
+
+        if (valEmail == '') {
+            alertify.warning('ایمیل را وارد نمایید');
+            $('#txtRWEmail').focus();
+            return;
+        }
+
+
+        if (validateEmail(valEmail) == false) {
+            alertify.warning('ایمیل وارد شده صحیح نمی باشد ');
+            $('#txtRWEmail').focus();
+            return;
+        }
+        if (valTitle == '') {
+            alertify.warning('عنوان نظر را وارد نمایید');
+            $('#txtRWTitle').focus();
+            return;
+        }
+
+        if (valComments == '') {
+            alertify.warning('متن نظر را وارد نمایید');
+            $('#txtComments').focus();
+            return;
+        }
+
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        jQuery.ajax({
+            url: '@Url.Action("Func/AddComments", "Products")',
+            data: { __RequestVerificationToken: token, ProductID: valPID, Name: valName, Email: valEmail, Title: valTitle, Comment: valComments, Rate: valRate },
+            datatype: "json",
+            type: "post",
+
+            success: function (result) {
+
+
+                if (result == "1") {
+                    alertify.success("نظر شما با موفقیت ثبت شد");
+
+                    $('#txtRWName').val('');
+                    $('#txtRWEmail').val('');
+                    $('#txtRWTitle').val('');
+                    $('#txtComments').val('');
+                }
+                else {
+                    alertify.error('خطا در درج اطلاعات');
+                }
+
+
+
+
+            },
+            error: function () {
+                alertify.error('خطا در ارسال اطلاعات');
+                $('.validate-req-msg').slideDown(300);
+            }
+
+
+        });
+    }
+
+</script>

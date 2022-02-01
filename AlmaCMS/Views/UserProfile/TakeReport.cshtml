@@ -1,0 +1,110 @@
+﻿@model List<AlmaCMS.Models.BagTransaction>
+@{
+    ViewBag.Title = "گزارش شارژ حساب";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div class="tg-dashboardbanner">
+    <h1>گزارش برداشت</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/userProfile">حساب کاربری</a></li>
+        <li class="tg-active">گزارش برداشت</li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:0px;">
+                            <div class="tg-dashboardboxtitle">
+                                <h2> گزارش برداشت کیف پول </h2>
+                            </div>
+                            <div class="tg-dashboardholder" style="padding-bottom:0px;">
+                                <div style="border:solid 1px #ccc;margin-bottom:20px;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" style="margin-bottom:0px !important">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:50px;">ردیف</th>
+                                                    <th>زمان</th>
+                                                 
+                                                    <th style="width:150px;">قیمت (تومان)</th>
+                                                    <th>توضیحات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int RowIndex = 1;
+                                                }
+                                                @foreach (var item in Model)
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <tr>
+                                                        <td>
+                                                            <span class="tblf">
+                                                                @Html.Raw(RowIndex)
+                                                            </span>
+                                                        </td>
+                                                        <td style="text-align:center;vertical-align:middle">
+                                                            <span class="nsprice tblf">
+                                                                @AlmaCMS.Helpers.Extentions.ToPersianShortDate(item.dateInsert.Value)
+                                                            </span>
+                                                        </td>
+                                                        <td style="text-align:center;vertical-align:middle">
+                                                            <span class="nsprice tblf">
+                                                                @Html.DisplayFor(modelItem => item.MinusPrice)
+                                                            </span>
+                                                        </td>
+                                                        <td style="text-align:center;vertical-align:middle">
+                                                            <span class="nsprice tblf">
+                                                                @Html.DisplayFor(modelItem => item.Descriptions)
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    RowIndex++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="DeleteItem" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">حذف محصول</h4>
+            </div>
+            <div class="modal-body" style="padding:20px 15px !important">
+                آیا محصول از لیست علاقه مندی ها حذف شود ؟
+            </div>
+            <div class="modal-footer">
+                <form action="DeleteFavorit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="Favoritid" id="ProductId" />
+                    <button class="btn btn-danger pull-right" type="submit">
+                        <a href="javascript:void(0);" id="BtnDeleteItem" class="delete" style="color:#fff;">بله ! حذف شود</a>
+                    </button>
+                </form>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">منصرف شدم</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function DeleteItem(favoritid) {
+        $("#ProductId").val(favoritid);
+        $("#DeleteItem").modal('show');
+    }
+</script>
+

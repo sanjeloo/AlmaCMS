@@ -1,0 +1,195 @@
+﻿@model IEnumerable<AlmaCMS.ViewModels.VMOrderProductSite>
+@{
+    ViewBag.Title = "تائید سفارش و پرداخت";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+   
+}
+
+
+
+
+<style>
+    .alertP {
+        margin-top: 0px !important;
+        margin-bottom: 10px !important;
+        padding: 10px 15px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .printlogo {
+        cursor: pointer;
+        font-size: 11px;
+        float: left;
+        direction: ltr;
+        padding: 5px 15px 0;
+    }
+
+        .printlogo i {
+            font-size: 16px;
+        }
+
+        .printlogo:hover {
+            text-decoration: none !important;
+        }
+
+    .article p {
+        margin-bottom: 5px !important;
+        font-size: 13px !important;
+        margin-top: 5px !important;
+    }
+</style>
+
+
+@{
+    var orderinfo = ViewBag.OrderInfo as AlmaCMS.ViewModels.VMOrderList;
+}
+
+<div class="cart-main">
+    <div class="d-block">
+        <div class="main-container">
+            <div class="col-lg-12 col-md-12 col-xs-12 float-right">
+                <div class="col-xs-12" style="background-color:#fff;padding:19px 15px;box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);border: 1px solid #ebeced;margin-top:7px;margin-bottom:25px;">
+                    <div style="margin-bottom:0px;">
+                        <h2 style="margin:0px;font-size:16px !important">تائید سفارش و پرداخت</h2>
+                    </div>
+
+                    <div style="margin-top:15px;">
+                        <div class="col-md-8 col-md-offset-2">
+                            <p class="alert alertP alert-success">سفارش شما با موفقیت ثبت شد.</p>
+                            <p class="alert alertP alert-info">برای مشاهده فاکتور به پروفایل خود مراجعه فرمایید.</p>
+                        </div>
+
+                        <div class="col-md-8 col-md-offset-2">
+                            @*<a class="printlogo" onclick='printDiv();'><i class="fa fa-print"></i> پرینت فاکتور</a>*@
+                            <div id="DivIdToPrint" class="factorhidden">
+                                <div style="background-color:#f0f0f0;border:solid 1px #ccc;height:140px;">
+                                    <div style="float:right;width:36%;padding:15px 15px 0 15px;">
+                                        <span style="font-size:12px;display:block;padding-top:8px;">
+                                            نام خریدار : @orderinfo.Name
+                                        </span>
+                                        <span style="font-size:12px;display:block;padding-top:8px;">
+                                            <span class="fktell" style="padding-left:30px;">تلفن ثابت : @orderinfo.Tel</span>
+                                        </span>
+                                        <span style="font-size:12px;display:block;padding-top:8px;">
+                                            موبایل : @orderinfo.Mobile
+                                        </span>
+                                        <span style="font-size:12px;display:block;padding-top:8px;">
+                                            آدرس : @orderinfo.Address
+                                        </span>
+                                    </div>
+                                    <div style="float:right;width:28%;margin:0 2%;text-align:center;padding-top:15px;">
+                                        <b class="fktitle" style="font-size:14px;font-weight:bold">فاکتور فروش اینترنتی نام فروشگاه</b>
+                                        <p style="margin:20px 0 0 0">http://site.com</p>
+                                    </div>
+                                    <div style="float:right;width:32%;padding:6px 0 0 15px">
+                                        <div style="float:left;">
+                                            <img src="~/Content/image/logo/logo-dark.png" style="height:50px;" />
+                                        </div>
+                                        <div class="clear"></div>
+                                        <span style="float: left;font-size:12px;padding-top:5px;">
+                                            شماره فاکتور : @orderinfo.id
+                                        </span>
+                                        <div class="clear"></div>
+                                        <span style="float: left;font-size:12px;padding-top:5px;">
+                                            شماره پیگیری : @orderinfo.TrackingID
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                </div>
+                                <div class="col-sm-9" style="padding-left:0px;margin-top:10px;">
+                                    <div class="col-sm-6" style="padding-left:0px">
+                                        <div style="border: 1px solid #c0f0c1;border-radius: 2px;margin-bottom: 10px;text-align: right;direction: rtl;position: relative;height:30px;background-color: #F7FFF7;">
+                                            <p style="padding:0px 10px;">
+                                                <span style="float:right;color:#565656 !important;font-size:13px !important;">جمع کل خرید شما :</span>
+                                                <span style="float:left;color:#565656 !important;font-size:13px !important;">
+                                                    <span class="nsprice">
+                                                        @(orderinfo.TotalPrice - orderinfo.SendPrice - orderinfo.VAT)
+                                                    </span> <span style="font-size:13px!important;">تومان</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" style="padding-left:0px">
+                                        <div style="border: 1px solid #c0f0c1;border-radius: 2px;margin-bottom: 10px;text-align: right;direction: rtl;position: relative;height:30px;background-color: #F7FFF7;">
+                                            <p style="padding:0px 10px;">
+                                                <span style="float:right;color:#565656 !important;font-size:13px !important;">هزینه ارسال :</span>
+                                                <span style="float:left;color:#565656 !important;font-size:13px !important;">
+                                                    <span class="nsprice">
+                                                        @orderinfo.SendPrice
+                                                    </span> <span style="font-size:13px!important;">تومان</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    @if (orderinfo.VAT > 0)
+                                    {
+                                        <div class="col-sm-6" style="padding-left:0px">
+                                            <div style="border: 1px solid #c0f0c1;border-radius: 2px;margin-bottom: 10px;text-align: right;direction: rtl;position: relative;height:30px;background-color: #F7FFF7;">
+                                                <p style="padding:0px 10px;">
+                                                    <span style="float:right;color:#565656 !important;font-size:13px !important;">مالیات بر ارزش افزوده :</span>
+                                                    <span style="float:left;color:#565656 !important;font-size:13px !important;">
+                                                        <span class="nsprice">
+                                                            @orderinfo.VAT
+                                                        </span> <span style="font-size:13px!important;">تومان</span>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div class="col-sm-6" style="padding-left:0px">
+                                        <div style="border: 1px solid #c0f0c1;border-radius: 2px;margin-bottom: 10px;text-align: right;direction: rtl;position: relative;height:30px;background-color: #F7FFF7;">
+                                            <p style="padding:0px 10px;">
+                                                <span style="float:right;color:#565656 !important;font-size:14px !important;font-weight:bold">مبلغ قابل پرداخت :</span>
+                                                <span style="float:left;color:#565656 !important;font-size:14px !important;font-weight:bold">
+                                                    <span class="nsprice">
+                                                        @orderinfo.TotalPrice
+                                                    </span> <span style="font-size:13px!important;">تومان</span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" style="float:left;padding-left:0px">
+                                        @if (orderinfo.PaymentType == 2)
+                                        {
+                                            <form action="/ZarinPalPayment/index?id=@orderinfo.id" method="post">
+                                                <input type="hidden" value="@orderinfo.id" name="FactorID" />
+                                                <button type="submit" class="btn btn-success" style="float:left;">پرداخت آنلاین</button>
+                                            </form>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--back-->
+                @*<a href="#" class="btn btn-sm back-to-index">
+                    <i class="fa fa-angle-right"></i>
+                    بازگشت به صفحه قبل
+                </a>*@
+                <!--back-->
+            </div>
+        </div>
+        
+    </div>
+    <!-- Modal -->
+
+</div>
+
+
+@section Scripts{
+    <script src="~/Content/Plugins/Footable/footable.js"></script>
+    <script type="text/javascript">
+    //$(document).ready(function () {
+    //    $('#hpsupportTable').footable();
+    //});
+    </script>
+
+}

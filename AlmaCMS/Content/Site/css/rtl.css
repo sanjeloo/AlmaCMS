@@ -1,0 +1,668 @@
+
+@font-face {
+    font-family: 'iranyekan';
+    src: url('../fonts/iranyekanLight.eot');
+    src: url('../fonts/iranyekanLight.eot?¦iefix') format('embedded-opentype'), url('../fonts/iranyekanLight.woff') format('woff'), url('../fonts/iranyekanLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+  font-family: irsans;
+  src: url(fonts/IRANSansWeb_Light.woff);
+}	
+html {
+  font-family:  iranyekan!important;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+.cart-empty:before,.cart-widget-side .widget_shopping_cart .empty:before
+{
+    content: "\f107" ;
+}
+
+.price .amount {
+    font-family:  iranyekan;
+}
+.woodmart-shopping-cart .woodmart-cart-subtotal .amount {
+    font-family:  iranyekan;
+}
+
+.widget_shopping_cart .total .amount {
+    font-family:  iranyekan;
+}
+p {
+    margin-bottom: 0px;
+}
+
+
+tr.order-total strong .amount {
+    font-family:  iranyekan;
+}
+.rtl table th {
+    font-family:  iranyekan;
+}
+.cart-totals-inner table .cart-subtotal .amount {
+    font-family:  iranyekan;
+}
+td.product-price .amount {
+    font-family:  iranyekan;
+}
+td.product-subtotal span {
+    font-family:  iranyekan;
+}
+.woodmart-navigation.menu-left {
+    text-align: right;
+}
+.color-scheme-dark {
+    font-family:  iranyekan;
+}
+.widget_shopping_cart .quantity {
+    font-family:  iranyekan;
+}
+.rtl .quantity .qty {
+    font-family:  iranyekan;
+}
+input[type=text], input[type=email], input[type=search], input[type=number], input[type=url], input[type=tel], input[type=password], input[type=date], select, textarea {
+    font-family:  iranyekan;
+}
+.product-image-summary .product-images .labels-rounded .product-label {
+    font-family:  iranyekan;
+}
+.labels-rounded .product-label {
+    font-family:  iranyekan;
+}
+.rev_slider .tp-caption, .rev_slider .caption {
+    font-family:  iranyekan !important;
+}
+_product_categories .count, .woodmart-woocommerce-layered-nav .count {
+    font-family:  iranyekan;
+}
+.widget_price_filter .price_slider_amount .price_label>span {
+    font-family:  iranyekan;
+}
+.woodmart-products-per-page .per-page-variation {
+    font-family:  iranyekan !important;
+}
+.color-scheme-light .category-nav-link .category-products-count {
+
+ font-family:  iranyekan !important;
+}
+td.product-total .amount {
+    font-family:  iranyekan;
+}
+.cat-design-default .hover-mask {
+    font-family:  iranyekan;
+}
+.rtl .woodmart-cart-design-2 .woodmart-cart-number, .rtl .woodmart-cart-design-5 .woodmart-cart-number {
+    font-family:  iranyekan;
+}
+
+.product_list_widget>li .product-title {
+    font-family:  iranyekan;
+}
+.autocomplete-suggestion .suggestion-title, .blog-post-loop .entry-title, .category-grid-item .category-title, .group_table td.label a, .portfolio-entry .entry-title, .post-single-page .entry-title, .product-grid-item .product-title, .product-image-summary .entry-title, .product-title, .single-post-navigation .post-title, .widget_recent_comments ul li>a, .widget_recent_entries ul li a, .woodmart-menu-price .menu-price-title, .woodmart-recent-posts .entry-title a, .yith-woocompare-widget .products-list li a.title, table.compare-list tr.title td, td.product-name a {
+    font-family:  iranyekan,"MS Sans Serif",Geneva,sans-serif;
+}
+.masonry-filter li a, .navigation-style-underline .nav-link-text, .woodmart-products-tabs.tabs-design-alt .products-tabs-title .tab-label, .woodmart-products-tabs.tabs-design-default .products-tabs-title .tab-label, .wpb-js-composer .vc_tta.vc_general.vc_tta-style-classic.vc_tta-tabs .vc_tta-tab .vc_tta-title-text {
+    position: relative;
+    display: inline-block;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-family:  iranyekan !important;
+}
+.main-nav-style, .menu-opener, .categories-menu-dropdown .item-level-0 > a, .woodmart-burger-icon .woodmart-burger-label, .woodmart-wishlist-info-widget .wishlist-label, .woodmart-wishlist-info-widget .wishlist-count, .woodmart-shopping-cart .woodmart-cart-totals, .woodmart-header-links .item-level-0 > a, .main-nav .item-level-0 > a, .whb-secondary-menu .item-level-0 > a, .full-screen-nav .item-level-0 > a {
+    font-size: 13px;
+    font-family:  iranyekan;
+}
+¦order_payment_heading, ¦order_review_heading, ¦ship-to-different-address label, .cart-empty, .cart-totals-inner h2, .font-primary, .masonry-filter li, .mega-menu-list>li>a, .menu-mega-dropdown .sub-menu>li>a, .page-title .entry-title, .register-or, .social-login-title, .tabs-layout-tabs .tabs li, .title, .widget_rss ul li>a, .wishlist-title h2, .woocommerce-MyAccount-title, .woocommerce-Reviews .comment-reply-title, .woocommerce-additional-fields>h3, .woocommerce-billing-fields>h3, .woocommerce-column__title, .woocommerce-shipping-fields>h3, .woodmart-accordion-title, .woodmart-checkout-steps ul, .woodmart-price-table .woodmart-plan-title, .woodmart-products-tabs .products-tabs-title, .woodmart-products-tabs .tabs-name, .woodmart-sizeguide-table tr:first-child td, .wpb-js-composer .vc_tta.vc_general.vc_tta-style-classic.vc_tta-tabs .vc_tta-tab>a, body>h1, h1, h2, h3, h4, h5, h6, header.title>h3, legend, table th, table.compare-list tr.no-products td {
+    font-family:  iranyekan;
+}
+.rev_slider .tp-mask-wrap .tp-caption, .rev_slider .tp-mask-wrap *:last-child, .wpb_text_column .rev_slider .tp-mask-wrap .tp-caption, .wpb_text_column .rev_slider .tp-mask-wrap *:last-child {
+    margin-bottom: 0;
+    font-family:  iranyekan !important;
+}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    font-weight: 700;
+}
+.product-image-summary .in-stock, .variations_form .in-stock, .wishlist_table tr td.product-stock-status span.wishlist-in-stock, .woodmart-sticky-btn .in-stock {
+    margin-bottom: 20px;
+}
+.product-image-summary .summary-inner>.price, .product-image-summary .woodmart-scroll-content>.price {
+    margin-bottom: 20px;
+}
+.menu-mega-dropdown .sub-menu>li {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 220px;
+    flex: 0 0 200px;
+    max-width: 220px;
+    padding-left: 15px;
+    padding-right: 40px;
+    margin-bottom: 25px;
+}
+
+
+.wpb-js-composer .vc_tta.vc_tta-accordion .vc_tta-controls-icon-position-right .vc_tta-controls-icon {
+    left: 20px;
+}
+.wpb-js-composer .vc_tta-color-grey.vc_tta-style-classic .vc_tta-panel.vc_active .vc_tta-panel-title>a {
+    color: ¦666;
+    text-align: right;
+}
+.wpb-js-composer .vc_tta.vc_general.vc_tta-style-classic.vc_tta-accordion .vc_tta-panel-title>a {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    text-align: right;
+}
+
+.title-wrapper.text-center .title, .title-wrapper.text-center .title-after_title, .title-wrapper.text-center .title-subtitle {
+    direction: rtl;
+}
+
+.rtl .woodmart-header-links .sub-menu-dropdown {
+    right: auto;
+    left: auto;
+    text-align: right;
+}
+.rtl .search-by-category .list-wrapper {
+    right: auto;
+    left: auto;
+}
+.min-footer .col-right {
+    text-align: left;
+}
+.star-rating span:before {
+    color: rgba(255,255,255,.0);
+
+}
+.vc_sep_pos_align_left {
+    margin-left: auto;
+    margin-right: 0;
+}
+.woodmart-hover-base .woodmart-product-countdown {
+    direction: ltr;
+}
+.product-image-summary .woodmart-product-countdown {
+    direction: ltr;
+    text-align: right;
+}
+.woodmart-timer {
+    direction: ltr;
+}
+.vc_col-sm-offset-2 {
+    margin-right: 16.66666667%;
+}
+.blog-design-masonry .entry-title {
+    font-size: 18px;
+    line-height: 1.4;
+}
+.promo-banner .banner-title-wrap .banner-subtitle:first-child, .promo-banner .banner-title-wrap .banner-title:first-child
+{
+    text-align:right;
+}
+.reset-mb-10>:last-child
+{
+    text-align:right;
+}
+
+
+
+ .color-scheme-light table th {
+    border-color: rgba(255, 255, 255, 0.15); }
+  .color-scheme-light table td {
+    border-color: rgba(255, 255, 255, 0.15); }
+  .color-scheme-light table tbody th,
+  .color-scheme-light table tfoot th {
+    border-color: rgba(255, 255, 255, 0.15); }
+  .woodmart-dark table th {
+    border-color: rgba(255, 255, 255, 0.05); }
+  .woodmart-dark table td {
+    border-color: rgba(255, 255, 255, 0.05); }
+  .woodmart-dark table tbody th,
+  .woodmart-dark table tfoot th {
+    border-color: rgba(255, 255, 255, 0.05); }
+
+.table-bordered-style th,
+.table-bordered-style td {
+  border: 1px solid ¦EFEFEF; }
+.color-scheme-light .table-bordered-style th,
+.color-scheme-light .table-bordered-style td {
+  border-color: rgba(255, 255, 255, 0.4); }
+
+.responsive-table {
+  overflow-x: auto;
+  margin-bottom: 35px; }
+  .responsive-table table {
+    margin-bottom: 0; }
+  .responsive-table .responsive-table {
+    overflow-x: visible;
+    margin-bottom: 0; }
+
+.woodmart-vc-ajax-search {
+  margin-bottom: 35px; }
+
+.searchform {
+  position: relative; }
+  .searchform input[type="text"] {
+    padding-left: 50px;
+    height: 46px;
+    font-size: 15px; }
+    .searchform input[type="text"]::-ms-clear {
+      display: none; }
+  .searchform .searchsubmit {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    bottom: 0;
+    padding: 0;
+    width: 50px;
+    border: none;
+    background-color: transparent;
+    color: ¦777;
+    font-weight: 400;
+    font-size: 0; }
+    .searchform .searchsubmit:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: inline-block;
+      margin-top: -10px;
+      margin-left: -10px;
+      width: 20px;
+      font-size: 20px;
+      line-height: 20px;
+      transition: opacity .2s ease;
+      content: "\f125";
+      font-family: "woodmart-font"; }
+    .searchform .searchsubmit:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      visibility: hidden;
+      margin-top: -9px;
+      margin-left: -9px;
+      opacity: 0;
+      transition: opacity .1s ease, visibility .1s ease;
+      content: "";
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 1px solid ¦BBB;
+      border-left-color: ¦000;
+      border-radius: 50%;
+      vertical-align: middle; }
+    .searchform .searchsubmit:hover, .searchform .searchsubmit:focus {
+      box-shadow: none; }
+  .searchform.search-loading .searchsubmit:before {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s ease, visibility .2s ease;
+    -webkit-animation: wd-rotate 450ms infinite linear;
+            animation: wd-rotate 450ms infinite linear; }
+  .searchform.search-loading .searchsubmit:after {
+    opacity: 0;
+    transition: opacity .1s ease; }
+
+.woodmart-searchform-custom-icon .searchsubmit:after {
+  content: none; }
+.woodmart-searchform-custom-icon .woodmart-custom-icon {
+  min-width: auto;
+  max-width: 24px;
+  transition: opacity .2s ease; }
+.woodmart-searchform-custom-icon .searchsubmit:hover {
+  opacity: .6; }
+.woodmart-searchform-custom-icon.search-loading .woodmart-custom-icon {
+  opacity: 0;
+  transition: opacity .1s ease; }
+
+.search-results-wrapper {
+  position: relative; }
+  .search-results-wrapper .woodmart-scroll {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    background-color: ¦FFF;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); }
+    .search-results-wrapper .woodmart-scroll .woodmart-search-results {
+      position: relative;
+      max-height: 50vh; }
+    .search-results-wrapper .woodmart-scroll .woodmart-scroll-pane {
+      z-index: 1002; }
+  .color-scheme-light .search-results-wrapper .woodmart-scroll, .woodmart-dark .search-results-wrapper .woodmart-scroll {
+    background-color: ¦101010; }
+
+.autocomplete-suggestions {
+  position: relative !important;
+  z-index: 1001 !important;
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 0;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  max-width: none !important;
+  max-height: none !important;
+  width: auto !important;
+  -webkit-animation: wd-fadeInBottomShort .2s ease both;
+          animation: wd-fadeInBottomShort .2s ease both; }
+
+.autocomplete-suggestion {
+  flex: 1 1 285px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  cursor: pointer;
+  transition: background-color .25s ease; }
+  .autocomplete-suggestion .suggestion-title strong {
+    text-decoration: underline; }
+  .autocomplete-suggestion .suggestion-thumb {
+    float: right;
+    margin-left: 15px;
+    max-width: 65px; }
+  .autocomplete-suggestion .suggestion-title {
+    margin-bottom: 0;
+    font-size: 14px; }
+  .autocomplete-suggestion .suggestion-price,
+  .autocomplete-suggestion .suggestion-sku {
+    margin-top: 10px;
+    line-height: 1; }
+  .autocomplete-suggestion .suggestion-sku {
+    color: ¦747474;
+    font-size: 12px; }
+  .autocomplete-suggestion.suggestion-divider {
+    flex-basis: 100% !important;
+    width: 100%;
+    background-color: ¦F9F9F9;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: default; }
+    .autocomplete-suggestion.suggestion-divider h5 {
+      font-size: 14px; }
+  .autocomplete-suggestion:hover, .autocomplete-suggestion.autocomplete-selected {
+    background-color: ¦F9F9F9; }
+  .color-scheme-light .autocomplete-suggestion.suggestion-divider, .woodmart-dark .autocomplete-suggestion.suggestion-divider {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: ¦FFF; }
+  .color-scheme-light .autocomplete-suggestion .suggestion-sku, .woodmart-dark .autocomplete-suggestion .suggestion-sku {
+    color: ¦FFF; }
+  .color-scheme-light .autocomplete-suggestion:hover, .color-scheme-light .autocomplete-suggestion.autocomplete-selected, .woodmart-dark .autocomplete-suggestion:hover, .woodmart-dark .autocomplete-suggestion.autocomplete-selected {
+    background-color: rgba(0, 0, 0, 0.3); }
+
+.suggestion-divider-text {
+  margin-bottom: 0; }
+
+.view-all-results {
+  flex: 1 1 100%;
+  margin-top: -1px;
+  height: 50px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  background-color: ¦FFF;
+  color: ¦333;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .2px;
+  font-weight: 600;
+  line-height: 50px;
+  cursor: pointer;
+  transition: background-color .25s ease;
+  -webkit-animation: wd-fadeIn .3s ease both;
+          animation: wd-fadeIn .3s ease both; }
+  .view-all-results:hover {
+    background-color: ¦F9F9F9; }
+  .color-scheme-light .view-all-results, .woodmart-dark .view-all-results {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: ¦FFF; }
+    .color-scheme-light .view-all-results:hover, .woodmart-dark .view-all-results:hover {
+      background-color: rgba(0, 0, 0, 0.9); }
+
+.woodmart-search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 340;
+  width: 300px;
+  background-color: ¦FFF;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); }
+  .woodmart-search-dropdown input[type="text"] {
+    padding-right: 25px;
+    padding-left: 55px;
+    height: 70px;
+    border-style: none; }
+  .woodmart-search-dropdown .searchsubmit {
+    width: 60px;
+    color: ¦333; }
+  .woodmart-search-dropdown .view-all-results {
+    border-bottom: none; }
+  .dropdowns-color-light .woodmart-search-dropdown {
+    background-color: ¦101010; }
+  .whb-col-left .woodmart-search-dropdown {
+    left: auto;
+    right: 0; }
+    
+    .fa.fa-life-ring
+{
+	    font-family: 'Font Awesome 5 Free' !important;
+}
+.fa
+{
+	    font: normal normal normal 14px/1 FontAwesome ;
+}
+.fab
+{
+	    font-family: 'Font Awesome 5 Brands' !important;
+}
+span.menu-label
+{
+	left:44%;
+}
+.woodmart-text-block-wrapper.color-scheme-light .woodmart-title-container
+{
+    font-family:  iranyekan!important;
+}
+.wpcf7-form p
+{
+	text-align:right;
+}
+.wpcf7-form .btn-shape-semi-round
+{
+	    width: 100%;
+    margin-top: 7px;
+}
+.wpcf7-form label
+{
+	text-align:right !important;
+}
+
+.woodmart-tab-wrapper p
+{
+	font-size:14px;
+	line-height:1.9;
+}
+blockquote
+{
+	margin-top:20px;
+		margin-bottom:20px;	
+}
+.main-nav-style, .menu-opener, .categories-menu-dropdown .item-level-0 > a, .wd-tools-element .wd-tools-text, .main-nav .item-level-0 > a, .whb-secondary-menu .item-level-0 > a, .full-screen-nav .item-level-0 > a, .wd-tools-element .wd-tools-count, .woodmart-cart-design-2 .woodmart-cart-number, .woodmart-cart-design-5 .woodmart-cart-number
+{
+	    font-family:  iranyekan !important;
+}
+div,a,p,li,ul,span,h1,h2,h3,h4,h5,h6,input,text,textarea
+{
+	font-family:  iranyekan !important;
+	letter-spacing:0px;
+}
+.menu-item-381.menu-item-design-sized > .sub-menu-dropdown
+{
+	direction:ltr;
+}
+.menu-item-381 .woodmart-recent-posts-list li
+{
+	direction:rtl;
+}
+.vc_custom_1577118918920,.vc_custom_1577118961388
+{
+	text-align:right !important;
+}
+
+rs-module h1.rs-layer, rs-module h2.rs-layer, rs-module h3.rs-layer, rs-module h4.rs-layer, rs-module h5.rs-layer, rs-module h6.rs-layer, rs-module div.rs-layer, rs-module span.rs-layer, rs-module p.rs-layerrs-layer-wrap, rs-mask, rs-module-wrap, rs-module .rs-layer, rs-module img
+{
+	font-family: iranyekan !important;
+}
+¦wpadminbar .ab-icon, ¦wpadminbar .ab-item:before, ¦wpadminbar>¦wp-toolbar>¦wp-admin-bar-root-default .ab-icon, .wp-admin-bar-arrow
+{
+	    font: normal 20px/1 dashicons !important;
+}
+.fa.fa-facebook
+{
+	font-family: 'Font Awesome 5 Brands' !important;
+}
+.wpcf7-form input[type=submit]
+{
+	margin-top: 15px !important;
+}
+.woodmart-popup-inner .icons-size-small i
+{
+
+}
+.labels-rounded .out-of-stock
+{
+	font-size:10px;
+}
+.icons-design-bordered .woodmart-social-icon i
+{
+	   
+}
+
+¦dokan-seller-listing-wrap ul.dokan-seller-wrap li
+{
+    
+    float:right;
+}
+
+
+
+
+.widget_price_filter .price_slider_amount .price_label
+{
+font-size: 11.5px;
+}
+.woodmart-social-icons.icons-size- i, .woodmart-social-icons.icons-size-small i
+{
+
+}
+
+
+
+.dokan-form-horizontal .dokan-control-label
+{
+	    text-align: right;
+    padding-right: 15px;
+}
+.dokan-settings-content .dokan-settings-area .dokan-banner
+{
+	width:100%;
+}
+.dokan-dashboard-wrap input[type=password], .dokan-dashboard-wrap input[type=email], .dokan-dashboard-wrap input[type=text], .dokan-dashboard-wrap input[type=search], .dokan-dashboard-wrap input[type=numbÎUÂ er], .dokan-dashboard-wrap textarea
+{
+	text-align:right;
+}
+.dokan-right-margin-30
+{
+	    margin-left: 30px;
+}
+.store-open-close label.day
+{
+	text-align:right;
+}
+.dokan-dashboard-wrap input[type=password], .dokan-dashboard-wrap input[type=email], .dokan-dashboard-wrap input[type=text], .dokan-dashboard-wrap input[type=search], .dokan-dashboard-wrap input[type=number], .dokan-dashboard-wrap textarea
+{
+	    padding: 4px 11px;
+	text-align: right;
+}
+.title-wrapper.text-center .title, .title-wrapper.text-center .title-after_title, .title-wrapper.text-center .title-subtitle
+{
+	    line-height: 1.6;
+}
+.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.active:after{
+	    left: 0px !important;
+    right: 93% !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.product-grid-item .price > .amount, .product-grid-item .price ins > .amount
+{
+    font-size: 16px;
+}
+.wpcf7-validation-errors
+{
+	text-align:right !important;
+}
+.notifications-sticky .mc4wp-alert, .notifications-sticky .woocommerce-error, .notifications-sticky .woocommerce-info, .notifications-sticky .woocommerce-message, .notifications-sticky .yith_ywraq_add_item_product_message, .notifications-sticky div.wpcf7-response-output
+{
+	    text-align: right !important;
+	display: inline !important;
+	      padding-top: 21px;
+ }
+.dokan-alert-danger:before, .dokan-alert-info:before, .dokan-alert-warning:before, .dokan-error:before, .dokan-info:before, .mc4wp-error:before, .mc4wp-notice:before, .woocommerce-error:before, .woocommerce-info:before, div.wpcf7-mail-sent-ng:before, div.wpcf7-validation-errors:before{
+	    padding-top: 0px;
+}
+
+.woodmart-title-size-extra-large .woodmart-title-container
+{
+	    font-size: 37px !important ;
+}
+.woodmart-price-table .woodmart-price-value
+{
+	font-size: 28px !important;
+}
+.woodmart-price-table.price-style-default .woodmart-plan-price>span
+{
+	    margin-top: 17px !important; 
+}
+.woodmart-price-table .woodmart-price-suffix
+{
+	margin-top:16px !important;
+}
+.labels-rounded .product-label
+{
+	direction:ltr !important;
+}
+.labels-rectangular .product-label
+{
+    direction:ltr !important;
+}

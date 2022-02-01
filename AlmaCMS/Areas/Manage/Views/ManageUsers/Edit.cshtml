@@ -1,0 +1,138 @@
+﻿@model AlmaCMS.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "ویرایش کاربران";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .alert {
+        padding: 5px 15px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">ویرایش کاربران</h3>
+                <a href='@Url.Action("index", "ManageUsers")' class="btn btn-primary btn-sm pull-right" style="margin-top:-23px;">
+                    بازگشت
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-horizontal">
+                        <div class="col-xs-12">
+                            @if (ViewBag.EmailStatus == "1")
+                            {
+                                <div class="col-sm-6">
+                                    <p class="alert alert-success">وضعیت ایمیل : تایید شده  </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-6">
+                                    <p class="alert alert-warning"> وضعیت ایمیل : تایید نشده  </p>
+                                </div>
+                            }
+                            @if (ViewBag.PhoneStatus == "1")
+                            {
+                                <div class="col-sm-6">
+                                    <p class="alert alert-success">وضعیت موبایل : تایید شده   [ @ViewBag.MobileNumber ]</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-6">
+                                    <p class="alert alert-warning">وضعیت موبایل : تایید نشده [ @ViewBag.MobileNumber ]</p>
+                                </div>
+                            }
+                            @if (ViewBag.UserInfoStatus != null)
+                            {
+                                <div class="col-sm-6">
+                                    <p class="alert alert-warning">اطلاعات تکمیلی وارد نشده</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            }
+
+                            else
+                            {
+                                var UserInfo = ViewBag.UserInfo as AlmaCMS.Models.UserInfo;
+
+                                <div class="col-sm-6">
+                                    <p>
+                                        نام و نام خانوادگی : <b>@UserInfo.Name</b>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        کد ملی : <b>@UserInfo.CodeMelli</b>
+                                    </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        ایمیل : <b>@Model.Email</b>
+                                    </p>
+                                </div>
+    <div class="col-sm-6">
+        <p>
+            تلفن : <b>@UserInfo.Phone</b>
+        </p>
+    </div>
+    <div class="col-sm-6">
+        <p>
+            تلفن : <b>@UserInfo.BirthDate</b>
+        </p>
+    </div>
+    <div class="col-sm-6">
+        <p>
+            آدرس : <b>@UserInfo.Address</b>
+        </p>
+    </div>
+                            }
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(model => model.Email)
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-12" style="margin:20px 0;background-color:#E0E0E0;border-radius:5px;padding:0 10px;">
+                                            <div class="form-group" style="padding:0px 15px;">
+                                                نوع کاربر :
+                                                @foreach (var item in Model.RolesList)
+                                                {
+                                                    <span style="margin:0 30px;">
+                                                        <input type="radio" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                                        @Html.Label(item.Value, new { @class = "control-label" })
+                                                    </span>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="submit" value="ثبت" class="btn btn-success btn-block" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

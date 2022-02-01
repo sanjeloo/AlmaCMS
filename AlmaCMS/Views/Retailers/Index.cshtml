@@ -1,0 +1,75 @@
+﻿
+@model AlmaCMS.ViewModels.VMRetailerLogin
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+                <li class="active">ورود نمایندگان</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="page-section" style="padding-top: 10px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="post-content top-pad-20">
+                    <h4 class="FontISB" style="font-size: 20px; color: #414141">ورود نمایندگان</h4>
+                </div>
+            </div>
+            <div class="col-sm-12" style="min-height:350px;">
+                <div class="col-sm-6" style="padding: 0px">
+                    <p class="text-center">نمایندگان محترم برای ورود از این بخش استفاده نمایید.</p>
+                    <br /><br /><br />
+                   @if (!string.IsNullOrEmpty(ViewBag.Msg))
+                   {
+                    <p class="alert alert-danger">@ViewBag.Msg</p>
+                   }
+                   @using (Html.BeginForm())
+                   
+                    {
+                        @Html.AntiForgeryToken()
+
+    <div class="col-sm-6 col-sm-offset-3">
+        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = " form-control mrgnbtn" } })
+        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger",  @placeholder = "نام کاربری"})
+  
+        @Html.EditorFor(model => model.Pass, new { htmlAttributes = new { @class = " form-control mrgnbtn" } })
+        @Html.ValidationMessageFor(model => model.Pass, "", new { @class = "text-danger", @placeholder = "نام کاربری" })
+
+
+      
+        <button type="submit" class="btn btn-success mrgnbtn FontISB col-xs-12" style="float: none !important; margin-bottom: 20px; border-radius: 0 !important">ورود</button>
+    </div>
+                    }
+                    
+                </div>
+                <div class="col-sm-6" style="padding: 0px">
+                    <p class="text-center">جهت دریافت نمایندگی و نام کاربری و رمز عبور میتوانید درخواست خود را از این بخش ثبت کنید.</p>
+
+                    <div style="width: 100%; position: relative">
+                        <div style="position: absolute; top: 0px; left: 0px; width: 100%">
+                            <p style="text-align: center">
+                                <img src="~/Content/img/iranmap.PNG" />
+                            </p>
+                        </div>
+                        <div style="position: absolute; top: 118px; left: 0px; width: 100%">
+                            <p style="text-align: center">
+                                <a href="/agency/form" class="btn btn-success">درخواست نمایندگی</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

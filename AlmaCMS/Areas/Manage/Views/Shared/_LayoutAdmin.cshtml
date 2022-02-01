@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>سیستم مدیریت محتوای نیووب</title>
+    <link rel='shortcut icon' type='image/x-icon' href='~/Areas/Manage/Content/images/favicon.ico' />
+    <link href="~/Areas/Manage/Content/css/entypo.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/integral-core.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/plugins/datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/plugins/colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/plugins/nouislider/css/nouislider.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/plugins/select2/css/select2.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/integral-forms.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/persian.css" rel="stylesheet" />
+    <link href="~/Areas/Manage/Content/css/jquery-ui.min.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    <link href="~/Areas/Manage/Content/css/bootstrap-rtl.min.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/integral-rtl-core.css" rel="stylesheet">
+    <link href="~/Areas/Manage/Content/css/bootstrap-tagsinput.css" rel="stylesheet" />
+    <script type="text/javascript">
+    function Showdate() {
+        week = new Array("يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
+        months = new Array("فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دي", "بهمن", "اسفند");
+        a = new Date();
+        d = a.getDay();
+        day = a.getDate();
+        month = a.getMonth() + 1;
+        year = a.getYear();
+        year = (year == 0) ? 2000 : year;
+        (year < 1000) ? (year += 1900) : true;
+        year -= ((month < 3) || ((month == 3) && (day < 21))) ? 622 : 621;
+        switch (month) {
+            case 1: (day < 21) ? (month = 10, day += 10) : (month = 11, day -= 20); break;
+            case 2: (day < 20) ? (month = 11, day += 11) : (month = 12, day -= 19); break;
+            case 3: (day < 21) ? (month = 12, day += 9) : (month = 1, day -= 20); break;
+            case 4: (day < 21) ? (month = 1, day += 11) : (month = 2, day -= 20); break;
+            case 5:
+            case 6: (day < 22) ? (month -= 3, day += 10) : (month -= 2, day -= 21); break;
+            case 7:
+            case 8:
+            case 9: (day < 23) ? (month -= 3, day += 9) : (month -= 2, day -= 22); break;
+            case 10: (day < 23) ? (month = 7, day += 8) : (month = 8, day -= 22); break;
+            case 11:
+            case 12: (day < 22) ? (month -= 3, day += 9) : (month -= 2, day -= 21); break;
+            default: break;
+        }
+    }
+    Showdate();
+    //document.write(" "+week[d]+" "+day+" "+months[month-1]+" "+ year);
+    </script>
+
+</head>
+<body>
+    @*<div class="loader-backdrop">
+        <div class="loader">
+            <div class="bounce-1"></div>
+            <div class="bounce-2"></div>
+        </div>
+    </div>*@
+    <div class="page-container">
+        <div class="page-sidebar">
+            <header class="site-header">
+                <div class="site-logo"><a href="http://newwebdesign.org" target="_blank"><img src="~/Areas/Manage/Content/images/newweb-logo-top.png" alt="Integral" title="Integral"></a></div>
+                <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
+                <div class="sidebar-mobile-menu visible-xs"><a data-target="#side-nav" data-toggle="collapse" class="mobile-menu-icon" href="#"><i class="icon-menu"></i></a></div>
+            </header>
+            <ul id="side-nav" class="main-menu navbar-collapse collapse">
+                <li class="navigation-header"> سیستم مدیریت محتوای نیووب</li>
+                <li><a href="/manage/admin/dashboard"><i class="icon-gauge"></i><span class="title">میز کار</span></a></li>
+
+               @* <li><a href="/manage/ManageMenuItems"><i class="icon-layout"></i><span class="title">مدیریت منوی اصلی</span></a></li>*@
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManagePages"))
+                {
+                    <li><a href="/manage/ManagePages"><i class="icon-docs"></i><span class="title">مدیریت صفحات</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProducts"))
+                {
+                    <li><a href="/manage/manageProductsGroup"><i class="icon-dropbox"></i><span class="title">مدیریت محصولات</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageNews"))
+                {
+                    <li><a href="/manage/ManageNewsGroup"><i class=" icon-megaphone"></i><span class="title">مدیریت اخبار</span></a></li>
+                }
+
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageCustomeProducts"))
+                {
+                    <li><a href="/manage/ManageCustomeProducts/index/1"><i class=" icon-megaphone"></i><span class="title">مدیریت محصولات سفارشی</span></a></li>
+                }
+                @*@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageArticles"))
+                {
+                    <li><a href="/manage/ManageArticleGroup"><i class="icon-doc-text-inv"></i><span class="title">مدیریت مقالات</span></a></li>
+                }*@
+
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageImageGallery"))
+                {
+                <li><a href="/manage/ManageAlbumes"><i class="icon-picture"></i><span class="title">مدیریت گالری</span></a></li>
+                }
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageLinks"))
+{
+    <li><a href="/manage/ManageLinksGroup"><i class="icon-link"></i><span class="title">مدیریت پیوندها</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProductComments"))
+{
+    <li><a href="/manage/ManageProductReview"><i class="icon-mail"></i><span class="title">مدیریت نظرات محصولات</span></a></li>
+}
+
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageOrders"))
+{
+    <li><a href="/manage/ManageProductReview"><i class="icon-mail"></i><span class="title">مدیریت سفارش ها</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageDiscountCode"))
+{
+    <li><a href="/manage/ManageDiscountCode"><i class="icon-mail"></i><span class="title">مدیریت کد تخفیف</span></a></li>
+}
+
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageTasks"))
+{
+    <li><a href="/manage/ManageTasks"><i class="icon-mail"></i><span class="title">مدیریت وظایف</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProductReports"))
+{
+    <li><a href="/manage/ManageProductReports"><i class="icon-mail"></i><span class="title">گزارشات محصول</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageSliders"))
+{
+    <li><a href="/manage/manageSlider"><i class="icon-mail"></i><span class="title">مدیریت اسلایدر</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageUsers"))
+{
+    <li><a href="/manage/manageusers"><i class="icon-user"></i><span class="title">مدیریت کاربران سایت</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageAdmins"))
+{
+    <li><a href="/manage/Manageadmins"><i class="icon-user"></i><span class="title">مدیریت مدیران سایت</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageSiteSettings"))
+{
+
+    <li><a href="/manage/ManageSiteSettings"><i class="icon-mail"></i><span class="title">تنظیمات سایت</span></a></li>
+}
+@if (AlmaCMS.Helpers.Extentions.HAsPermission("BagTransactionReport"))
+{
+
+    <li><a href="/manage/ManageBagTransactionsReport"><i class="icon-mail"></i><span class="title">گزارش کیف پول </span></a></li>
+}
+
+                @*<li><a href="/manage/ManageProjectsGroup"><i class="icon-archive"></i><span class="title">مدیریت پروژه ها</span></a></li>*@
+                @*<li><a href="/manage/ManageCertificateGroup"><i class="icon-vcard"></i><span class="title">مدیریت گواهینامه ها</span></a></li>*@
+             
+                @*<li><a href="/manage/ManageQuestions"><i class="icon-chat"></i><span class="title">مدیریت پرسش و پاسخ</span></a></li>*@
+                <li>@*<a href="/manage/ManageSiteMessages"><i class="icon-mail"></i><span class="title">مدیریت پیام ها</span></a>*@</li>
+               
+               
+              
+              
+              
+              
+                @*<li><a href="/manage/ManageRssReader"><i class="icon-rss"></i><span class="title">مدیریت خبر خوان</span></a></li>*@
+                @*<li><a href="/manage/ManageRetailers"><i class="icon-users"></i><span class="title">مدیریت نمایندگان</span></a></li>
+                <li><a href="/manage/ManageSecureArticles"><i class="icon-bookmarks"></i><span class="title">مدیریت اطلاعیه نمایندگان</span></a></li>*@
+             
+                     
+            </ul>
+        </div>
+        <div class="main-container">
+            <div class="main-header row">
+                <div class="col-sm-7 col-xs-7">
+                    <ul class="user-info pull-left">
+                        <li class="profile-info dropdown">
+                            @{
+                                string name = "";
+                                string userpic = "";
+                                int userid = 0;
+                                var db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+                                var q = db.Admins.Where(a => a.Email == User.Identity.Name).SingleOrDefault();
+                                if (q != null)
+                                {
+                                    name = q.FullName;
+                                    userpic = q.Image;
+                                    userid = q.Id;
+                                }
+                            }
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="~/Areas/Manage/Content/images/logoadmin.png"> @name <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @*<li><a href="#/"><i class="icon-user"></i>پروفایل من</a></li>
+                                <li><a href="#/"><i class="icon-mail"></i>پیام ها</a></li>
+                                <li><a href="#"><i class="icon-clipboard"></i>اعلان ها</a></li>
+                                <li class="divider"></li>*@
+                                <li><a href="/Manage/ManageAdmins/Edit/@userid"><i class="icon-cog"></i>تنظیمات حساب</a></li>
+                                <li><a href="@Url.Action("LogOut","Admin")"><i class="icon-logout"></i>خروج</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="pull-right hidden-xs" style="padding-top: 12px;font-size: 12px;"><i class="fa fa-calendar"></i> امروز : <span id="time"></span></div>
+                </div>
+                <div class="col-sm-5 col-xs-5">
+                    <div class="pull-right">
+                        <ul class="user-info pull-left">
+                            <li class="notifications dropdown">
+                                <a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-bell-o"></i></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li class="first">
+                                        <div class="dropdown-content-header"><i class="fa fa-pencil-square-o pull-right"></i> آخرین مطالب و اخبار درج شده در سایت</div>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-list">
+                                            <li class="unread notification-success"><a href="#"><i class="icon-user-add pull-right"></i><span class="block-line strong">New user registered</span><span class="block-line small">30 seconds ago</span></a></li>
+                                            <li class="unread notification-secondary"><a href="#"><i class="icon-heart pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
+                                            <li class="unread notification-primary"><a href="#"><i class="icon-user pull-right"></i><span class="block-line strong">Privacy settings have been changed</span><span class="block-line small">2 hours ago</span></a></li>
+                                            <li class="notification-danger"><a href="#"><i class="icon-cancel-circled pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
+                                            <li class="notification-info"><a href="#"><i class="icon-info pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
+                                            <li class="notification-warning"><a href="#"><i class="icon-rss pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="external-last"> <a href="/manage/ManageArticleGroup">مشاهده تمام مطالب</a> </li>
+                                </ul>
+                            </li>
+                            <li class="notifications dropdown">
+                                <a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-mail"></i><span class="badge badge-secondary">12</span></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li class="first">
+                                        <div class="dropdown-content-header"><i class="fa fa-pencil-square-o pull-right"></i> پیام های سایت</div>
+                                    </li>
+                                    <li>
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <div class="media-left"><img alt="" class="img-circle img-sm" src="~/Areas/Manage/Content/images/domnic-brown.png"></div>
+                                                <div class="media-body">
+                                                    <a class="media-heading" href="#">
+                                                        <span class="text-semibold">رضا قلیپور</span>
+                                                        <span class="media-annotation pull-right">Tue</span>
+                                                    </a>
+                                                    <span class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ...</span>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left"><img alt="" class="img-circle img-sm" src="~/Areas/Manage/Content/images/alex-dolgove.png"></div>
+                                                <div class="media-body">
+                                                    <a class="media-heading" href="#">
+                                                        <span class="text-semibold">سعید رضایی</span>
+                                                        <span class="media-annotation pull-right">10:45</span>
+                                                    </a>
+                                                    <span class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ...</span>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left"><img alt="" class="img-circle img-sm" src="~/Areas/Manage/Content/images/domnic-brown.png"></div>
+                                                <div class="media-body">
+                                                    <a class="media-heading" href="#">
+                                                        <span class="text-semibold">امید عبادی</span>
+                                                        <span class="media-annotation pull-right">4:00</span>
+                                                    </a>
+                                                    <span class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ...</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="external-last"> <a href="/manage/ManageSiteMessages">نمایش همه پیام ها</a> </li>
+                                </ul>
+                            </li>
+                            <li class="notifications dropdown hidden-xs">
+                                <a class="dropdown-toggle" href="/" target="_blank"><i class="fa fa-desktop"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                @RenderBody()
+                <br><br><br><br><br>
+                <footer class="footer-main">
+                    &copy; 2021 - طراحی و توسعه :  <a target="_blank" href="http://newwebdesign.org"><strong>طراحی سایت نیووب</strong></a>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="~/Areas/Manage/Content/js/jquery.min.js"></script>
+    <script src="~/Areas/Manage/Content/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/metismenu/js/jquery.metisMenu.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/blockui-master/js/jquery-ui.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/blockui-master/js/jquery.blockUI.js"></script>
+    <script src="~/Areas/Manage/Content/js/functions.js"></script>
+    @RenderSection("Scripts", false)
+    <script src="~/Areas/Manage/Content/js/loader.js"></script>
+    <script src="~/Areas/Manage/Content/js/bootstrap-tagsinput-angular.js"></script>
+    <script src="~/Areas/Manage/Content/js/bootstrap-tagsinput.js"></script>
+    @RenderSection("FooterContent", false)
+    <script type="text/javascript">
+        document.getElementById('time').innerHTML = (" " + week[d] + " " + day + " " + months[month - 1] + " " + year)
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).keypress(function (e) {
+        if (e.which == 13 && e.target.tagName != 'TEXTAREA') {
+            return false;
+        }
+    });
+
+    </script>
+
+</body> 
+</html>

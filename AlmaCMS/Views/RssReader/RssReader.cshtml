@@ -1,0 +1,53 @@
+﻿
+@model IEnumerable<AlmaCMS.Helpers.RssReaderHelper.Rss>
+@using AlmaCMS.Helpers
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+                <li>
+                    <a href="/RssReader">خبر خوان</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="page-section" style="padding-top: 10px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-sm-12">
+                        <div class="post-item">
+                           
+                            <h2 class="post-title" style="font-size:16px;">
+                                <a href="@item.Link" target="_blank" rel="nofollow">@Html.Encode(item.Title)</a>
+                            </h2>
+                            <div class="post-content">
+                           @System.Web.HttpUtility.HtmlDecode(item.Description)
+                            </div>
+                           
+                        </div>
+                    </div>
+
+
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+

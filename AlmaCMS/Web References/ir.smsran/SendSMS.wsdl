@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CHECK_CREDIT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CHECK_CREDITResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CHECK_CREDITResult" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEXT" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Send_Sms1Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEXT" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="API" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="API_CHANGE_ALLOW" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Send_Sms2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FROM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEXT" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="API" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="API_CHANGE_ALLOW" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Send_Sms3Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms4">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FROM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEXT" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="API" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="API_CHANGE_ALLOW" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="FLASH" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Internation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms4Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Send_Sms4Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms5">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FROM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TEXT" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="API" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="API_CHANGE_ALLOW" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="FLASH" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DATE" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="Internation" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Send_Sms5Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Send_Sms5Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEND_SMS_STATUS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SEND_ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEND_SMS_STATUSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SEND_SMS_STATUSResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEND_SMS_STATUS2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SEND_ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SEND_SMS_STATUS2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SEND_SMS_STATUS2Result" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="API_Exit" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Receive_Sms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NUMBER" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Receive_SmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Receive_SmsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Receive_Sms2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PASSWORD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NUMBER" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Receive_Sms2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Receive_Sms2Result" type="tns:ArrayOfResult_Receive" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfResult_Receive">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Result_Receive" nillable="true" type="tns:Result_Receive" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Result_Receive">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="From" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MESSAGE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DATE" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CHECK_CREDITSoapIn">
+    <wsdl:part name="parameters" element="tns:CHECK_CREDIT" />
+  </wsdl:message>
+  <wsdl:message name="CHECK_CREDITSoapOut">
+    <wsdl:part name="parameters" element="tns:CHECK_CREDITResponse" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms1SoapIn">
+    <wsdl:part name="parameters" element="tns:Send_Sms1" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms1SoapOut">
+    <wsdl:part name="parameters" element="tns:Send_Sms1Response" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms2SoapIn">
+    <wsdl:part name="parameters" element="tns:Send_Sms2" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms2SoapOut">
+    <wsdl:part name="parameters" element="tns:Send_Sms2Response" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms3SoapIn">
+    <wsdl:part name="parameters" element="tns:Send_Sms3" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms3SoapOut">
+    <wsdl:part name="parameters" element="tns:Send_Sms3Response" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms4SoapIn">
+    <wsdl:part name="parameters" element="tns:Send_Sms4" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms4SoapOut">
+    <wsdl:part name="parameters" element="tns:Send_Sms4Response" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms5SoapIn">
+    <wsdl:part name="parameters" element="tns:Send_Sms5" />
+  </wsdl:message>
+  <wsdl:message name="Send_Sms5SoapOut">
+    <wsdl:part name="parameters" element="tns:Send_Sms5Response" />
+  </wsdl:message>
+  <wsdl:message name="SEND_SMS_STATUSSoapIn">
+    <wsdl:part name="parameters" element="tns:SEND_SMS_STATUS" />
+  </wsdl:message>
+  <wsdl:message name="SEND_SMS_STATUSSoapOut">
+    <wsdl:part name="parameters" element="tns:SEND_SMS_STATUSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SEND_SMS_STATUS2SoapIn">
+    <wsdl:part name="parameters" element="tns:SEND_SMS_STATUS2" />
+  </wsdl:message>
+  <wsdl:message name="SEND_SMS_STATUS2SoapOut">
+    <wsdl:part name="parameters" element="tns:SEND_SMS_STATUS2Response" />
+  </wsdl:message>
+  <wsdl:message name="Receive_SmsSoapIn">
+    <wsdl:part name="parameters" element="tns:Receive_Sms" />
+  </wsdl:message>
+  <wsdl:message name="Receive_SmsSoapOut">
+    <wsdl:part name="parameters" element="tns:Receive_SmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Receive_Sms2SoapIn">
+    <wsdl:part name="parameters" element="tns:Receive_Sms2" />
+  </wsdl:message>
+  <wsdl:message name="Receive_Sms2SoapOut">
+    <wsdl:part name="parameters" element="tns:Receive_Sms2Response" />
+  </wsdl:message>
+  <wsdl:portType name="SendSMSSoap">
+    <wsdl:operation name="CHECK_CREDIT">
+      <wsdl:input message="tns:CHECK_CREDITSoapIn" />
+      <wsdl:output message="tns:CHECK_CREDITSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms1">
+      <wsdl:input message="tns:Send_Sms1SoapIn" />
+      <wsdl:output message="tns:Send_Sms1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms2">
+      <wsdl:input message="tns:Send_Sms2SoapIn" />
+      <wsdl:output message="tns:Send_Sms2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms3">
+      <wsdl:input message="tns:Send_Sms3SoapIn" />
+      <wsdl:output message="tns:Send_Sms3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms4">
+      <wsdl:input message="tns:Send_Sms4SoapIn" />
+      <wsdl:output message="tns:Send_Sms4SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms5">
+      <wsdl:input message="tns:Send_Sms5SoapIn" />
+      <wsdl:output message="tns:Send_Sms5SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEND_SMS_STATUS">
+      <wsdl:input message="tns:SEND_SMS_STATUSSoapIn" />
+      <wsdl:output message="tns:SEND_SMS_STATUSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SEND_SMS_STATUS2">
+      <wsdl:input message="tns:SEND_SMS_STATUS2SoapIn" />
+      <wsdl:output message="tns:SEND_SMS_STATUS2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Receive_Sms">
+      <wsdl:input message="tns:Receive_SmsSoapIn" />
+      <wsdl:output message="tns:Receive_SmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Receive_Sms2">
+      <wsdl:input message="tns:Receive_Sms2SoapIn" />
+      <wsdl:output message="tns:Receive_Sms2SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SendSMSSoap" type="tns:SendSMSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CHECK_CREDIT">
+      <soap:operation soapAction="http://tempuri.org/CHECK_CREDIT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms1">
+      <soap:operation soapAction="http://tempuri.org/Send_Sms1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms2">
+      <soap:operation soapAction="http://tempuri.org/Send_Sms2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms3">
+      <soap:operation soapAction="http://tempuri.org/Send_Sms3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms4">
+      <soap:operation soapAction="http://tempuri.org/Send_Sms4" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms5">
+      <soap:operation soapAction="http://tempuri.org/Send_Sms5" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEND_SMS_STATUS">
+      <soap:operation soapAction="http://tempuri.org/SEND_SMS_STATUS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEND_SMS_STATUS2">
+      <soap:operation soapAction="http://tempuri.org/SEND_SMS_STATUS2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receive_Sms">
+      <soap:operation soapAction="http://tempuri.org/Receive_Sms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receive_Sms2">
+      <soap:operation soapAction="http://tempuri.org/Receive_Sms2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSMSSoap12" type="tns:SendSMSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CHECK_CREDIT">
+      <soap12:operation soapAction="http://tempuri.org/CHECK_CREDIT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms1">
+      <soap12:operation soapAction="http://tempuri.org/Send_Sms1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms2">
+      <soap12:operation soapAction="http://tempuri.org/Send_Sms2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms3">
+      <soap12:operation soapAction="http://tempuri.org/Send_Sms3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms4">
+      <soap12:operation soapAction="http://tempuri.org/Send_Sms4" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_Sms5">
+      <soap12:operation soapAction="http://tempuri.org/Send_Sms5" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEND_SMS_STATUS">
+      <soap12:operation soapAction="http://tempuri.org/SEND_SMS_STATUS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SEND_SMS_STATUS2">
+      <soap12:operation soapAction="http://tempuri.org/SEND_SMS_STATUS2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receive_Sms">
+      <soap12:operation soapAction="http://tempuri.org/Receive_Sms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receive_Sms2">
+      <soap12:operation soapAction="http://tempuri.org/Receive_Sms2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SendSMS">
+    <wsdl:port name="SendSMSSoap" binding="tns:SendSMSSoap">
+      <soap:address location="http://smsran.ir/API/SendSMS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSMSSoap12" binding="tns:SendSMSSoap12">
+      <soap12:address location="http://smsran.ir/API/SendSMS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

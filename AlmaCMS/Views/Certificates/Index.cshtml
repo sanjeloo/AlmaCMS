@@ -1,0 +1,51 @@
+﻿@model List<AlmaCMS.ViewModels.VMCertificates>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="works" class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 post-content top-pad-20">
+                <h4 class="FontISB" style="font-size: 20px; color: #414141">گواهی نامه</h4>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="post-image opacity"></div>
+                    <div class="post-content top-pad-20">
+                        <div style="text-align: justify">
+                            <div class="col-sm-12 hover15" style="float: left; padding-left: 0; cursor: pointer">
+                                <figure>
+                                    <a href="/Certificates/Details/@item.id/@item.Title.Replace(" ","-").Replace(".","")" title="@item.Title">
+                                        <img src="@item.Image"  class="img-responsive" style="border-radius: 3px 3px 0 0; border: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 0px">
+                                    </a>
+                                </figure>
+                                <a href="/Certificates/Details/@item.id/@item.Title.Replace(" ","-").Replace(".","")" title="@item.Title">
+                                    <p class="text-center" style="background-color: #e4e4e4; border: 1px solid rgba(0, 0, 0, 0.1); text-align:center!important">
+                                        @item.Title
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</section>
+

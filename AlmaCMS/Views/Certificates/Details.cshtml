@@ -1,0 +1,37 @@
+﻿@model AlmaCMS.ViewModels.VMCertificates
+@{
+  
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+
+                <li>
+                    <a href="/Certificates/@ViewBag.GroupID/@ViewBag.GroupTitleUrl">@ViewBag.GroupTitle</a>
+                </li>
+                <li class="active">@Model.Title</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="works" class="page-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 post-content top-pad-20">
+                <h4 class="FontISB" style="font-size: 20px; color: #414141">@Model.Title</h4>
+            </div>
+            <div class="col-md-5">
+                <img src="@Model.Image" alt="@Model.Title" title="" class="responsive">
+            </div>
+            <div class="col-md-7 project-details">
+               @Html.Raw(Model.Descriotion)
+            </div>
+        </div>
+    </div>
+</section>

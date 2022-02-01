@@ -1,0 +1,182 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model List<AlmaCMS.Models.VWTaskList>
+
+
+@{
+    ViewBag.Title = " وظایف من";
+    Layout = "~/Areas/Expert/Views/Shared/_LayoutDashboardExpert.cshtml";
+}
+<link href="~/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+<link href="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+@helper GetRemainTime(DateTime ExpireDate)
+{
+    string Strret = "";
+    var Diffdate = ExpireDate - DateTime.Now;
+
+    if (ExpireDate > DateTime.Now)
+    {
+        if (Diffdate.Days != 0)
+        {
+            Strret += Diffdate.Days.ToString() + "روز و";
+
+        }
+        if (Diffdate.Hours != 0)
+        {
+            Strret += Diffdate.Hours + " ساعت و ";
+        }
+        Strret += Diffdate.Minutes + " دقیقه ";
+        <span>
+            @Strret
+        </span>
+    }
+    else
+    {
+        <span class="">
+            -
+        </span>
+    }
+
+
+}
+@helper getUsers(int taskid)
+{
+    AlmaCMS.Models.DB_AlmaCmsEntities db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+    AlmaCMS.Repositories.TasksRepository reptask = new AlmaCMS.Repositories.TasksRepository(db);
+    var userList = reptask.GetDapperTaskUsers(taskid).ToList();
+    foreach (var item in userList)
+    {
+
+        <span class="label label-info">
+            @item.Name
+        </span>
+    }
+}
+
+    <link href="~/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+
+
+
+<div class="tg-dashboardbanner">
+    <h1>وظایف</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/expert/Profile">حساب کاربری</a></li>
+        <li class="tg-active">وظایف</li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:0px;">
+                            <div class="tg-dashboardboxtitle" style="display:flex">
+                                <h2> وظایف ایجاد شده توسط من </h2>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <a href='@Url.Action("Create")' class="btn btn-primary btn-add">
+                                            <i class="fa fa-plus"></i>
+                                            ثبت وظیفه جدید
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tg-dashboardholder" style="padding-bottom:0px;">
+                                <div style="border:solid 1px #ccc;margin-bottom:20px;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped dataTables-example" style="margin-bottom:0px !important">
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th> عنوان  </th>
+                                                    <th> تاریخ ایجاد  </th>
+                                                    <th>
+                                                        کاربران
+                                                    </th>
+                                                    <th>
+                                                        تاریخ پایان
+                                                    </th>
+                                                    <th>
+                                                        زمان باقی مانده
+                                                    </th>
+                                                    <th>
+                                                        ارسال اس ام اس
+                                                    </th>
+                                                    <th>
+                                                        وضعیت
+                                                    </th>
+                                                    <th>عملیات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int i = 1; }
+                                                @foreach (var item in Model)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td class="size-40 text-center">
+                                                            @i
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Title)
+                                                        </td>
+                                                        <td>
+                                                            @item.persiandateinsert
+                                                        </td>
+                                                        <td>
+                                                            @getUsers(item.id)
+                                                        </td>
+                                                        <td>
+                                                            @item.persianexpiredate
+                                                        </td>
+
+                                                        <td>
+                                                            @GetRemainTime(item.ExpireDate.Value)
+                                                        </td>
+                                                        <td>
+                                                            @if (item.SendSMSAlarm == true)
+                                                            {
+                                                                <i class="icon-check icon-larger green-color" title="فعال"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="icon-cancel icon-larger red-color" title="غیرفعال"></i>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @item.StatusTitle
+                                                        </td>
+                                                        <td class="size-80 text-center">
+                                                            <a href="@Url.Action("details", "mytasks", new { id = item.id })" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="ویرایش"><i class="fa fa-list"></i></a>
+                                                           @* <a href="@Url.Action("Delete", "ManageTasks", new { id = item.id })" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="حذف"><i class="fa fa-close"></i></a>*@
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script src="~/Areas/Manage/Content/plugins/datatables/js/jquery.dataTables.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/js/jszip.min.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/js/pdfmake.min.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/js/vfs_fonts.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
+    <script src="~/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>
+}

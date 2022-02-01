@@ -1,0 +1,48 @@
+﻿@model List<AlmaCMS.ViewModels.VMProjects>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+                <li class="active">@ViewBag.Title</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section id="news" class="page-section " style="padding: 20px 0 50px;">
+    <div class="container text-center">
+        <div class="row animated fadeInUp visible" data-animation="fadeInUp">
+
+
+            @foreach (var iten in Model)
+            { 
+            <div class="col-sm-4 col-md-3 icons-hover-color bottom-xs-pad-20">
+                <div class="projects-block" style="margin-bottom:10px;  background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;">
+                    <div class="image">
+                        <a href="#">
+                            <img src="@iten.Image" alt="@iten.Title" title="@iten.Title" style="padding-bottom: 0px" width="270" height="270">
+                        </a>
+                    </div>
+                    <div class="description">
+                        <h4 class="post-title" style="margin-top: 5px; padding: 0 10px; font-size:20px;">
+                            <a href="#">@iten.Title </a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            }
+
+
+        </div>
+    </div>
+</section>

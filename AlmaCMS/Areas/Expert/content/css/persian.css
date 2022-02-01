@@ -1,0 +1,43 @@
+﻿@font-face {
+    font-family: 'IranSansEN';
+    src: url('../fonts/IRANSans.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/IRANSans.eot?#') format('eot'), /* IE6–8 */
+    url('../fonts/IRANSans.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('../fonts/IRANSans.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/IRANSans.otf') format('opentype'),
+    url('../fonts/IRANSans.svg') format('svg');
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IranSans';
+    src: url('../fonts/IRANSans(FaNum).eot'); /* IE9 Compat Modes */
+    src: url('../fonts/IRANSans(FaNum).eot?#') format('eot'), /* IE6–8 */
+    url('../fonts/IRANSans(FaNum).ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('../fonts/IRANSans(FaNum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/IRANSans(FaNum).otf') format('opentype'),
+    url('../fonts/IRANSans(FaNum).svg') format('svg');
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'IranSansB';
+    src: url('../fonts/IRANSans(FaNum).eot'); /* IE9 Compat Modes */
+    src: url('../fonts/IRANSans(FaNum).eot?#') format('eot'), /* IE6–8 */
+    url('../fonts/IRANSans(FaNum)_Bold.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('../fonts/IRANSans(FaNum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/IRANSans(FaNum).otf') format('opentype'),
+    url('../fonts/IRANSans(FaNum).svg') format('svg');
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.FontIS{font-family:IranSans !important;}
+.FontISB{font-family:IranSansB !important;}
+                                            /* =============================================== */
+											/* ------------>>> Mohsen Javadi     <<<---------- */
+											/* ------------>>> Hamed Mohammadian <<<---------- */
+											/* =============================================== */ 

@@ -1,0 +1,199 @@
+﻿@model List<AlmaCMS.Models.ProductReview>
+@using AlmaCMS.Helpers;
+<link href="~/Content/assets/css/alertify.rtl.min.css" rel="stylesheet" />
+<style>
+    .product-rate .active{
+        color:yellow;
+    }
+</style>
+
+
+<div class="col-lg-6 col-md-6 col-xs-12 float-left">
+    <div class="comments-summary-note">
+        <div class="form-reply ui-form-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <label for="shoptop" class="pull-right ml-15" style="padding-top:3px;">امتیاز دهی</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-left "><div id="shop"></div></div>
+                    </div>
+                 
+
+                 
+                    <div style="display:none">
+                        <select id="ddlRWRate" class="drpdn">
+                            <option value="1">
+                                1
+                            </option>
+                            <option value="2">
+                                2
+                            </option>
+                            <option value="3">
+                                3
+                            </option>
+                            <option value="4">
+                                4
+                            </option>
+                            <option selected value="5">
+                                5
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="txtRWName" id="txtRWName" placeholder="نام">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="email" name="txtRWEmail" id="txtRWEmail" placeholder="ایمیل">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="tel" name="txtRWTitle" id="txtRWTitle" placeholder="عنوان">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <textarea class="form-control mb-0" rows="6" name="txtComments" id="txtComments" placeholder="پیام"></textarea>
+                        </div>
+                    </div>
+                </div>
+      
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="text-left">
+                        <button class="ui-form__btn btn btn-primary color-box-price" onclick="AddProductCommentRes();" id="BtnAddComment">ثبت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--write comment button end-->
+<!-- comments -->
+<div class="product-comment-list">
+    <ul class="comment-list">
+        <!-- comments-item -->
+
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="comments-user-shopping">
+                    <div class="message-light"><i class="fa fa-thumbs-o-up"></i></div>
+                    <small>توسط</small>
+                    <span>@item.Name</span>
+                    <div class="cell-date">
+                        در تاریخ @item.DateInsert.Value.ToPersianShortDate()
+                        <div class="product-rate float-left mr-3" dir="ltr">
+                            <i class="fa fa-star @(item.Rate>=1?"active":"")"></i>
+                            <i class="fa fa-star @(item.Rate >= 2 ? "active" : "")"></i>
+                            <i class="fa fa-star @(item.Rate >= 3 ? "active" : "")"></i>
+                            <i class="fa fa-star @(item.Rate >= 4 ? "active" : "")"></i>
+                            <i class="fa fa-star @(item.Rate >= 5 ? "active" : "")"></i>
+                        </div>
+                    </div>
+                    <p class="dec">@item.Comment</p>
+
+                    @if (!string.IsNullOrEmpty(item.Answer))
+                    {
+                        <p class="dec answer-comment"> پاسخ مدیر :@item.Answer</p>
+                    }
+                </div>
+            </li>
+        }
+        
+       
+        <!-- comments-item end-->
+    </ul>
+</div>
+
+<script src="~/Content/js/jquery-1.10.2.min.js"></script>
+<script src="~/Content/js/jquery.validate.min.js"></script>
+<script src="~/Content/js/EmailValidation.js"></script>
+<script src="~/Content/assets/alertify.js"></script>
+<script>
+    //$('#BtnProductAddComment').click();
+
+    function AddProductCommentRes() {
+
+        var valName = $('#txtRWName').val();
+        var valEmail = $('#txtRWEmail').val();
+        var valTitle = $('#txtRWTitle').val();
+        var valComments = $('#txtComments').val();
+        var valRate = $('#ddlRWRate').val();
+        var valPID = $("#PublicProductID").val();
+        if (valName == '') {
+            alertify.warning('نام را وارد نمایید');
+            $('#txtRWName').focus();
+            return;
+        }
+
+
+        if (valEmail == '') {
+            alertify.warning('ایمیل را وارد نمایید');
+            $('#txtRWEmail').focus();
+            return;
+        }
+
+
+        if (validateEmail(valEmail) == false) {
+            alertify.warning('ایمیل وارد شده صحیح نمی باشد ');
+            $('#txtRWEmail').focus();
+            return;
+        }
+        if (valTitle == '') {
+            alertify.warning('عنوان نظر را وارد نمایید');
+            $('#txtRWTitle').focus();
+            return;
+        }
+
+        if (valComments == '') {
+            alertify.warning('متن نظر را وارد نمایید');
+            $('#txtComments').focus();
+            return;
+        }
+
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        jQuery.ajax({
+            url: '@Url.Action("Func/AddComments", "Products")',
+            data: { __RequestVerificationToken: token, ProductID: valPID, Name: valName, Email: valEmail, Title: valTitle, Comment: valComments, Rate: valRate },
+            datatype: "json",
+            type: "post",
+
+            success: function (result) {
+
+
+                if (result == "1") {
+                    alertify.success("نظر شما با موفقیت ثبت شد");
+
+                    $('#txtRWName').val('');
+                    $('#txtRWEmail').val('');
+                    $('#txtRWTitle').val('');
+                    $('#txtComments').val('');
+                }
+                else {
+                    alertify.error('خطا در درج اطلاعات');
+                }
+
+
+
+
+            },
+            error: function () {
+                alertify.error('خطا در ارسال اطلاعات');
+                $('.validate-req-msg').slideDown(300);
+            }
+
+
+        });
+    }
+
+</script>

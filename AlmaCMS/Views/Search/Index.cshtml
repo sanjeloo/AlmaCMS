@@ -1,0 +1,113 @@
+﻿@using AlmaCMS.Helpers
+@{
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    var PagesResult = ViewBag.PagesResult as List<AlmaCMS.Models.Page>;
+    var NewsList = ViewBag.NewsList as List<AlmaCMS.Models.News>;
+    var ProductsList = ViewBag.ProductsList as List<AlmaCMS.Models.Product>;
+    var CustomerProductList = ViewBag.CustomerProductList as List<AlmaCMS.Models.CustomProduct>;
+
+
+}
+<div class="page-title page-title-default title-size-default title-design-centered color-scheme-light" style="background-image: url(/content/site/images/page.jpg); height:250px; width:100%">
+    <div class="container">
+        <header class="entry-header">
+            <h1 class="entry-title"></h1>
+        </header>
+    </div>
+</div><br />
+<div class="divider">
+    <div class="line red"></div>
+    <span class="section">
+        <span class="title">جستجو</span>
+    </span>
+    <div class="line red"></div>
+</div>
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-12 vc_col-md-12">
+        <div class="vc_column-inner vc_custom_1499612435663">
+            <div class="wpb_wrapper">
+                <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h4 class="woodmart-title-container title  woodmart-font-weight-"> <asp:Label runat="server" ID="lblTitle2"></asp:Label></h4>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+                <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <div class="info-box-wrapper ">
+                                    <div id="wd-5e02250148175" class=" woodmart-info-box text-right box-icon-align-right box-style- color-scheme- woodmart-bg-none box-title-small vc_custom_1577198871754">
+
+                                        <div class="info-box-content">
+                                            <h4 class="info-box-title woodmart-font-weight- box-title-style-default"> <asp:Label Text="" ID="lblTitle" runat="server" /></h4>						<div class="info-box-inner reset-mb-10">
+                                                <p style="text-align:justify;direction:rtl">
+                                                    <section class="speak-about-us">
+                                                        <div class="container-fluid">
+                                                            <div class="divider">
+                                                                <span class="section">
+                                                                    <i class="pusn-trumpet text-red"></i>
+                                                                    نتایج جستجو "@ViewBag.SerachValue"
+                                                                </span>
+                                                                <div class="line"></div>
+                                                            </div>
+                                                <p class="body">
+
+
+
+                                                    @foreach (var item in PagesResult)
+                                                    {
+                                                    <p>
+                                                        <a href="/Content/@item.PegeID/@item.Title.toSlugify()">@item.Title</a>
+                                                    </p>
+                                                }
+                                                    @foreach (var item in NewsList)
+                                                    {
+                                                        <p>
+                                                            <a href="/blog/read/@item.id/@item.Title.toSlugify()">@item.Title</a>
+                                                        </p>
+                                                    }
+                                                    @foreach (var item in ProductsList)
+                                                    {
+                                                        <p>
+                                                            <a href="/products/details/@item.id/@item.Title.toSlugify()">@item.Title</a>
+                                                        </p>
+                                                    }
+                                                    @foreach (var item in CustomerProductList)
+                                                    {
+                                                        <p>
+                                                            <a href="/CustomeProducts/@item.id/@item.Title.toSlugify()">@item.Title</a>
+                                                        </p>
+                                                    }
+
+
+
+
+                                                    </p>
+
+                                                </div>
+                                                </section>
+
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

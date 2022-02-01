@@ -1,0 +1,75 @@
+﻿@model AlmaCMS.ViewModels.VMNews
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VMNews</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewsContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewsContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateInsert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateInsert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Keyword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Keyword)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

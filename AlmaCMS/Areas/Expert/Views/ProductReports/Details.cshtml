@@ -1,0 +1,190 @@
+﻿@model AlmaCMS.ViewModels.VMReportExpertAnswer
+
+@{
+    ViewBag.Title = "شرح گزارش";
+    Layout = "~/Areas/Expert/Views/Shared/_LayoutDashboardExpert.cshtml";
+    var AnswerList = ViewBag.AnswerList as List<AlmaCMS.Models.VWProductReportAnswer>;
+    var ReportDocs = ViewBag.ReportDocs as List<AlmaCMS.Models.ProductReportDoc>;
+    var TaskInfo = ViewBag.ReportInfo as AlmaCMS.Models.VWProducReport;
+}
+@section Styles{
+    <style>
+        .tg-statistic {
+            border: solid 1px #ccc;
+            margin-bottom: 15px;
+        }
+
+        .shcartbank {
+            text-align: left;
+            letter-spacing: 2px;
+            font-family: IranSansEN;
+        }
+
+        .irshebabox {
+            position: relative;
+        }
+
+        .irshebainput {
+            padding-left: 45px !important;
+            text-align: left;
+            letter-spacing: 2px;
+            font-family: IranSansEN;
+        }
+
+        .irsheba {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            background-color: #ffffdf;
+            padding: 9px 12px;
+            border-radius: 3px 0px 0px 3px;
+            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0,0.5);
+        }
+    </style>
+}
+@helper getAnsweDocs(int answerid)
+{
+    AlmaCMS.Models.DB_AlmaCmsEntities db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+    var doclist = db.ProductReportAnswerDocs.Where(c => c.ProductReportAnswerId == answerid).ToList();
+    foreach (var item in doclist)
+    {
+        <div class="col-md-2">
+            <a href="~/UploadedFiles/@item.FileName" target="_blank">
+                <img class="img-responsive" style="max-width:50px" src="/content/images/fileicon.png" />
+                <p>@item.Title</p>
+            </a>
+        </div>
+
+    }
+}
+@helper getUsers(int taskid)
+{
+    AlmaCMS.Models.DB_AlmaCmsEntities db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+    AlmaCMS.Repositories.ProductReportRepository reptask = new AlmaCMS.Repositories.ProductReportRepository(db);
+    var userList = reptask.GetDapperReportUsers(taskid).ToList();
+    foreach (var item in userList)
+    {
+
+        <li><a href="javascript:void(0);">@item.Name</a></li>
+      
+    }
+}
+<div class="tg-dashboardbanner">
+    <h1>حساب کاربری</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <div id="tg-content" class="">
+                    <div class="tg-post tg-detail tg-postdetail">
+                        <div class="tg-posttitle">
+                            <h1>@Model.Title</h1>
+                        </div>
+                        <ul class="tg-postmetadata">
+                            <li><time datetime="">@TaskInfo.persiandateinsert</time></li>
+                           
+                            @*<li>مهلت انجام : @TaskInfo.persianexpiredate</li>*@
+                        </ul>
+                        
+                      
+                        <ul class="tg-postcategories">
+                            <li>کاربران ارجاع داده شده : </li>
+                        @getUsers(TaskInfo.id)
+                        </ul>
+                        <div class="tg-description">
+                            @Html.Raw(TaskInfo.Title)
+
+
+                        </div>
+                        <div class="tg-description">
+                            @Html.Raw(TaskInfo.Descriptions)
+
+
+                        </div>
+                        <fieldset style="border: solid 1px #cacaca; margin: 20px 0; padding: 20px 0; box-shadow: 0px 0px 15px #cecece;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tg-lgcolwidthhalf">
+                                <div class="tg-dashboardbox">
+                                    <div class="tg-dashboardboxtitle">
+                                        <h2>فایل های پیوست</h2>
+                                    </div>
+                                    <div class="tg-dashboardholder">
+                                        @foreach (var item in ReportDocs)
+                                        {
+                                            <div class="col-md-2">
+                                                <a href="~/UploadedFiles/@item.FileName" target="_blank">
+                                                    <img class="img-responsive" style="max-width:50px;margin:auto" src="/content/images/fileicon.png" />
+                                                    <p style="text-align:center;margin-top:10px;color:#ED1B24;font-size:14px">@item.Title</p>
+                                                </a>
+                                            </div>
+
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+                        
+                    
+                    <div id="tg-comments" class="tg-comments" style="margin-top:30px">
+                        <h2>@AnswerList.Count پاسخ</h2>
+
+                        ارسال پاسخ   <a style="margin-top:10px" class="tg-btnreply" href="/Expert/ProductReports/SendAnswer/@TaskInfo.id"><i class="fa fa-mail-reply"></i></a>
+
+                        <ul>
+
+                            @foreach (var item in AnswerList)
+{
+    <li style="border: solid 1px #cacaca;margin: 20px 0;padding-bottom: 20px;box-shadow: 0px 0px 15px #cecece;">
+        <hr />
+        <div class="tg-author">
+
+            <div class="tg-authorcontent">
+                <div class="tg-authorhead">
+                    <div class="tg-boxright">
+                        <div style="display:flex;margin-bottom:10px;align-items:center">
+                            <i class="fa fa-user" style="margin-left:5px"></i><h3 style="margin:0"><a href="javascript:void(0);">@item.Name</a></h3>
+                        </div>
+                            <span>نوشته شده در تاریخ :@item.answerpersiandateinsert</span>
+                        </div>
+                    <div class="tg-boxleft">
+                        <a class="tg-btnreply" href="/Expert/ProductReports/SendAnswer/@TaskInfo.id"><i class="fa fa-mail-reply"></i></a>
+                    </div>
+                </div>
+                <div class="tg-description">
+                    @Html.Raw(item.Title)
+                </div>
+                <div class="tg-description">
+                    @Html.Raw(item.Descriptions)
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tg-lgcolwidthhalf">
+                <div class="tg-dashboardbox">
+                    <div class="tg-dashboardboxtitle">
+                        <h2>فایل های پیوست</h2>
+                    </div>
+                    <div class="tg-dashboardholder">
+                        @getAnsweDocs(item.id)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </li>
+}
+                            
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

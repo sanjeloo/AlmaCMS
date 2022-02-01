@@ -1,0 +1,740 @@
+﻿@using AlmaCMS.Helpers
+@{
+    ViewBag.Title = "فروشگاه لوازم یدکی دارت کالا";
+    ViewBag.Descriptions = "فروشگاه لوازم یدکی دارت کالا";
+    ViewBag.Keywords = "فروشگاه لوازم یدکی دارت کالا";
+
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+
+    var Sliders = ViewBag.Sliders as List<AlmaCMS.Models.Slider>;
+    var HomeProducts = ViewBag.HomeProducts as List<AlmaCMS.Models.Link>;
+    var LastProducts = ViewBag.LastProsucts as List<AlmaCMS.Models.Product>;
+    var LastNews = ViewBag.LastNews as List<AlmaCMS.Models.News>;
+
+    var HomePageInfo = ViewBag.HomePAgeInfo as List<AlmaCMS.Models.Link>;
+    var section1 = HomePageInfo.Where(c => c.id == 28).FirstOrDefault();
+    var AboutSection = HomePageInfo.Where(c => c.id == 29).FirstOrDefault();
+    var historydection = HomePageInfo.Where(c => c.id == 30).FirstOrDefault();
+    var section4 = HomePageInfo.Where(c => c.id == 31).FirstOrDefault();
+}
+
+
+<div class="vc_row wpb_row vc_row-fluid vc_rtl-columns-reverse vc_row-o-content-top vc_row-flex">
+    <div class="wpb_column vc_column_container vc_col-sm-4 vc_hidden-sm vc_hidden-xs">
+        <div class="vc_column-inner vc_custom_1584978007465">
+            <div class="wpb_wrapper">
+                <div class="wpb_single_image wpb_content_element vc_align_center bannertop">
+
+                    <figure class="wpb_wrapper vc_figure">
+                        <div class="vc_single_image-wrapper   vc_box_border_grey">
+                            
+
+
+                            <a href='@section4.LinkUrl' target='_self' title="@section4.Title">
+
+
+                                <img width="502" height="455" src="@section4.Image" alt="@section4.Title" class="vc_single_image-img attachment-full" sizes="(max-width: 502px) 100vw, 502px" />
+                            </a>
+                           
+
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div><div class="wpb_column vc_column_container vc_col-sm-8">
+        <div class="vc_column-inner vc_custom_1584977968179">
+            <div class="wpb_wrapper">
+                <!-- START blackfriday REVOLUTION SLIDER 6.1.5 --><p class="rs-p-wp-fix"></p>
+                <rs-module-wrap id="woodmart-black-friday-demo_wrapper" data-source="gallery" style="background:#202328;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;max-width:">
+                    <rs-module id="woodmart-black-friday-demo" style="display:none;" data-version="6.1.5">
+                        <rs-slides>
+
+
+                            @foreach (var item in Sliders)
+                            {
+
+                                <rs-slide data-key="rs-112" data-title="@item.Title 💫" data-anim="ei:d;eo:d;s:1000;r:0;t:fade;sl:0;">
+                                    <img src="@item.Image" alt="@item.Title" data-parallax="off" class="rev-slidebg" data-no-retina>
+
+
+                                    <rs-layer id="slider-6-slide-107-layer-4"
+                                              data-type="image"
+                                              data-rsp_ch="on"
+                                              data-xy="xo:-26px,-25px,-19px,-8px;yo:-1px,0,0,0;"
+                                              data-text="w:normal;s:20,19,14,6;l:0,24,18,7;"
+                                              data-dim="w:1062px,1037px,806px,346px;h:472px,460px,357px,153px;"
+                                              data-frame_999="o:0;st:w;"
+                                              style="z-index:5;">
+                                        <img src="@item.Image" width="1024" height="455" data-no-retina>
+                                    </rs-layer>
+
+                                </rs-slide>
+
+                            }
+                        </rs-slides>
+                        <rs-progress class="rs-bottom" style="visibility: hidden !important;"></rs-progress>
+                    </rs-module>
+                    <script type="text/javascript">
+                                                        setREVStartSize({ c: 'woodmart-black-friday-demo', rl: [1240, 1024, 778, 480], el: [455, 465, 465, 174], gw: [1024, 1000, 778, 334], gh: [455, 373, 465, 174], layout: 'fullwidth', mh: "0" });
+                                                        var revapi6,
+                                                            tpj;
+                                                        jQuery(function () {
+                                                            tpj = jQuery;
+                                                            if (tpj("#woodmart-black-friday-demo").revolution == undefined) {
+                                                                revslider_showDoubleJqueryError("#woodmart-black-friday-demo");
+                                                            } else {
+                                                                revapi6 = tpj("#woodmart-black-friday-demo").show().revolution({
+                                                                    jsFileLocation: "js/",
+                                                                    visibilityLevels: "1240,1024,778,480",
+                                                                    gridwidth: "1024,1000,778,334",
+                                                                    gridheight: "455,373,465,174",
+                                                                    minHeight: "none",
+                                                                    editorheight: "455,465,465,174",
+                                                                    responsiveLevels: "1240,1024,778,480",
+                                                                    disableProgressBar: "on",
+                                                                    navigation: {
+                                                                        mouseScrollNavigation: false,
+                                                                        onHoverStop: false,
+                                                                        touch: {
+                                                                            touchenabled: true,
+                                                                            touchOnDesktop: true
+                                                                        },
+                                                                        arrows: {
+                                                                            enable: true,
+                                                                            style: "hephaistos",
+                                                                            rtl: true,
+                                                                            left: {
+
+                                                                            },
+                                                                            right: {
+
+                                                                            }
+                                                                        },
+                                                                        tabs: {
+                                                                            enable: true,
+                                                                            tmp: "<span class=\"tp-tab-title\">{{title}}</span>",
+                                                                            style: "zeus",
+                                                                            v_offset: -14,
+                                                                            width: 250,
+                                                                            min_width: 300,
+                                                                            wrapper_padding: 3,
+                                                                            wrapper_color: "rgba(12, 12, 12, 0.41)",
+                                                                            span: true
+                                                                        }
+                                                                    },
+                                                                    parallax: {
+                                                                        levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 51, 55],
+                                                                        type: "mouse"
+                                                                    },
+                                                                    scrolleffect: {
+                                                                        set: true,
+                                                                        multiplicator: 1.3,
+                                                                        multiplicator_layers: 1.3
+                                                                    },
+                                                                    fallbacks: {
+                                                                        allowHTML5AutoPlayOnAndroid: true
+                                                                    },
+                                                                });
+                                                            }
+
+                                                        });
+                    </script>
+                    <script>
+                                                        var htmlDivCss = unescape("%23woodmart-black-friday-demo_wrapper%20%7B%0A%09height%3A%20465px%3B%0A%7D%0A%0A%40media%20%28max-width%3A%201024px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D%0A%20%20%20%20%20%20%0A%40media%20%28max-width%3A%20778px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D%0A%20%20%20%20%20%20%20%20%0A%40media%20%28max-width%3A%20480px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D");
+                                                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+                                                        if (htmlDiv) {
+                                                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+                                                        } else {
+                                                            var htmlDiv = document.createElement('div');
+                                                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+                                                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+                                                        }
+                    </script>
+                    <script>
+                                                        var htmlDivCss = unescape("%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%20%7B%0A%09cursor%3Apointer%3B%0A%09background%3Argba%280%2C0%2C0%2C0.5%29%3B%0A%09width%3A40px%3B%0A%09height%3A40px%3B%0A%09position%3Aabsolute%3B%0A%09display%3Ablock%3B%0A%09z-index%3A1000%3B%0A%20%20%20%20border-radius%3A50%25%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%3Ahover%20%7B%0A%09background%3A%23000000%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%3Abefore%20%7B%0A%09font-family%3A%20%27revicons%27%3B%0A%09font-size%3A18px%3B%0A%09color%3A%23ffffff%3B%0A%09display%3Ablock%3B%0A%09line-height%3A%2040px%3B%0A%09text-align%3A%20center%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows.tp-leftarrow%3Abefore%20%7B%0A%09content%3A%20%27%5Ce82c%27%3B%0A%20%20%20%20margin-left%3A-2px%3B%0A%20%20%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows.tp-rightarrow%3Abefore%20%7B%0A%09content%3A%20%27%5Ce82d%27%3B%0A%20%20%20%20margin-right%3A-2px%3B%0A%7D%0A%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab%20%7B%20%0A%20%20opacity%3A1%3B%20%20%20%20%20%20%0A%20%20box-sizing%3Aborder-box%3B%0A%7D%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab-title%20%7B%20%0Adisplay%3A%20block%3B%0Atext-align%3A%20center%3B%0Abackground%3A%20rgba%280%2C0%2C0%2C0.25%29%3B%0Afont-family%3A%20%27Roboto%20Slab%27%2C%20serif%3B%20%0Afont-weight%3A%20700%3B%20%0Afont-size%3A%2013px%3B%20%0Aline-height%3A%2013px%3B%0Acolor%3A%20%23ffffff%3B%20%0Apadding%3A%209px%2010px%3B%20%7D%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab%3Ahover%20.tp-tab-title%2C%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab.selected%20.tp-tab-title%20%7B%0A%20%20color%3A%20%23000000%3B%0A%20%20background%3A%23ffffff%3B%20%0A%7D%0A");
+                                                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+                                                        if (htmlDiv) {
+                                                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+                                                        } else {
+                                                            var htmlDiv = document.createElement('div');
+                                                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+                                                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+                                                        }
+                    </script>
+                    <script>
+                                                        var htmlDivCss = unescape("%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab-title%7B%0Abackground%3A%20rgba%280%2C0%2C0%2C0.25%29%20%21important%3B%0Acolor%3A%20%23ffffff%20%21important%3B%0Afont-size%3A%2013px%20%21important%3B%0Aline-height%3A%2013px%20%21important%3B%0A%7D%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab%3Ahover%20.tp-tab-title%2C%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab.selected%20.tp-tab-title%7B%0Abackground%3A%20%23ffffff%20%21important%3B%0Acolor%3A%20%23000000%20%21important%3B%0A%7D%0A%0A%0A%0A%0A%0A%0A%0A");
+                                                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+                                                        if (htmlDiv) {
+                                                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+                                                        } else {
+                                                            var htmlDiv = document.createElement('div');
+                                                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+                                                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+                                                        }
+                    </script>
+                </rs-module-wrap>
+                <!-- END REVOLUTION SLIDER -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1579001536888 vc_row-o-content-top vc_row-flex">
+
+
+    @if (HomeProducts.Count > 2)
+    {
+        foreach (var item in HomeProducts.OrderBy(c => c.id).Take(2))
+        {
+            <div class="wpb_column vc_column_container vc_col-sm-4">
+                <div class="vc_column-inner vc_custom_1584473170429">
+                    <div class="wpb_wrapper">
+                        <div class="wpb_single_image wpb_content_element vc_align_center bannertop">
+
+                            <figure class="wpb_wrapper vc_figure">
+                                <div class="vc_single_image-wrapper   vc_box_border_grey">
+                                    <a href='@item.LinkUrl' target='_self' title="@item.Title">
+
+                                        <img width="520" height="300" src="@item.Image" alt="@item.Title" class="vc_single_image-img attachment-full" sizes="(max-width: 520px) 100vw, 520px" />
+                                    </a>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        foreach (var item in HomeProducts.OrderBy(c => c.id).Skip(2))
+        {
+            <div class="wpb_column vc_column_container vc_col-sm-4">
+                <div class="vc_column-inner vc_custom_1584473170429">
+                    <div class="wpb_wrapper">
+                        <div class="wpb_single_image wpb_content_element vc_align_center bannertop">
+
+                            <figure class="wpb_wrapper vc_figure">
+                                <div class="vc_single_image-wrapper   vc_box_border_grey">
+                                    <a href='@item.LinkUrl' target='_self' title="@item.Title">
+
+                                        <img width="520" height="300" src="@item.Image" alt="@item.Title" class="vc_single_image-img attachment-full" sizes="(max-width: 520px) 100vw, 520px" />
+                                    </a>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        foreach (var item in HomeProducts)
+        {
+            <div class="wpb_column vc_column_container vc_col-sm-4">
+                <div class="vc_column-inner vc_custom_1584473170429">
+                    <div class="wpb_wrapper">
+                        <div class="wpb_single_image wpb_content_element vc_align_center bannertop">
+
+                            <figure class="wpb_wrapper vc_figure">
+                                <div class="vc_single_image-wrapper   vc_box_border_grey">
+                                    <a href='@item.LinkUrl' target='_self' title="@item.Title">
+
+                                        <img width="520" height="300" src="@item.Image" alt="@item.Title" class="vc_single_image-img attachment-full" sizes="(max-width: 520px) 100vw, 520px" />
+                                    </a>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+
+
+
+
+</div>
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1584785718517">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner vc_custom_1584785786630">
+            <div class="wpb_wrapper">
+                <div id="wd-5e75ed2a97fbd" class="title-wrapper  woodmart-title-color-default woodmart-title-style-underlined woodmart-title-width-100 text-center woodmart-title-size-default ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h4 class="woodmart-title-container title  woodmart-font-weight-">هدیه چی بدم؟</h4>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1585242658721 vc_row-has-fill vc_row-o-content-middle vc_row-flex" style="background-color:white">
+    <div class="wpb_column vc_column_container vc_col-sm-1/5">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div class="info-box-wrapper ">
+                    <div id="wd-5e7cd899da55b" class=" woodmart-info-box text-center box-icon-align-top box-style- color-scheme- woodmart-bg-none box-title-default ">
+                        <div class="box-icon-wrapper  box-with-icon box-icon-simple">
+                            <div class="info-box-icon">
+
+
+                                <img class="info-icon image-1 " src="~/Content/Site/images/5-1.png" width="56" height="60" alt="5" title="5" />
+
+                            </div>
+                        </div>
+                        <div class="info-box-content">
+                            <a href="/product.aspx?type=box">
+                                <h4 class="woodmart-font-weight- box-title-style-default">جعبه واکس خودرو</h4>
+                            </a>
+                            <div class="info-box-inner reset-mb-10">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div class="wpb_column vc_column_container vc_col-sm-1/5">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div class="info-box-wrapper ">
+                    <div id="wd-5e7cd88a870a0" class=" woodmart-info-box text-center box-icon-align-top box-style- color-scheme- woodmart-bg-none box-title-default ">
+                        <div class="box-icon-wrapper  box-with-icon box-icon-simple">
+                            <div class="info-box-icon">
+
+
+                                <img class="info-icon image-1 " src="~/Content/Site/images/4-3.png" width="54" height="62" alt="4" title="4" />
+
+                            </div>
+                        </div>
+                        <div class="info-box-content">
+                            <a href="/product.aspx?type=off">
+                                <h4 class="woodmart-font-weight- box-title-style-default">کادوهای تخفیف دار</h4>
+                            </a>
+                            <div class="info-box-inner reset-mb-10">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div class="wpb_column vc_column_container vc_col-sm-1/5">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div class="info-box-wrapper ">
+                    <div id="wd-5e7cd8394ad02" class=" woodmart-info-box text-center box-icon-align-top box-style- color-scheme- woodmart-bg-none box-title-default ">
+                        <div class="box-icon-wrapper  box-with-icon box-icon-simple">
+                            <div class="info-box-icon">
+
+
+                                <img class="info-icon image-1 " src="~/Content/Site/images/3-2.png" width="59" height="64" alt="3" title="3" />
+
+                            </div>
+                        </div>
+                        <div class="info-box-content">
+                            <a href="/product.aspx?type=special">
+                                <h4 class="woodmart-font-weight- box-title-style-default">هدایای ویژه</h4>
+                            </a>
+                            <div class="info-box-inner reset-mb-10">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div class="wpb_column vc_column_container vc_col-sm-1/5">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div class="info-box-wrapper ">
+                    <div id="wd-5e7cd85536a0b" class=" woodmart-info-box text-center box-icon-align-top box-style- color-scheme- woodmart-bg-none box-title-default ">
+                        <div class="box-icon-wrapper  box-with-icon box-icon-simple">
+                            <div class="info-box-icon">
+
+
+                                <img class="info-icon image-1 " src="~/Content/Site/images/2-2.png" width="59" height="64" alt="2" title="2" />
+
+                            </div>
+                        </div>
+                        <div class="info-box-content">
+                            <a href="/product.aspx?type=man">
+                                <h4 class="woodmart-font-weight- box-title-style-default">هدیه برای آقایان</h4>
+                            </a>
+                            <div class="info-box-inner reset-mb-10">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div class="wpb_column vc_column_container vc_col-sm-1/5">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div class="info-box-wrapper ">
+                    <div id="wd-5e7cd8de33d2c" class=" woodmart-info-box text-center box-icon-align-top box-style- color-scheme- woodmart-bg-none box-title-default ">
+                        <div class="box-icon-wrapper  box-with-icon box-icon-simple">
+                            <div class="info-box-icon">
+
+
+                                <img class="info-icon image-1 " src="~/Content/Site/images/6-1.png" width="56" height="61" alt="6" title="6" />
+
+                            </div>
+                        </div>
+                        <div class="info-box-content">
+                            <a href="/product.aspx?type=woman">
+                                <h4 class="woodmart-font-weight- box-title-style-default">هدیه برای خانم ها</h4>
+                            </a>
+                            <div class="info-box-inner reset-mb-10">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1584785718517">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner vc_custom_1584785786630">
+            <div class="wpb_wrapper">
+                <div id="wd-5e75e8876d26c" class="title-wrapper  woodmart-title-color-default woodmart-title-style-underlined woodmart-title-width-100 text-center woodmart-title-size-default ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h4 class="woodmart-title-container title  woodmart-font-weight-">جدیدترین محصولات ثبت شده در سایت</h4>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="vc_row wpb_row vc_row-fluid backgroundwhite vc_custom_1579055687439">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner">
+            <div class="wpb_wrapper">
+                <div id="carousel-755" class="woodmart-carousel-container woodmart-highlighted-products slider-type-product woodmart-carousel-spacing-0" data-owl-carousel data-wrap="no" data-autoplay="yes" data-hide_pagination_control="no" data-hide_prev_next_buttons="no" data-desktop="5" data-tablet_landscape="4" data-tablet="3" data-mobile="1">
+                    <div class="owl-carousel owl-items-lg-5 owl-items-md-4 owl-items-sm-3 owl-items-xs-1">
+
+
+                        @foreach (var item in LastProducts)
+                        {
+
+                            <div class="slide-product owl-carousel-item">
+                                <div class="product-grid-item wd-with-labels product product-no-swatches woodmart-hover-base product-in-carousel type-product post-5387 status-publish first instock product_cat-uncategorized product_cat-77 has-post-thumbnail sale shipping-taxable purchasable product-type-simple" data-loop="1" data-id="5387">
+                                    <div class="product-wrapper">
+                                        <div class="content-product-imagin"></div>
+                                        <div style="    background-color: white;
+padding-top: 33px;" class="product-element-top">
+                                            <a href="" class="product-image-link">
+                                                <div class="product-labels labels-rounded"><span class="onsale product-label">@item.Description</span></div>
+                                            </a>
+                                            <div class="card col-md-12">
+                                                <a href="/products/details/@item.id/@item.Title.toSlugify()" class="product-image-link">
+
+                                                    <img width="600" height="600" src="@item.Image" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="@item.Title" sizes="(max-width: 600px) 100vw, 600px" />
+                                                </a>
+                                                <div class="col-md-12 card-title productCard-title">
+                                                    <a href="" style="font-size:12pt">
+                                                        @item.Title
+                                                    </a>
+                                                </div>
+
+
+                                                <!--
+                                                <del>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        <span class="woocommerce-Price-currencySymbol">
+                                                            @item.PriceBeforeDiscount ریال
+                                                        </span>
+                                                    </span>
+                                                </del>-->
+
+                                                @item.price ریال
+
+                                                <div class="btn-cart" style="display:block">
+
+                                                    <a id="linkcart" class="btn card-cart" href="/cart/addtocart/@item.id">افزودن به سبد</a>
+
+
+
+
+                                                </div>
+                                                <div class="wrapp-swatches"></div>
+
+                                                <div style="text-align:center;    background-color: white; padding: 0px 25px 10px 30px; border-top: 1px solid #f3f3f3" class="product-information">
+                                                    <ul style="text-align:center;">
+
+
+                                                        <li>
+                                                            <div class="wrap-quickview-button">
+                                                                <div class="quick-view wd-action-btn wd-quick-view-btn wd-style-icon">
+                                                                    <a href="/products/details/@item.id/@item.Title.toSlugify()" class=""
+                                                                       data-id="5387" title="اطلاعات بیشتر">
+                                                                        اطلاعات بیشتر
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="woodmart-add-btn wd-action-btn wd-add-cart-btn wd-style-icon">
+                                                                <a href="https://dartkala.com/cart/addtocart/@item.id" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart add-to-cart-loop"
+                                                                   data-product_sku="" rel="nofollow" title="مشاهده سبد خرید"><span>مشاهده سبد خرید</span></a>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+                                                    <div class="wrap-quickview-button">
+
+
+
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                                <style>
+                                                    .woodmart-highlighted-products .woodmart-hover-base.product-in-carousel {
+                                                        border-radius: 20px;
+                                                    }
+
+                                                    .product-grid-item .product-image-link img, .product-grid-item .hover-img img {
+                                                        width: 68%;
+                                                        padding-top: 30px;
+                                                        padding-bottom: 92px;
+                                                    }
+
+                                                    .product-information ul li {
+                                                        float: left;
+                                                    }
+
+                                                    .woodmart-hover-base .wd-bottom-actions .wd-action-btn.wd-style-icon > a, .woodmart-hover-base .wd-compare-btn > a {
+                                                        height: 50px;
+                                                    }
+
+                                                    .woodmart-highlighted-products .elements-grid, .woodmart-highlighted-products.woodmart-carousel-container {
+                                                        border: 0px !important;
+                                                    }
+
+                                                    .woodmart-highlighted-products .elements-grid, .woodmart-highlighted-products.woodmart-carousel-container {
+                                                        padding-top: 0px;
+                                                    }
+
+                                                    .title-wrapper {
+                                                        margin-bottom: 11px;
+                                                    }
+
+                                                    .woodmart-highlighted-products:not(.with-title) .owl-nav > div[class*="prev"] {
+                                                        right: 5px;
+                                                        width: 25px;
+                                                        font-size: 14px;
+                                                        height: 25px;
+                                                        border-radius: 0;
+                                                        background-color: transparent;
+                                                        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+                                                    }
+
+                                                    .woodmart-highlighted-products:not(.with-title) .owl-nav > div[class*="next"] {
+                                                        left: 5px;
+                                                        width: 25px;
+                                                        font-size: 14px;
+                                                        height: 25px;
+                                                        border-radius: 0;
+                                                        background-color: transparent;
+                                                        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+                                                    }
+
+                                                    .woodmart-highlighted-products .owl-nav > div:after, .woodmart-highlighted-products .wrap-loading-arrow > div:after {
+                                                        font-size: 17px;
+                                                    }
+                                                </style>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>}
+                    </div>
+                </div> <!-- end #carousel-752 -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="vc_row wpb_row vc_row-fluid">
+    <div class="wpb_column vc_column_container vc_col-sm-12">
+        <div class="vc_column-inner vc_custom_1533740399367">
+            <div class="wpb_wrapper">
+                <div id="wd-5e0ca567d6789" class="title-wrapper  woodmart-title-color-primary woodmart-title-style-underlined woodmart-title-width-100 text-right woodmart-title-size-custom vc_custom_1577887090981">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h4 class="woodmart-title-container title  woodmart-font-weight-600">وبلاگ سایت</h4>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+                <div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1585159363601 vc_row-has-fill vc_rtl-columns-reverse woodmart-bg-left-center">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <div id="carousel-737" class="woodmart-carousel-container  slider-type-post woodmart-carousel-spacing-6" data-owl-carousel data-wrap="yes" data-autoplay="yes" data-hide_pagination_control="yes" data-hide_prev_next_buttons="no" data-desktop="4" data-tablet_landscape="4" data-tablet="3" data-mobile="1">
+                                    <div class="owl-carousel owl-items-lg-4 owl-items-md-4 owl-items-sm-3 owl-items-xs-1">
+
+
+                                        @foreach (var item in LastNews)
+                                        {
+
+
+
+                                            <div class="slide-post owl-carousel-item" >
+                                                <article id="post-126" class="blog-post-loop post-slide blog-style-shadow blog-design-masonry post-126 post type-post status-publish format-standard has-post-thumbnail hentry category-decoration">
+                                                    <div class="article-inner">
+                                                        <header class="entry-header">
+                                                            <figure class="entry-thumbnail">
+                                                                <div class="post-img-wrapp">
+                                                                    <a href="/blog/read/@item.id/@item.Title.toSlugify()">
+                                                                        <img width="300" height="211" src="@item.Image" alt="@item.Title" />
+                                                                    </a>
+                                                                </div><div class="post-image-mask"><span></span></div>
+                                                            </figure>
+                                                        </header>
+                                                        <div class="article-body-container">
+                                                            <div class="meta-categories-wrapp">
+                                                                <div class="meta-post-categories">
+                                                                    <a href="/blog/read/@item.id/@item.Title.toSlugify()" rel="category tag"> منتشر شده در : @AlmaCMS.Helpers.Extentions.ToPersianShortDate(item.DateInsert.Value)</a>
+                                                                </div>
+                                                            </div>
+
+                                                            <h3 class="entry-title title">
+                                                                <a href="/blog/read/@item.id/@item.Title.toSlugify()" rel="bookmark">@item.Title</a>
+                                                            </h3>
+
+                                                            <div class="entry-content woodmart-entry-content" style="text-align:justify">
+                                                                @item.ShortDesc
+                                                                <p class="read-more-section"><a class="btn-read-more more-link" href="/blog/read/@item.id/@item.Title.toSlugify()">ادامه مطلب</a></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                        }
+
+                                    </div> <!-- end product-items -->
+                                </div> <!-- end #carousel-737 -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div><div class="vc_row-full-width vc_clearfix"></div><div id="offerwoordmart" data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row vc_row-fluid vc_custom_1585233707528 vc_row-has-fill woodmart-bg-left-center">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner vc_custom_1584785786630">
+                            <div class="wpb_wrapper">
+                                <div class="wpb_raw_code wpb_content_element wpb_raw_html">
+                                    <div class="wpb_wrapper">
+                                        <style>
+                                            body {
+                                                background-color: #f5f5f5 !important;
+                                            }
+
+                                            .main-page-wrapper {
+                                                background-color: #f5f5f5 !important;
+                                            }
+
+                                            .btn-size-default {
+                                                font-size: 10.5px;
+                                            }
+
+                                            .promo-banner-wrapper p {
+                                                padding: 10px;
+                                                text-align: center;
+                                                font-size: 11px;
+                                                background-color: #2bc5ca;
+                                                color: white;
+                                                width: 100%;
+                                            }
+
+                                            .box-title-default .info-box-title {
+                                                font-size: 12px;
+                                                line-height: 30px;
+                                                border-radius: 30px;
+                                                border: 1px solid #d60644;
+                                                background-color: #fff;
+                                                color: #d60644;
+                                                cursor: pointer;
+                                                text-align: center;
+                                                margin: 10px auto 0;
+                                                transition: background-color 0.3s;
+                                                max-width: 70%;
+                                            }
+
+                                            .woodmart-info-box:hover .box-icon-simple {
+                                                transform: scale(1.1) rotate(4deg) translateZ(0);
+                                                transition: transform 0.4s;
+                                                cursor: pointer;
+                                            }
+
+                                            .woodmart-info-box:hover .info-box-title {
+                                                transition: border-color 0.3s;
+                                                background-color: #d60644;
+                                                color: #fff;
+                                            }
+
+
+                                            .whb-header-bottom .wd-tools-element > a, .whb-header-bottom .main-nav .item-level-0 > a, .whb-header-bottom .whb-secondary-menu .item-level-0 > a, .whb-header-bottom .categories-menu-opener, .whb-header-bottom .menu-opener, .whb-header-bottom .whb-divider-stretch:before, .whb-header-bottom form.woocommerce-currency-switcher-form .dd-selected, .whb-header-bottom .whb-text-element .wcml-dropdown a.wcml-cs-item-toggle {
+                                                padding: 0 5px;
+                                                margin: 0 10px;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><div class="vc_row-full-width vc_clearfix"></div>
+    <div class="vc_row-full-width vc_clearfix"></div>
+</div>
+

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<AlmaCMS.Models.VWPeyment>
+
+@{
+    ViewBag.Title = "تاریخچه پرداخت ها";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="tg-dashboardbanner">
+    <h1>تاریخچه پرداخت ها</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/userprofile">حساب کاربری</a></li>
+        <li class="tg-active">تاریخچه پرداخت ها</li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:0px;">
+                            <div class="tg-dashboardboxtitle">
+                                <h2> تاریخچه پرداخت ها </h2>
+                            </div>
+                            <div class="tg-dashboardholder" style="padding-bottom:0px;">
+                                <div style="border:solid 1px #ccc;margin-bottom:20px;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" style="margin-bottom:0px !important">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:50px;">ردیف</th>
+                                                    <th style="width:150px;">تاریخ</th>
+                                                    <th>کد سفارش</th>
+                                                    <th > شماره پیگیری </th>
+                                                    <th >مبلغ</th>
+                                                    <th >وضعیت</th>
+                                                    <th > کد پیگیری سفارش </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int RowIndex = 1;
+                                                }
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <span class="tblf">
+                                                                @Html.Raw(RowIndex)
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.PersianDate)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.OrderID)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.SaleRefrenceID)
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="nsprice">@item.Amount</span>
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Title)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TrackingID)
+                                                        </td>
+                                                    </tr>
+                                                    RowIndex++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>

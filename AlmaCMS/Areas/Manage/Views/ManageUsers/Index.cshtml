@@ -1,0 +1,199 @@
+﻿@model IEnumerable<AlmaCMS.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "مدیریت کاربران";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmin.cshtml";
+    var UserInfoList = ViewBag.USerInfoList as List<AlmaCMS.Models.VWUserInfo>;
+}
+
+@helper  GetUniqCode(string UserId)
+{var UserInfoList = ViewBag.USerInfoList as List<AlmaCMS.Models.VWUserInfo>;
+ var CurrentInfo = UserInfoList.Where(c => c.Id == UserId).FirstOrDefault();
+
+ if (CurrentInfo != null)
+ {
+    <span>@CurrentInfo.UserInfoId</span>
+ }
+
+}
+
+@helper GetUserName(string UserId)
+    {
+AlmaCMS.Models.DB_AlmaCmsEntities db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+var CurrentUserInfo = db.UserInfoes.Where(c => c.UserId == UserId);
+if(CurrentUserInfo.Count()>0)
+{
+        <span>@CurrentUserInfo.FirstOrDefault().Name</span>
+}
+else
+{
+        <span></span>
+}
+    }
+@helper GetRoleTitle(string RoleID)
+{
+    var RolesList = ViewBag.RolesListAl as List<AlmaCMS.Models.AspNetRole>;
+    var currentRole = RolesList.Where(c => c.Id == RoleID).FirstOrDefault();
+
+    if (currentRole != null)
+    {
+        <span>
+            @currentRole.Name
+        </span>
+    }
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">مدیریت کاربران : @ViewBag.StatusTitle</h3>
+            </div>
+            <div class="panel-body">
+                @*<a href='@Url.Action("Create", "ManageUsers")' class="btn ls-green-btn btnmrgin AddNew">
+                        <i class="fa fa-plus"></i>
+                        ایجاد کاربر جدید
+                    </a>*@
+
+                <div class="row">
+                    <form>
+                        <div class="col-xs-12">
+
+                            <div style="border:solid 1px #E0E0E0;border-bottom-width:3px;background-color:#ededed;margin-bottom:15px;padding-top:15px;padding-bottom:15px;">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <select name="Title" class="form-control" style="background-color:#fff;padding:5px 15px;">
+                                            <option value="0">
+                                                همه کاربران
+                                            </option>
+                                            @foreach (var item in ViewBag.RoleList as List<AlmaCMS.ViewModels.VMDropDownOption>)
+                                            {
+                                                <option value="@item.Title">
+                                                    @item.Title
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>     <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input name="Filter" class="form-control" style="background-color:#fff;" placeholder=" ایمیل یا نام کاربری" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-filter"></i> فیلتر </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="table-responsive ls-table">
+                    <table class="table table-hover table-bordered table-striped FontIS">
+                        <thead>
+                            <tr class="bg-info">
+                                <th style="width:50px;text-align:center;">
+                                    ردیف
+                                </th>
+                                <th>
+                                    کد کاربری
+                                </th>
+                                <th>
+                                    نام کاربری
+                                </th>
+                                <th>
+                                    نام 
+                                </th>
+                                <th>
+                                    وضعیت کاربر
+                                </th>
+                                <th>
+                                    وضعیت ایمیل
+                                </th>
+                                <th>
+                                    وضعیت شماره موبایل
+                                </th>
+                                <th style="width:80px;">
+                                    عملیات
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{ int i = 0; }
+                            @foreach (var item in Model)
+                            {
+                                i++;
+                            <tr>
+                                <td style="text-align:center;">
+                                    @i
+                                </td>
+                                <td>
+                                    @GetUniqCode(item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                  @GetUserName(item.Id)
+                                </td>
+                                <td>
+                                    @if (item.Roles.Count > 0)
+                                    {
+                                        @GetRoleTitle(item.Roles.FirstOrDefault().RoleId)
+                                    }
+
+                                </td>
+                                <td>
+                                    @if (item.EmailConfirmed)
+                                    {
+                                        <span>
+                                            تایید شده
+                                        </span>
+                                    }
+
+                                </td>
+                                <td>
+                                    @if (item.PhoneNumberConfirmed)
+                                    {
+                                        <span>
+                                            تایید شده
+                                        </span>
+                                    }
+                                </td>
+                                <td style="text-align:center; width:100px">
+                                    <span class="tooltipLink " data-placement="top" data-toggle="tooltip" title="ویرایش">
+                                        <a href="@Url.Action("Edit", "ManageUsers", new { id = item.Id })" class="btn btn-xs btn-warning">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                    </span>
+                                    <span class="tooltipLink " data-placement="top" data-toggle="tooltip" title="حذف">
+                                        <a href="@Url.Action("Delete", "ManageUsers", new { id = item.Id })" class="btn btn-xs btn-danger">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </span>
+                                    <a href="@Url.Action("Messages", "ManageUsers", new { UserId = item.Id })" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" title="پیام ها"><i class="fa fa-mail-reply"></i></a>
+
+
+                                    @if (item.Roles.FirstOrDefault().RoleId == "aaf1a291-9ed1-405b-886a-d8c4514d9f5b")
+                                    {
+                                        <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title=" کاربران زیر مجموعه">
+                                            <a href="@Url.Action("SubUsers", "ManageUsers", new { UserId = item.Id })" data-placement="top" data-toggle="tooltip" title=" کاربران زیر مجموعه" class="btn btn-xs btn-primary">
+                                                <i class="fa fa-user"></i>
+                                            </a>
+                                        </span>
+                                    }
+                                    @*<span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title=" ویرایش اطلاعات" >
+                <a href="@Url.Action("EditInfo", "ManageUsers", new { id = item.Id })" class="btn btn-xs btn-primary">
+                    <i class="fa fa-pencil-square-o"></i>
+                </a>
+            </span>*@
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

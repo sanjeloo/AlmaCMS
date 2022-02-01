@@ -1,0 +1,187 @@
+﻿@model AlmaCMS.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "ورود به پنل کاربری";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<div class="page-title page-title-default title-size-default title-design-centered color-scheme-light" style="background-image: url(/content/site/images/page.jpg); height:250px; width:100%">
+    <div class="container">
+        <header class="entry-header">
+            <h1 class="entry-title"></h1>
+        </header>
+    </div>
+</div><br />
+<div class="divider">
+    <div class="line red"></div>
+    <span class="section">
+        <span class="title">@ViewBag.Title</span>
+    </span>
+    <div class="line red"></div>
+</div>
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-8 vc_col-md-8">
+        <div class="vc_column-inner vc_custom_1499612435663">
+            <div class="wpb_wrapper">
+                <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h4 class="woodmart-title-container title  woodmart-font-weight-"> <asp:Label runat="server" ID="lblTitle2"></asp:Label></h4>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+                <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <div class="info-box-wrapper ">
+                                    <div id="wd-5e02250148175" class=" woodmart-info-box text-right box-icon-align-right box-style- color-scheme- woodmart-bg-none box-title-small vc_custom_1577198871754">
+
+                                        <div class="info-box-content">
+                                            <h4 class="info-box-title woodmart-font-weight- box-title-style-default"> <asp:Label Text="" ID="lblTitle" runat="server" /></h4>						<div class="info-box-inner reset-mb-10">
+                                                <p style="text-align:justify;direction:rtl">
+                                                <p class="body">
+                                                </p><div id="ContentPlaceHolder1_p1">
+
+                                                    <br>
+                                                    <div class="container">
+                                                        <div dir="rtl">
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-xs-12">
+                                                                    <div class="border p-4">
+                                                                        <div class="text-right mb-5">
+                                                                            <p> جهت انجام خرید باید با اطلاعات کاربری خود وارد سایت شوید</p>
+                                                                            <br>
+                                                                            اگر عضو سایت نمی باشید در صفحه
+                                                                            <a href="/account/register">ثبت عضویت </a>
+                                                                            اطلاعات خود را ثبت نمایید
+                                                                        </div>
+                                                                        <div class="d-flex">
+
+                                                                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                                                            {
+                                                                                @Html.AntiForgeryToken()
+
+                                                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                                                <div class="mr-3">
+                                                                                    <span>موبایل:</span><span style="color:red;">*</span>
+                                                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @style = "width:200px;margin-top:10px" })
+                                                                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <span>کلمه عبور:</span><span style="color:red;">*</span>
+
+                                                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:200px;margin-top:10px" })
+                                                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                                                                                    <span id="ContentPlaceHolder1_RequiredFieldValidator1" style="visibility:hidden;">*</span>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <div class="col-md-offset-2 col-md-10">
+                                                                                        <button type="submit" class="btn btn-color-primary btn-style-default btn-shape-semi-round btn-size-small"><i class="fa fa-sign-in"></i> ورود</button>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            }
+
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-xs-12">
+                                                                    <div class="border p-4">
+                                                                        <div class="text-right">
+                                                                            <p class=""><p>چنانچه کلمه عبور خود را فراموش کرده اید </p><br />موبایل ثبت نام خود را در فیلد موبایل وارد نموده و روی دکمه زیر کلیک نمایید</p>
+                                                                            <div class="text-left mt-5">
+                                                                                <a value="فراموشی کلمه عبور" href="/account/UserResetPassword" class="btn btn-color-primary btn-style-default btn-shape-semi-round btn-size-small " style="text-align:center">
+                                                                                    فراموشی کلمه عبور
+                                                                                </a>
+                                                                            </div>
+                                                                            <span id="ContentPlaceHolder1_lblError" style="color:Red;"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div></div>
+    @*<div class="row">
+            <div class="col-md-8">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+                        @Html.AntiForgeryToken()
+                        <h4>Use a local account to log in.</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-default" />
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Register a new user?", "Register")
+                        </p>
+                        <p>
+                            @Html.ActionLink("Forget your password?", "ForgotPassword")
+                        </p>
+                    }
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new AlmaCMS.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
+        </div>*@
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

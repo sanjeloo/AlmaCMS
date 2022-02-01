@@ -1,0 +1,248 @@
+﻿@using AlmaCMS.Helpers
+
+@model AlmaCMS.ViewModels.VMProducts
+@{
+    /**/
+
+
+    ViewBag.Title = Model.Title;
+
+    var GroupInfo = ViewBag.GroupInfo as AlmaCMS.Models.ProductsGroup;
+
+    var ImageList = ViewBag.ImageList as List<AlmaCMS.Models.ProductsImage>;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@section HeaderSection
+{
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:description" content="@Model.Keywords" />
+
+}
+
+<link href="~/Content/alertifyjs/alertify.rtl.css" rel="stylesheet" />
+<link href="~/Content/Plugins/rating/css/style.css" rel="stylesheet" />
+<link href="~/Content/Plugins/rating/css/rating.css" rel="stylesheet" />
+<meta property="og:locale" content="fa_IR" />
+<meta property="og:type" content="product" />
+<meta property="og:title" content="@Model.PriceBeforeDiscount" />
+<meta property="og:description" content="@Model.Keywords" />
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6 vc_col-md-6">
+        <div class="vc_column-inner vc_custom_1499612435663">
+            <div class="wpb_wrapper">
+                <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h3 class="woodmart-title-container title  woodmart-font-weight-">
+                            <input type="hidden" value="@Model.id" id="PublicProductID" />
+                            @Model.Title
+                        </h3>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+                <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <div class="info-box-wrapper ">
+                                    <div id="wd-5e02250148175" class=" woodmart-info-box text-right box-icon-align-right box-style- color-scheme- woodmart-bg-none box-title-small vc_custom_1577198871754">
+
+                                        <div class="info-box-content">
+                                            <h4 class="info-box-title woodmart-font-weight- box-title-style-default">
+
+                                                @Model.Title
+                                            </h4>						<div class="info-box-inner reset-mb-10">
+                                                <p>
+                                                    <h6 class="midFooter-about-title text-right" style="color:#000000">
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i>دسته بندی این محصول:
+                                                        <a class="active" href="/products/@GroupInfo.id/@GroupInfo.Title.toSlugify()">
+                                                            @GroupInfo.Title
+                                                        </a>
+                                                    </h6>
+                                                <p class="midFooter-about-text" style="text-align:justify;direction:rtl">
+                                                    @Model.Description                                                    <br />
+                                                    تعداد بازدید:  @Model.VisitCount
+                                                    <br />
+
+                                                    @Html.Raw(Model.Specification)
+                                                    <br />
+                                                    @if (Model.ExistStatus == true)
+                                                    {
+
+                                                        <a href="#" style="padding: 12px 20px; background: #ff0000; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl">
+
+                                                            <strike>
+                                                                قیمت قبلی  @Model.PriceBeforeDiscount ریال
+                                                            </strike>
+
+
+                                                        </a>
+
+                                                        <a style="padding: 12px 20px; background: #009dcd; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl"
+                                                           href="/cart/addtocart/@Model.id">
+                                                            خرید محصول - قیمت     @Model.Price ریال
+
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" style="padding: 12px 20px; background: #ff0000; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl">
+
+                                                            <strike>
+                                                                ناموجود
+                                                            </strike>
+
+
+                                                        </a>
+                                                    }
+
+
+                                                    <asp:ListView ID="ListView1" runat="server" ItemPlaceholderID="itemPlaceHolder">
+                                                        <LayoutTemplate>
+                                                            <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+                                                        </LayoutTemplate>
+                                                        <ItemTemplate>
+                                                        </ItemTemplate>
+                                                    </asp:ListView>
+                                                </p>
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6 vc_col-md-6 vc_col-has-fill">
+        <div class="vc_column-inner vc_custom_1499612446263">
+            <div class="wpb_wrapper">
+                <div id="gallery_195" class="woodmart-images-gallery view-grid photoswipe-images">
+                    <div class="gallery-images row woodmart-spacing-10">
+
+
+                        <div class="woodmart-gallery-item col-12">
+                            <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
+
+                                <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" />
+                            </a>
+                        </div>
+                        @foreach (var item in ImageList)
+                        {
+                            <div class="woodmart-gallery-item col-12">
+                                <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
+
+                                    <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" />
+                                </a>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+<div class="divider">
+    <div class="line red"></div>
+    <span class="section">
+        <span class="title">برای مشاهده هر عکس، بر روی آن کلیک کنید</span>
+    </span>
+    <div class="line red"></div>
+</div>
+<br />
+
+
+@*<section class="speak-about-us">
+        <div class="container-fluid">
+
+            @{
+                var ReviewListRes = ViewBag.ReviewList as List<AlmaCMS.Models.ProductReview>
+                    ;
+                Html.RenderPartial("/views/Products/_CommentsResponsive.cshtml", ReviewListRes);
+            }
+        </div>
+    </section>*@
+
+
+
+
+@section Scripts
+{
+    <script src="~/Scripts/alertify.js"></script>
+    <script src="~/Content/Plugins/rating/js/dist/rating.min.js"></script>
+    <script src="~/Content/Site/js/EmailValidation.js"></script>
+    <script>
+        (function () {
+            'use strict';
+            // SHOP ELEMENT
+            var shop = document.querySelector('#shop');
+            // DUMMY DATA
+            var data = [
+                {
+                    rating: 5
+                }
+            ];
+            // INITIALIZE
+            (function init() {
+                for (var i = 0; i < data.length; i++) {
+                    addRatingWidget(buildShopItem(data[i]), data[i]);
+                }
+            })();
+            // BUILD SHOP ITEM
+            function buildShopItem(data) {
+                var shopItem = document.createElement('div');
+                var html =
+                    '<ul class="c-rating"></ul>' +
+                    '</div>';
+                shopItem.classList.add('c-shop-item');
+                shopItem.innerHTML = html;
+                shop.appendChild(shopItem);
+
+                return shopItem;
+            }
+            // ADD RATING WIDGET
+            function addRatingWidget(shopItem, data) {
+                var ratingElement = shopItem.querySelector('.c-rating');
+                var currentRating = data.rating;
+                var maxRating = 5;
+                var callback = function (rating) {
+                    $("#ddlRWRate").val(rating)
+                };
+                var r = rating(ratingElement, currentRating, maxRating, callback);
+            }
+        })();
+
+    </script>
+}

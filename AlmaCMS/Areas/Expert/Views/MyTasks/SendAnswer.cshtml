@@ -1,0 +1,220 @@
+﻿@model AlmaCMS.ViewModels.VMExpertAnswer
+@{
+    ViewBag.Title = "ثبت پاسخ";
+    Layout = "~/Areas/Expert/Views/Shared/_LayoutDashboardExpert.cshtml";
+
+    var TaskInfo = ViewBag.TaskInfo as AlmaCMS.Models.VWTaskList;
+}
+
+@section Styles{
+    <link href="~/Content/persian-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.rtl.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.loading.css" rel="stylesheet" />
+    <link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="~/ckeditor/adapters/jquery.js"></script>
+    <style>
+        .alert {
+            padding: 5px 15px !important;
+            margin-bottom: 10px !important;
+        }
+
+        @@media (max-width: 768px) {
+            .full-on-mobile {
+                width: 100%;
+            }
+        }
+    </style>
+}
+<div class="tg-dashboardbanner">
+    <h1>ثبت پاسخ</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/expert/profile">داشبورد</a></li>
+        <li><a href="/expert/Profile/tasks">وظایف</a></li>
+        <li class="tg-active">@TaskInfo.Title</li>
+    </ol>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:20px;">
+
+
+
+                            @using (Html.BeginForm())
+                            {   @Html.HiddenFor(model => model.SelectedFiles)
+                                @Html.HiddenFor(model => model.TaskId)
+                                @Html.AntiForgeryToken()
+                                <div class="tg-dashboardholder">
+
+                                    <div class=" col-sm-8 col-lg-offset-2" id="divform">
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control ", @placeholder = "عنوان" } })
+                                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm112">
+                                            <div class="form-group">
+                                                @Html.TextAreaFor(model => model.Descriptions, new { htmlAttributes = new { @class = "form-control ", @placeholder = "پاسخ" } })
+                                                @Html.ValidationMessageFor(model => model.Descriptions, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <script>
+                                                $('#Descriptions').ckeditor();
+                                        </script>
+
+                                        <div class="clear"></div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <h4>آپلود مدارک</h4>
+                                                <p> </p>
+                                                <input type="file" id="UploadFileInput" style="display:none" />
+
+                                                <div class="col-sm-2 no-padding">
+                                                    <label for="UploadFileInput" class="btn btn-primary btn-block no-radius" style="height:44px;line-height:32px"> انتخاب فایل <i class="fa fa-ellipsis-h"></i></label>
+                                                </div>
+                                                <div class="col-sm-8 no-padding">
+                                                    <input type="text" class="form-control" id="txtFileTitle" placeholder="عنوان فایل انتخاب شده" />
+                                                </div>
+                                                <div class="col-sm-2 no-padding">
+                                                    <button type="button" id="btnUploadFile" class="btn btn-success btn-block no-radius" style="height:44px">آپلود فایل <i class="fa fa-upload"></i></button>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <img src="~/Content/images/content_Loading-Loop-1.gif" id="LoadingImg" width="100" style="display:none" />
+                                                <div id="UploadedFiles"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <button class="tg-btn tg-btnactionregister pull-left" id="submitform" type="submit"><i class="fa fa-check"></i> ثبت پاسخ</button>
+
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts
+    {
+    <script src="~/Scripts/alertify.min.js"></script>
+    <script>
+        $('#btnUploadFile').click(function () {
+
+
+            var data = new FormData();
+            var files = $("#UploadFileInput").get(0).files;
+            if (files.length > 0) {
+                data.append("UploadFileInput", files[0]);
+            }
+            else {
+                alertify.warning('لطفا یک فایل را انتخاب نمایید');
+                return;
+
+            }
+
+            if ($('#txtFileTitle').val() == '') {
+                alertify.warning('لطفا عنوان فایل را وارد نمایید');
+                return
+            }
+            $("#LoadingImg").css('display', 'block');
+            $('#BtnSubmit').attr('disabled', 'true');
+            data.append("__RequestVerificationToken", $('input[name=__RequestVerificationToken]').val());
+            $.ajax({
+                type: "POST",
+                url: "/expert/tasks/UploadFile",//ارسال فایل به اکشن بارگذاری
+                contentType: false,
+                processData: false,
+                data: data,
+                error: function (xhr) {
+                    console.log('Error: ' + xhr.statusText);
+
+                    $("#LoadingImg").css('display', 'none');
+                    ;
+
+                },
+                success: function (data) {
+                    if (data.State == "true") {
+
+                        //$("#ImgPersonalImage").attr("src", "/RevisionUploadedFiles/" + data.Filename);
+
+
+
+                        newfile = "<div current-Data='" + data.Filename + "' class='ImageBox col-md-1 col-sm-2 col-xs-6 no-padding margin-15' style='min-height:50px;max-height:200px;background-color:#ccc;overflow:hidden;border:1px solid #bbb' id='ImageBox_" + data.Filename + "'>";
+
+                        newfile += "<a target='_blank' href='/UploadedFiles/" + data.Filename + "'>"
+                        newfile += " <img class='img-responsive'  src='/content/images/fileicon.png' />";
+                        newfile += "</a>"
+
+                        newfile += "<p class='img-title'>" + $('#txtFileTitle').val() + "</p>";
+                        newfile += ' <span onclick="removeItem(this)" class="remove-btn"><i class="fa fa-close"></i></span>';
+                        newfile += " </div>";
+
+
+                        $('#UploadedFiles').append(newfile);
+
+                        $('#txtFileTitle').val('');
+                        UpdateFileNames();
+                        $("#LoadingImg").css('display', 'none');
+
+                    } else {
+                        alertify.message(data.Message);
+                        $("#UploadStatus").html(data.Message);
+
+
+                        $("#LoadingImg").css('display', 'none');
+
+                    }
+                    $('#UploadFileInput').val('');
+
+
+                    $("#LoadingImg").css('display', 'none');
+
+                    $('#BtnSubmit').removeAttr('disabled');
+                },
+            });
+        });
+
+        function UpdateFileNames() {
+            var varselectedFiles = "[";
+            $('.ImageBox').each(function (i, obj) {
+
+                if (varselectedFiles == "[") {
+                    varselectedFiles += "{Title:'" + $(obj).find('p').text() + "',FileName:'" + $(obj).attr('current-Data') + "'}";
+                }
+                else {
+                    varselectedFiles += ",{Title:'" + $(obj).find('p').text() + "',FileName:'" + $(obj).attr('current-Data') + "'}";
+                }
+            });
+
+            varselectedFiles += "]";
+
+            $('#SelectedFiles').val(varselectedFiles);
+        }
+        function removeItem(Removeobj) {
+
+            $(Removeobj).parent().remove();
+        }
+    </script>
+
+}

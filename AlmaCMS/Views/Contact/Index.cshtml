@@ -1,0 +1,184 @@
+﻿@model AlmaCMS.ViewModels.VMSiteMesage
+@using CaptchaMvc.HtmlHelpers;
+@{
+    ViewBag.Title = "تماس با ما";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<style>
+    #CaptchaImage {
+        float: left;
+        width: 130px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        height: 34px;
+        margin-top: -13px;
+    }
+
+    #CaptchaInputText {
+        text-align: left;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #555555;
+        display: block;
+        font-size: 14px;
+        height: 34px;
+        line-height: 1.42857;
+        padding: 6px 12px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        float: right;
+        width: 55%;
+        margin-top: -89px;
+    }
+
+        #CaptchaInputText:focus {
+            border-color: #66afe9;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+            outline: 0 none;
+        }
+
+    #Submit1 {
+        margin-top: -77px;
+    }
+</style>
+<div class="page-title page-title-default title-size-default title-design-centered color-scheme-light" style="background-image: url(/content/site/images/page.jpg); height:250px; width:100%">
+    <div class="container">
+        <header class="entry-header">
+            <h1 class="entry-title"></h1>
+        </header>
+    </div>
+</div><br />
+<div class="divider">
+    <div class="line red"></div>
+    <span class="section">
+        <span class="title">@ViewBag.Title</span>
+    </span>
+    <div class="line red"></div>
+</div>
+@*<div class="page-header">
+        <div class="breadcrumb-box">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/Home">صفحه اصلی</a>
+                    </li>
+                    <li class="active">تماس با ما</li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+
+<section id="contact-us" class="page-section" style="padding-top:20px !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="p-4 border line-h-2">
+                    <h5 class="FontISB" style="font-size:15px;color:#424242">
+                        فرم تماس با ما
+                        <span class="pull-left" style="font-size:13px;"><span id="ContentPlaceHolder1_lblMSG"></span></span>
+                    </h5>
+                    <p class="form-message mb-2">
+                        برای تماس با ما اعلام درخواست و بیان نظرات، پیشنهادات و انتقادات خود از فرم زیر می توانید استفاده نمایید.
+                    </p>
+                    <div class="contact-form">
+                        <!-- Form Begins -->
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div role="form" name="contactform" id="contactform" novalidate="novalidate" class="bv-form">
+                                <button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+                                <!-- Field 1 -->
+                                <div class="input-text form-group">
+
+                                    @Html.TextBoxFor(c => c.Name, new { @class = "input-name form-control", @minlength = "2", @placeholder = "نام و نام خانوادگی" })
+                                    @Html.ValidationMessageFor(c => c.Name)
+                                </div>
+                                <!-- Field 2 -->
+                                <div class="input-text form-group">
+
+                                    @Html.TextBoxFor(c => c.Subject, new { @class = "input-name form-control", @minlength = "2", @placeholder = "نام شرکت / موسسه" })
+                                    @Html.ValidationMessageFor(c => c.Subject)
+                                </div>
+                                <!-- Field 3 -->
+                                <div class="input-email form-group">
+
+                                    @Html.TextBoxFor(c => c.Email, new { @class = "input-name form-control", @minlength = "2", @placeholder = "ایمیل" })
+                                    @Html.ValidationMessageFor(c => c.Email)
+                                </div>
+
+                                <!-- Field 4 -->
+                                <div class="textarea-message form-group">
+
+                                    @Html.TextAreaFor(c => c.Message, new { @class = "form-control textarea-message", @minlength = "2", @placeholder = "متن پیام" })
+                                    @Html.ValidationMessageFor(c => c.Message)
+                                </div>
+                                <div class="input-email form-group">
+                                    <div class="col-xs-12" style="padding-left:0;padding-right:0">
+                                        <div class="col-xs-12 form-group" style="padding-left:0;padding-right:0">
+                                            <span class="field-title">
+                                                کد امنیتی
+                                            </span>
+                                            <span class="warning-hint">
+                                                @ViewBag.CaptchaMsg
+                                            </span>
+                                            @Html.Captcha(5)
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Button -->
+
+                                <input id="Submit1" type="submit" value="ارسال" class="btn btn-success  col-xs-12" />
+                            </div>
+                        }
+                    </div>
+                    <!-- Form Ends -->
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="p-4 border line-h-2">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="contact-title">
+                                <span><i class="fa fa-map-marker"></i></span><h5 class="FontISB" style="font-size:15px;color:white">آدرس دفتر مرکزی</h5>
+                            </div>
+                            <div class="h-contact">
+                                <address>
+                                    تهران خیابان شهید بهشتی ، خیابان قائم مقام فراهانی ، کوچه شهید میرزا حسنی ، پلاک 23 ، طبقه دوم ، واحد 4
+                                    <br>
+                                </address>
+                                <div>ایمیل : <span class="pull-left">info@chabahargreenpipe.com</span></div>
+                                <div>تلفن : <span class="pull-left">021-88728281  021-88724156</span></div><br />
+                                <div>نمابر :<span class="pull-left">021-88726252</span></div>
+                            </div>
+                            <hr>
+                            <div>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12951.553068320887!2d51.718099404199236!3d35.75355094118578!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x65779241b540bc89!2z2LTYsdqp2Kog2YTZiNmE2Ycg2LPYqNiyINqG2KfYqNmH2KfYsQ!5e0!3m2!1sen!2s!4v1499670322873" style="border: 0" allowfullscreen="" class="col-xs-6" width="222" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="contact-title">
+                                <span><i class="fa fa-map-marker"></i></span><h5 class="FontISB" style="font-size:15px;color:white">آدرس کارخانه</h5>
+                            </div>
+                            <div class="h-contact">
+                                <address>
+                                    جاده دماوند، منطقه صنعتی کمرد <br><br>
+                                </address>
+                                <div>ایمیل : <span class="pull-left">factory@chabahargreenpipe.com</span></div>
+                                <div>تلفن : <span class="pull-left">021-00000000</span></div>
+                                <div>نمابر :<span class="pull-left">021-00000000</span></div>
+                            </div>
+                            <hr>
+                            <div>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1619.479313988855!2d51.4171321835052!3d35.72723599752293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQzJzM4LjAiTiA1McKwMjUnMDQuNSJF!5e0!3m2!1sen!2s!4v1499670707155" style="border: 0" allowfullscreen="" class="col-xs-6" width="222" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+

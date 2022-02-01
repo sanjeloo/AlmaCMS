@@ -1,0 +1,454 @@
+﻿@model AlmaCMS.ViewModels.VMRegisterRetailer
+@using CaptchaMvc.HtmlHelpers;
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    .form-control::-moz-placeholder {
+        font-size: 10px;
+    }
+
+    .sec2hidden {
+        display: none;
+    }
+
+    .sec2visible {
+        display: block;
+    }
+</style>
+
+<style>
+    #CaptchaImage {
+        float: left;
+        width: 130px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        height: 34px;
+        margin-top: -13px;
+    }
+
+    #CaptchaInputText {
+        text-align: left;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #555555;
+        display: block;
+        font-size: 14px;
+        height: 34px;
+        line-height: 1.42857;
+        padding: 6px 12px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        float: right;
+        width: 55%;
+        margin-top: -89px;
+    }
+
+        #CaptchaInputText:focus {
+            border-color: #66afe9;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+            outline: 0 none;
+        }
+
+    #Submit1 {
+        margin-top: -77px;
+    }
+</style>
+
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+                <li class="active">درخواست نمایندگی</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="page-section" style="padding-top: 10px;">
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="post-content top-pad-20">
+                    <h4 class="FontISB" style="font-size: 20px; color: #414141">درخواست نمایندگی</h4>
+                </div>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h5>
+                        فرم تقاضای اخذ نمایندگی فروش محصولات شرکت لوله چابهار ( کایرپایپ )
+                    </h5>
+                    
+                    @{
+            if (!string.IsNullOrEmpty(ViewBag.EmailState))
+            {
+                if (ViewBag.EmailState == "1")
+                {
+                    <p class="alert alert-success text-center">
+                        درخواست شما با موفقیت ثبت شد
+                        <br />
+                        کارشناسان ما در اسرع وقت با شما تماس خواهند گرفت
+                        <br />
+                        با نظرات و پیشنهادات خود ما را جهت همكاری بهینه راهنمایی فرمائید
+                    </p>
+                }
+                else
+                {
+                    <p class="alert alert-danger text-center">
+                        خطا در ارسال در خواست
+                      
+                    </p>
+                }
+            }
+}
+
+                    
+                    <fieldset>
+                        <legend>اطلاعات پایه ای</legend>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>نام و نام خانوادگی</label>
+                                <span class="red">
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { })
+
+                                </span>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = " form-control " } })
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>نام پدر</label>
+                                <span class="red">
+                                    @Html.ValidationMessageFor(model => model.FatherName, "", new { })
+
+                                </span>
+                                @Html.EditorFor(model => model.FatherName, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>تاریخ تولد</label>
+                                <span class="red">
+                                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { })
+
+                                </span>
+                                @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>صادره از</label>
+                                <span class="red">
+                                    @Html.ValidationMessageFor(model => model.ExportPlace, "", new { })
+
+                                </span>
+                                @Html.EditorFor(model => model.ExportPlace, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>شماره شناسنامه</label><span class="red">
+                                    @Html.ValidationMessageFor(model => model.IDNumber, "", new { })
+
+                                </span>
+                                @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>کد ملی</label><span class="red">
+    @Html.ValidationMessageFor(model => model.NationalCode, "", new { })
+
+</span>
+@Html.EditorFor(model => model.NationalCode, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>آدرس فروشگاه</label><span class="red">
+    @Html.ValidationMessageFor(model => model.ShopAddress, "", new { })
+
+</span>
+@Html.EditorFor(model => model.ShopAddress, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>آدرس انبار</label><span class="red">
+    @Html.ValidationMessageFor(model => model.StoreAddress, "", new { })
+
+</span>
+@Html.EditorFor(model => model.StoreAddress, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>تلفن منزل</label><span class="red">
+    @Html.ValidationMessageFor(model => model.HomeTel, "", new { })
+
+</span>
+@Html.EditorFor(model => model.HomeTel, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>تلفن فروشگاه</label><span class="red">
+    @Html.ValidationMessageFor(model => model.ShopTel, "", new { })
+
+</span>
+@Html.EditorFor(model => model.ShopTel, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>تلفن انبار</label><span class="red">
+    @Html.ValidationMessageFor(model => model.StoreTel, "", new { })
+
+</span>
+@Html.EditorFor(model => model.StoreTel, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>تلفن همراه</label><span class="red">
+    @Html.ValidationMessageFor(model => model.Mobile, "", new { })
+
+</span>
+@Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>فاکس</label><span class="red">
+    @Html.ValidationMessageFor(model => model.Fax, "", new { })
+
+</span>
+@Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label>پست الکترونیک</label><span class="red">
+    @Html.ValidationMessageFor(model => model.Email, "", new { })
+
+</span>
+@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = " form-control " } })
+
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="padding-bottom:15px;">
+                            <input id="chkacc" type="checkbox">
+                            <label for="chkacc">تقاضای اخذ نمایندگی فروش محصولات تولیدی شرکت لوله چابهار ( کایرپایپ ) را دارم.</label>
+                        </div>
+                    </fieldset>
+                    @{
+            var Yesnoselct = new List<SelectListItem>();
+            Yesnoselct.Add(new SelectListItem(){  Value="بله" , Text="بله"});
+                  Yesnoselct.Add(new SelectListItem(){  Value="خیر" , Text="خیر"});
+               
+             
+                    
+                    }
+                          
+                    <fieldset id="sec2" class="sec2hidden">
+                        <legend>با توجه به شروع همکاری اولیه نسبت به تکمیل بندهای ذیل توجه فرمائید.</legend>
+                        <label style="float:right;padding-right:15px;padding-top:7px">آیا با شرکت چابهار آشنایی دارید ؟</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.Companyfriendship,( Yesnoselct),new{@class="form-control"} )
+                                  
+</div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <label style="float:right;padding-right:15px;padding-top:7px">آیا با محصول جدید لوله و اتصالات کایرپایپ آشنایی دارید ؟</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.newProductfriendship, Yesnoselct, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        @{
+            var FriendShipList  = new List<SelectListItem>();
+           
+            
+
+                      FriendShipList.Add(  new SelectListItem(){ Value="معرفی دوستان" , Text="معرفی دوستان"});
+                      FriendShipList.Add( new SelectListItem(){ Value="مراجعه حضوری بازاریاب شرکت" , Text="مراجعه حضوری بازاریاب شرکت"});
+                      FriendShipList.Add(new SelectListItem() { Value = "تبلیغات تلویزیونی", Text = "تبلیغات تلویزیونی" });
+                      FriendShipList.Add(new SelectListItem() { Value = "تبلیغات محیطی", Text = "تبلیغات محیطی" });
+                      FriendShipList.Add(new SelectListItem() { Value = "تبلیغات اینترنتی", Text = "تبلیغات اینترنتی" });
+                
+
+
+                        }
+                        <label style="float:right;padding-right:15px;padding-top:7px">از چه طریقی با شرکت لوله چابهار و کایرپایپ آشنا شده اید ؟</label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                               @Html.DropDownListFor(model => model.friendshipWay, Yesnoselct, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        @{
+            var ProductTypeList = new List<SelectListItem>();
+             ProductTypeList.Add(  new SelectListItem(){ Value="لوله و اتصالات پلی پروپیلن تک لایه چابهار" , Text="لوله و اتصالات پلی پروپیلن تک لایه چابهار"});
+              ProductTypeList.Add(  new SelectListItem(){ Value="لوله و اتصالات پلی پروپیلن تک لایه چابهار" , Text="لوله و اتصالات پلی پروپیلن تک لایه چابهار"});
+             
+                        }
+
+                        <label style="float:right;padding-right:15px;padding-top:7px">متقاضی کدام محصول شرکت لوله چابهار می باشید ؟</label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.ProductType, ProductTypeList, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>آیا تا کنون نمایندگی شرکت های لوله و اتصالات دیگری را داشته اید ؟ لطفا نام ببرید؟</label><span class="red">
+    @Html.ValidationMessageFor(model => model.OtherAgency, "", new { })
+
+</span>
+@Html.EditorFor(model => model.OtherAgency, new { htmlAttributes = new { @class = " form-control " } })
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>لطفا متراژ فروشگاه و انبار خود را بیان نمایید.</label><span class="red">
+    @Html.ValidationMessageFor(model => model.StoreMetraj, "", new { })
+
+</span>
+@Html.EditorFor(model => model.StoreMetraj, new { htmlAttributes = new { @class = " form-control " } })
+                            </div>
+                        </div>
+                        <label style="float:right;padding-right:15px;padding-top:7px">لطفا وضعیت مالکیت فروشگاه خود را مشخص فرمائید.</label>
+                        
+                        @{
+                            
+            var OwnerType = new List<SelectListItem>();
+            OwnerType.Add(new SelectListItem() { Value = "مالک", Text = "مالک" });
+            OwnerType.Add(new SelectListItem() { Value = "مستاجر", Text = "مستاجر" });
+      
+         
+
+
+                        }
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.ShopOwnerType, OwnerType, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <label style="float:right;padding-right:15px;padding-top:7px">لطفا وضعیت مالکیت انبار خود را مشخص فرمائید.</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.StoreOwnerType, OwnerType, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>لطفاً مدت فعالیت خود را در خصوص این حرفه بیان نمائید.</label><span class="red">
+    @Html.ValidationMessageFor(model => model.ActivityTime, "", new { })
+
+</span>
+@Html.EditorFor(model => model.ActivityTime, new { htmlAttributes = new { @class = " form-control " } })
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>لطفاً تعداد ماشین هایی كه جهت پخش لوله و اتصالات در فروشگاه خود استفاده می نمائید را بنویسید.</label><span class="red">
+    @Html.ValidationMessageFor(model => model.PublishCarsNumbers, "", new { })
+
+</span>
+@Html.EditorFor(model => model.PublishCarsNumbers, new { htmlAttributes = new { @class = " form-control " } })
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>لطفاً تعداد پرسنل بیمه شده و پرسنل فعال در مجموعه خود را بنویسید.</label><span class="red">
+    @Html.ValidationMessageFor(model => model.PersonelNumber, "", new { })
+
+</span>
+@Html.EditorFor(model => model.PersonelNumber, new { htmlAttributes = new { @class = " form-control " } })
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>لطفاً شماره حسابهای بانكی كه جهت ارائه چك به این شركت ، مد نظر دارید را بنویسید.</label><span class="red">
+    @Html.ValidationMessageFor(model => model.AccountNumber, "", new { })
+
+</span>
+@Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = " form-control " } })
+                            </div>
+                        </div>
+
+                        <div class="input-email form-group">
+                            <div class="col-xs-12" style="padding-left:0;padding-right:0">
+                                <div class="col-xs-12 form-group" style="padding-left:0;padding-right:0">
+                                    <span class="field-title">
+                                        کد امنیتی
+                                    </span>
+                                    <span class="warning-hint">
+                                        @ViewBag.CaptchaMsg
+                                    </span>
+                                    @Html.Captcha(5)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-success">ثبت درخواست</button>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $("#chkacc").click(function () {
+            if (!this.checked) {
+                $("#sec2").removeClass("sec2visible");
+                $("#sec2").addClass("sec2hidden");
+            }
+            else {
+                $("#sec2").removeClass("sec2hidden");
+                $("#sec2").addClass("sec2visible");
+            }
+        });
+    </script>
+}

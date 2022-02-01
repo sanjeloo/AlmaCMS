@@ -1,0 +1,306 @@
+﻿@model IEnumerable<AlmaCMS.ViewModels.VMOrderList>
+@using AlmaCMS.Helpers;
+@{
+    ViewBag.Title = "مدیریت سفارشات";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Content/assets/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h4 class="panel-title">مدیریت سفارشات</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12" style="height:75px;">
+                        <div class="filterpr">
+                            <div class="col-xs-12 col-md-12">
+                                <div class="form-group">
+
+                                    @*<div class="col-md-3">
+                                                <span>وضعیت سفارش : </span>
+                                                <select class="form-control" id="ddlStatuses">
+                                                    <option value="0">
+                                                        انتخاب وضعیت
+                                                    </option>
+                                                    @foreach (var item in ViewBag.StatusList as List<NSCMS.Models.OrderStatus>)
+                                                    {
+                                                        <option value="@item.id">
+                                                            @item.Title
+                                                        </option>
+                                                    }
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <span>کد پیگیری : </span>
+                                                <input type="text" class="form-control" id="txtTrackingCode" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span>شماره فاکتور : </span>
+                                                <input type="text" class="form-control" id="txtFactorNo" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <span>نام و نام خانوادگی : </span>
+                                                <input type="text" class="form-control" id="txtNAme" />
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-2" style="padding-left:0px">
+                                                <button id="btnfilter" class="btn btn-blue btn-block btn-add" style="margin-bottom:0px;margin-top:20px;"><i class="fa fa-search"></i> جستجو</button>
+                                            </div>
+                                        </div>*@
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="table-responsive ls-table">
+                                <table id="nsdatatable" class="table table-hover table-bordered table-striped FontIS dataTables-example dataTable nsdatatable ">
+                                    <thead>
+                                        <tr class="bg-info">
+                                            <th style="width:50px;text-align:center;">
+                                                کد
+                                            </th>
+                                            <th>
+                                                تاریخ
+                                            <th>
+                                                نام
+                                            </th>
+                                            <th>
+                                                وضعیت
+                                            </th>
+                                            <th>
+                                                کد رهگیری
+                                            </th>
+                                            <th>
+                                                جمع فاکتور
+                                            </th>
+                                            <th>
+                                                شیوه پرداخت
+                                            </th>
+                                            <th class="text-center FontIS" style="width: 110px;">
+                                                عملیات
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @{ int i = 0; }
+                                        @foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    @item.id
+                                                </td>
+                                                <td>
+                                                    <p style="direction:ltr !important">
+                                                        @item.OrderDate.ToPersianShortDate()   @item.OrderDate.Hour:@item.OrderDate.Minute
+                                                    </p>
+
+                                                </td>
+                                                <td>
+                                                    @item.Name
+                                                </td>
+                                                <td>
+                                                    @item.StatusTitle
+                                                </td>
+                                                <td>
+                                                    @item.TrackingID
+                                                </td>
+                                                <td>
+                                                    @item.TotalPrice
+                                                </td>
+                                                <td>
+                                                    @item.PaymentTitle
+                                                </td>
+                                                <td style="text-align:center;">
+
+
+                                                    <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title="ویرایش">
+                                                        <a href="@Url.Action("details", "ManageOrders", new { id = item.id })" class="btn btn-xs btn-warning">
+                                                            <i class="fa fa-pencil-square-o"></i>
+                                                        </a>
+                                                    </span>
+                                                    <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title="حذف">
+                                                        <a href="@Url.Action("Delete", "ManageOrders", new { id = item.id })" class="btn btn-xs btn-danger">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </span>
+
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    @section Scripts{
+        <script src="~/Scripts/jquery-1.9.0.js"></script>
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script src="~/Scripts/jtable/jquery.jtable.js"></script>
+
+        <script type="text/javascript">
+            $.fn.digits = function () {
+                return this.each(function () {
+                    $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                })
+            }
+            $(".nsprice").digits();
+
+            $(document).ready(function () {
+
+                $('#btnfilter').click(function () {
+
+                    $('#OrdersTableContainer').jtable('destroy');
+                    $('#OrdersTableContainer').jtable({
+
+                        title: 'لیست سفارشات',
+                        paging: true, //Enable paging
+                        pageSize: 20, //Set page size (default: 10)
+                        sorting: true, //Enable sorting
+                        defaultSorting: 'id DESC', //Set default sorting
+                        actions: {
+                            listAction: '/manage/ManageOrders/GetList?FilterTitle=' + $('#ddlStatuses').val() + '&TrackingCode=' + $('#txtTrackingCode').val() + '&FactorNo=' + $('#txtFactorNo').val() + '&Name=' + $('#txtNAme').val()
+                        },
+                        fields: {
+                            id: {
+                                title: 'کد',
+                                width: '5%'
+                            },
+                            PersianOrderDate: {
+                                title: 'تاریخ ثبت سفارش',
+                                width: '17%'
+                            },
+                            Name: {
+                                title: 'نام و نام خانوادگی',
+                                width: '20%'
+                            },
+
+                            StatusTitle: {
+                                title: 'وضعیت سفارش',
+                                width: '14%',
+                            },
+                            TrackingID: {
+                                title: 'کد رهگیری',
+                                width: '14%'
+                            },
+                            TotalPrice: {
+                                title: 'جمع فاکتور',
+                                width: '12%'
+                            },
+                            ShowDetailColumn: {
+                                title: 'جزئیات',
+                                width: '3%',
+                                sorting: false,
+                                display: function (data) {
+                                    return '<p style="text-align:center;margin-bottom: 0;"><a href="/Manage/ManageOrders/details/' + data.record.id + '"><img src="/Content/img/JTable-Ico/list_metro.png" /></a></p>';
+                                }
+                            },
+                            ShowDeleteColumn: {
+                                title: 'حذف',
+                                width: '3%',
+                                sorting: false,
+                                display: function (data) {
+                                    return '<p style="text-align:center;margin-bottom: 0;"><a href="/Manage/ManageOrders/delete/' + data.record.id + '"><img src="/Content/img/JTable-Ico/Delete.png" /></a></p>';
+                                }
+                            }
+                        }
+
+
+                    });
+
+                    $('#OrdersTableContainer').jtable('reload');
+
+                });
+                $('#OrdersTableContainer').jtable({
+
+                    title: 'لیست سفارشات',
+                    paging: true, //Enable paging
+                    pageSize: 20, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'id DESC', //Set default sorting
+                    actions: {
+                        listAction: '/Manage/ManageOrders/GetList?FilterTitle=' + $('#ddlStatuses').val()
+                    },
+                    fields: {
+                        id: {
+                            title: 'کد',
+                            width: '5%'
+                        },
+                        PersianOrderDate: {
+                            title: 'تاریخ ثبت سفارش',
+                            width: '17%'
+                        },
+                        Name: {
+                            title: 'نام و نام خانوادگی',
+                            width: '20%'
+                        },
+
+                        StatusTitle: {
+                            title: 'وضعیت سفارش',
+                            width: '14%',
+                        },
+                        TrackingID: {
+                            title: 'کد رهگیری',
+                            width: '14%'
+                        },
+                        TotalPrice: {
+                            title: 'جمع فاکتور',
+                            width: '12%'
+                        },
+                        ShowDetailColumn: {
+                            title: 'جزئیات',
+                            width: '3%',
+                            sorting: false,
+                            display: function (data) {
+                                return '<p style="text-align:center;margin-bottom: 0;"><a href="/manage/ManageOrders/details/' + data.record.id + '"><img src="/Content/img/JTable-Ico/list_metro.png" /></a></p>';
+                            }
+                        },
+                        ShowDeleteColumn: {
+                            title: 'حذف',
+                            width: '3%',
+                            sorting: false,
+                            display: function (data) {
+                                return '<p style="text-align:center;margin-bottom: 0;"><a href="/manage/ManageOrders/delete/' + data.record.id + '"><img src="/Content/img/JTable-Ico/Delete.png" /></a></p>';
+                            }
+                        }
+                    }
+
+
+
+                });
+                $('#OrdersTableContainer').jtable('load');
+            });
+
+            $.fn.digits = function () {
+                return this.each(function () {
+                    $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                })
+            }
+            $(".nsprice").digits();
+        </script>
+        <script>
+            $(".page-container").addClass("sidebar-collapsed can-resize")
+        </script>
+    }

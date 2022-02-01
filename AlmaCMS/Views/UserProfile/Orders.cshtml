@@ -1,0 +1,114 @@
+﻿
+@model IEnumerable<AlmaCMS.ViewModels.VMOrderList>
+
+@using AlmaCMS.Helpers;
+@using AlmaCMS.Models;
+@using AlmaCMS.Repositories;
+@using AlmaCMS.ViewModels;
+
+
+@{
+    ViewBag.Title = "تاریخچه سفارشات";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+@helper GetOrderPRoducts(int OrderID)
+{
+
+    var db = new AlmaCMS.Models.DB_AlmaCmsEntities();
+    OrderProductRepository repOP = new OrderProductRepository(db);
+
+    var PList = repOP.GetDapperOrderID(OrderID);
+    if (PList.Count() > 0)
+    {
+        <table dir="rtl" cellpadding="5" border="1" cellspacing="0" style="width:100%;border-radius:5px;">
+            <thead>
+                <tr>
+                    <th>
+                        <span class="tblf">کالا</span>
+                    </th>
+                    <th>
+                        <span class="tblf">تعداد</span>
+                    </th>
+                    <th>
+                        <span class="tblf">قیمت واحد</span>
+                    </th>
+                    <th data-hide="phone,tablet">
+                        <span class="tblf">قیمت کل</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in PList)
+                {
+                    <tr>
+                        <td>
+                            <img width="30" src="@item.Image" alt="@item.Title" />
+                            <span class="tblf">@item.Title</span>
+
+                        </td>
+                        <td style="vertical-align: middle;width:150px;">
+                            <span class="FontNumFA tblf">  @item.Quantity</span>
+                        </td>
+                        <td style="vertical-align: middle;width:150px;">
+                            <span class="nsprice tblf">@item.Price</span>
+                        </td>
+                        <td style="vertical-align: middle;width:150px;">
+                            <span class="nsprice tblf">@(item.Price * item.Quantity)</span>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
+}
+
+<div class="tg-dashboardbanner">
+    <h1>تاریخچه سفارشات</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/userprofile">حساب کاربری</a></li>
+        <li class="tg-active">تاریخچه سفارشات</li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:0px;">
+                            <div class="tg-dashboardboxtitle">
+                                <h2> تاریخچه سفارشات </h2>
+                            </div>
+                            <div id="PrintFactor" class="tg-dashboardholder" style="padding-bottom:0px;">
+                                @{
+                                    int RowIndex = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <div style="border:solid 1px #ccc;margin-bottom:20px;">
+                                        <div class="ftt">
+                                            <p class="fttr">ردیف : @Html.Raw(RowIndex)</p>
+                                            <p class="fttl">وضعیت : @item.StatusTitle</p>
+                                            <div class="clearfix"></div>
+                                            <p class="fttr">تاریخ سفارش : @item.OrderDate.ToPersianShortDate() @item.OrderDate.ToShortTimeString()</p>
+                                            <p class="fttl">روش پرداخت : @item.PaymentTitle</p>
+                                            <div class="clearfix"></div>
+                                            <p class="fttr">کد پیگیری : @item.TrackingID</p>
+                                            <p class="fttl">مبلغ کل سفارش : <span class="nsprice">@item.TotalPrice</span> تومان</p>
+                                        </div>
+                                        @GetOrderPRoducts(@item.id)
+                                    </div>
+                                    RowIndex++;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>

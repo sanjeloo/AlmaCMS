@@ -1,0 +1,45 @@
+﻿@model AlmaCMS.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "حذف کاربر";
+    Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">حذف کاربر</h3>
+
+                <a href='@Url.Action("index", "ManageUsers")' class="btn btn-primary btn-sm pull-right" style="margin-top:-23px;">
+                    بازگشت
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+            </div>
+            <div class="panel-body">
+
+                <h3 class="text-danger">آیا مطمئن هستید که می خواهید این کاربر را حذف کنید؟</h3>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            نام کاربری
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="بله ، حذف شود !" class="btn btn-danger" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

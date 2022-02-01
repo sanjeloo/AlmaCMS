@@ -1,0 +1,98 @@
+﻿@model AlmaCMS.ViewModels.VMPages
+@{
+
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-8 vc_col-md-8">
+        <div class="vc_column-inner vc_custom_1499612435663">
+            <div class="wpb_wrapper">
+                <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h4 class="woodmart-title-container title  woodmart-font-weight-">
+                            @Model.Title
+                        </h4>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+                <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <div class="info-box-wrapper ">
+                                    <div id="wd-5e02250148175" class=" woodmart-info-box text-right box-icon-align-right box-style- color-scheme- woodmart-bg-none box-title-small vc_custom_1577198871754">
+
+                                        <div class="info-box-content">
+                                            <h4 class="info-box-title woodmart-font-weight- box-title-style-default">@Model.ShortDesc</h4>						<div class="info-box-inner reset-mb-10">
+                                                <p style="text-align:justify;direction:rtl">
+                                                    @Html.Raw(Model.PageContent)
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-4 vc_col-md-4 vc_col-has-fill">
+        <div class="vc_column-inner vc_custom_1499612446263">
+            <div class="wpb_wrapper">
+                <div id="gallery_195" class="woodmart-images-gallery view-grid photoswipe-images">
+                    <div class="gallery-images row woodmart-spacing-10">
+
+
+                        <div class="woodmart-gallery-item col-12">
+                            <a href="@Model.ImageUrl" data-index="2" data-width="500" data-height="643">
+
+                                <img class="woodmart-gallery-image image-2 wpb_single_image wpb_content_element vc_align_center
+                                         bannertop" src="@Model.ImageUrl" alt="@Model.Title" width="500" height="643" />
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-4 vc_col-md-4 vc_col-has-fill">
+    <div class="vc_column-inner vc_custom_1499612446263">
+        <div class="wpb_wrapper">
+            <div id="gallery_195" class="woodmart-images-gallery view-grid photoswipe-images">
+                <div class="gallery-images row woodmart-spacing-10">
+
+
+                    <div class="woodmart-gallery-item col-12">
+                        <a href="@Model.ImageUrl" data-index="2" data-width="500" data-height="643">
+
+                            <img class="woodmart-gallery-image image-2 wpb_single_image wpb_content_element vc_align_center
+                                         bannertop" src="@Model.ImageUrl" alt="@Model.Title" width="500" height="643" />
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

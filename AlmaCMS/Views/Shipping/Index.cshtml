@@ -1,0 +1,372 @@
+﻿@model AlmaCMS.ViewModels.VMShipping
+@{
+    ViewBag.Title = "بررسی و انتخاب نحوه ارسال";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@ViewBag.TotalPriceWithVat" id="txtTotalPrice">
+    @Html.HiddenFor(model => model.MemberID)
+    @Html.HiddenFor(model => model.SendTypePrice)
+    @Html.HiddenFor(model => model.SendTypeID)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <link rel="stylesheet" href="/content/site/css/cart/style.css">
+
+    <div class="site__body">
+        <div class="page-header" style="background:url(/Content/site/images/banners/listpb.jpg)">
+
+            <div class="page-header__container container">
+                <div class="page-header__breadcrumb">
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">خانه</a>
+                                <svg class="breadcrumb-arrow" width="6px" height="9px">
+                                    <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
+                                </svg>
+                            </li>
+
+                            <li class="breadcrumb-item active" aria-current="page">تمکیل خرید</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="page-header__title">
+                    <h1> تکمیل خرید</h1>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <div class="row">
+                        <div class="col-lg-8 col-md-8 col-xs-12 float-right">
+                            <div class="p-content-cart">
+                                <div class="cart-title-top h5 mb-3">ثبت اطلاعات و انتخاب نحوه ارسال</div>
+                                <div class="card-body">
+                                    <div class="current-address">
+                                        <div class="subtitle">
+                                            <div style="margin-top:15px;">
+                                                <div class="col-md-12">
+                                                    <p style="color:#222 !important;margin-bottom:10px;padding-right:15px;margin-top:30px;">  اطلاعات شخصی تحویل گیرنده  :</p>
+                                                    <div class="container shipping-container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="font-14" class="font-14">نام و نام خانوادگی</label>
+                                                                <div class="form-group">
+                                                                    @Html.EditorFor(model => model.DeliverName, new { htmlAttributes = new { @placeholder = "نام و نام خانوادگی", @required = "required", @id = "firstNameInput", @maxlength = "50", @class = "form-control", @tabindex = "10", @autocomplete = "off", @name = "firstName", @value = "", @type = "text" } })
+                                                                    @Html.ValidationMessageFor(model => model.DeliverName, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="font-14">تلفن ثابت</label>
+                                                                <div class="form-group">
+
+                                                                    @Html.EditorFor(model => model.DeliverTel, new { htmlAttributes = new { @placeholder = "تلفن ثابت", @required = "required", @id = "TelInput", @maxlength = "50", @class = "form-control", @tabindex = "10", @autocomplete = "off", @name = "TelInput", @value = "", @type = "text" } })
+                                                                    @Html.ValidationMessageFor(model => model.DeliverTel, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="font-14">تلفن همراه</label>
+                                                                <div class="form-group">
+                                                                    @Html.EditorFor(model => model.DeliverMobile, new { htmlAttributes = new { @placeholder = "موبایل", @required = "required", @id = "MobileInput", @maxlength = "50", @class = "form-control", @tabindex = "10", @autocomplete = "off", @name = "MobileInput", @value = "", @type = "text" } })
+                                                                    @Html.ValidationMessageFor(model => model.DeliverMobile, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="font-14">کد پستی</label>
+                                                                <div class="form-group">
+                                                                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @placeholder = "کد پستی", @maxlength = "50", @class = "form-control", @tabindex = "10", @autocomplete = "off", @type = "text" } })
+                                                                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    @Html.DropDownListFor(model => model.StateID, new SelectList(ViewBag.StateList, "id", "Title"), new { @class = "form-control p-2", @tabindex = "10" })
+
+                                                                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    @Html.DropDownListFor(model => model.CityID, new SelectList(ViewBag.cityList, "id", "Title"), new { @class = "form-control p-2", @tabindex = "10" })
+
+                                                                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label class="font-14">آدرس</label>
+                                                                <div class="form-group">
+                                                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @placeholder = "آدرس محل تحویل مرسوله", @required = "required", @id = "AddressInput", @maxlength = "50", @class = "form-control", @tabindex = "10", @autocomplete = "off", @name = "AddressInput", @value = "", @type = "text" } })
+
+                                                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "" })
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-xs-12">
+                                                        <hr style="margin-top:5px;margin-bottom:20px;" />
+                                                        <p style="color:#222 !important;margin-bottom:10px;;">  نحوه ارسال  :</p>
+                                                        @Html.ValidationMessageFor(model => model.SendTypeID, "", new { @class = "" })
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered table-hover table-striped text-center shipping-method-table">
+                                                                <tr>
+                                                                    <td colspan="2" style="vertical-align: middle">
+                                                                        <img class="send-truck" src="~/Content/image/truck.png" />
+                                                                        <div class="send-first-div">
+                                                                            <p style="text-align:right;color:#222 !important;margin-top:5px !important;font-weight:bold">
+                                                                                ارسال رایگان سفارش‌های بالاتر از ‌صد هزار تومان
+                                                                            </p>
+                                                                            <p style="font-weight:normal">
+                                                                                با توجه به انتخاب نحوه ارسال زمان تحویل متغیر خواهد بود.
+                                                                            </p>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td style="width:100px;vertical-align:middle;">هزینه ارسال <span style="font-weight:normal !important;font-size:11px !important">تومان</span></td>
+                                                                </tr>
+                                                                @foreach (var item in ViewBag.SendypeList as List<AlmaCMS.Models.SendType>)
+                                                                {
+
+                                                                    <tr id="tritemsend_@item.Id" for="SendType_@item.Id">
+                                                                        <td onclick="setSendTypeValue(@item.Id,this)" id="itemtd_@item.Id" current-price="@item.Price" current-id="@item.Id" style="vertical-align:middle;text-align:right;"><input type="radio" id="SendType_@item.Id" onchange="" name="SendType" style="margin-top:5px;" value="@item.Id" /> <label for="SendType_@item.Id" style="line-height:15px;">@item.Title</label></td>
+                                                                        <td style="width:100px;vertical-align:middle;"><img src="@item.Image" width="50" /></td>
+                                                                        <td style="vertical-align:middle;"><span class="nsprice">@item.Price</span></td>
+                                                                    </tr>
+
+                                                                }
+
+                                                            </table>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--back-->
+                            <a href="/Cart" class="btn btn-primary product-card__addtocart mb-2 mr-4">بازگشت به سبد خرید</a>
+                            <!--back-->
+                        </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 float-left">
+                        <div class="p-sidebar-cart">
+                            <div class="cart-title-top h5 mb-3">جزئیات خرید</div>
+                            <div class="card-body pt-3">
+                                <p style="color:#222 !important;margin-bottom:10px;;">  مبلغ نهایی  :</p>
+
+                                <br />
+                                <table class="table table-bordered final-price-table">
+
+                                    <tr style="font-size:17px;" class="final-price-tr">
+                                        <td>هزینه ارسال</td>
+                                        <td><span id="SendPriceLable" class="nsprice"></span> تومان</td>
+                                    </tr>
+                                    <tr style="font-size:17px;">
+                                        <td>قیمت کل محصولات</td>
+                                        <td><span class="nsprice">@ViewBag.totalPrice</span> تومان</td>
+                                    </tr>
+
+                                    @if (ViewBag.Vat > 0)
+                                    {
+                                        <tr style="font-size:17px;">
+                                            <td>مالیات بر ارزش افزوده</td>
+                                            <td><span id="tax" class="nsprice">@( ViewBag.Vat)</span> تومان</td>
+                                        </tr>
+
+                                    }
+                                    <tr style="color:green;">
+                                        <td style="font-weight:bold">مبلغ قابل پرداخت</td>
+                                        <td style="font-weight:bold"><span id="TotalPriceSpan" class="nsprice">@ViewBag.TotalPriceWithVat</span> تومان</td>
+                                    </tr>
+                                </table>
+                                <hr style="margin-top:5px;margin-bottom:20px;" />
+                                <p style="color:#222 !important;margin-bottom:10px;;">  نحوه پرداخت  :</p>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6" style="background-color:#f9f9f9;border:solid 1px #ddd;text-align:center;padding:10px;">
+                                            <input id="PayType_2" name="PaymentTypeid" value="2" type="radio">
+                                            <label for="PayType_2" style="font-size:14px !important">پرداخت آنلاین </label>
+                                        </div>
+                                        <div class="col-sm-6" style="background-color:#f9f9f9;border:solid 1px #ddd;text-align:center;padding:10px;">
+                                            <input id="PayType_1" name="PaymentTypeid" value="1" checked="checked" type="radio">
+                                            <label for="PayType_1" style="font-size:14px !important">پرداخت حضوری </label>
+                                        </div>
+                                    </div>
+                                </div>                          
+                                <div class="clearfix"></div>
+                                <hr style="margin-top:5px;margin-bottom:20px;" />
+                                <div class="d-block text-center">
+                                    <button type="submit" class="btn btn-success ">ثبت اطلاعات و ادامه خرید <i class="fa fa-arrow-left"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+}
+@section Scripts{
+    <script src="~/Scripts/jquery-1.9.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            SetSendType()
+            $("#ULSendTypes li").each(function () {
+                if ($(this).find('input:radio').is(':checked')) {
+                    var id = $(this).attr('current-id');
+                    $("#SendTypeID").val(id);
+                    var Totalprice = parseInt($('#txtTotalPrice').val());
+                    var SendTypePrice = parseInt($(this).attr('current-Price'));
+                    $('#TotalPriceSpan').html(Totalprice + SendTypePrice);
+                    $("#TotalPriceSpan").digits();
+                    $('#SendTypePrice').val(SendTypePrice);
+                    $('#SendTypePrice').val(SendTypePrice);
+                }
+            });
+        });
+
+        function setSendTypeValue(id, itemselector) {
+
+            $("#SendType_" + id).prop('checked', true);
+            $("#SendTypeID").val(id);
+            var Totalprice = parseInt($('#txtTotalPrice').val());
+            var SendTypePrice = parseInt($(itemselector).attr('current-Price'));
+            $('#TotalPriceSpan').html(Totalprice + SendTypePrice);
+            $("#TotalPriceSpan").digits();
+            $('#SendTypePrice').val(SendTypePrice);
+          
+            $('#SendPriceLable').html(SendTypePrice);
+
+            $(".nsprice").digits();
+        }
+
+        function setSendTypeValueZero()
+        {
+
+            $("#SendTypeID").val(0);
+            var Totalprice = parseInt($('#txtTotalPrice').val());
+            var SendTypePrice = 0;
+            $('#TotalPriceSpan').html(Totalprice + SendTypePrice);
+            $("#TotalPriceSpan").digits();
+            $('#SendTypePrice').val(SendTypePrice);
+            $('#SendPriceLable').html(SendTypePrice);
+            $(".nsprice").digits();
+        }
+
+
+        $('#StateID').change(function () {
+            SetSendType();
+
+
+        });
+
+        function SetSendType() {
+
+
+            $('#SendType_6').prop("checked", true);
+            $('#SendType_6').trigger('click');
+            var StateId=$('#StateID').val();
+
+            if(StateId>0)
+            { var token = $('input[name="__RequestVerificationToken"]').val();
+                jQuery.ajax({
+                    url: '@Url.Action("GetCityList", "Shipping")',
+                    data: { __RequestVerificationToken: token, StateID: StateId },
+                    datatype: "json",
+                    type: "post",
+
+                    success: function (result) {
+
+                        $('#CityID option').remove();
+
+
+                        $.each(result, function (index, item) {
+
+                            $('#CityID').append("<option value='" + item.Id + "'>" + item.Title + "</option>");
+                        });
+                        if ($('#CityID > option').length > 1) {
+                            $('#CityID').val('@Model.CityID');
+                        } else {
+                            $('#ModelID').val('0');
+                        }
+
+
+                    },
+                    error: function () {
+                        alertify.error('خطا در ارسال اطلاعات');
+
+                    }
+
+                });
+
+            }
+            else
+            {
+
+            }
+
+            //if ($('#StateID').val() == 0) {
+            //    $('#SendType_1').attr("disabled", "true");
+            //    $('#SendType_4').attr("disabled", "true");
+            //    $('#SendType_5').attr("disabled", "true");
+            //    $('#SendType_6').removeAttr("disabled");
+            //    $('#PostalCode').css("display", "none");
+            //    $('#tritemsend_1').css("display", "none");
+            //    $('#tritemsend_4').css("display", "none");
+            //    $('#tritemsend_5').css("display", "none");
+            //    $('#tritemsend_6').css("display", "none");
+            //    setSendTypeValueZero();
+            //    return;
+            //}
+            //if ($('#StateID').val() != 9) {
+            //    $('#SendType_1').attr("disabled", "true");
+            //    $('#SendType_4').attr("disabled", "true");
+            //    $('#SendType_5').attr("disabled", "true");
+            //    $('#PostalCode').css("display", "");
+            //    $('#SendType_6').removeAttr("disabled");
+
+            //    $('#SendType_1').removeAttr("checked");
+            //    $('#SendType_4').removeAttr("checked");
+            //    $('#SendType_5').removeAttr("checked");
+            //    $('#SendType_6').prop("checked", true);
+            //    $('#SendType_6').trigger('click');
+            //    $('#tritemsend_1').css("display", "none");
+            //    $('#tritemsend_4').css("display", "none");
+            //    $('#tritemsend_5').css("display", "none");
+            //    $('#tritemsend_6').css("display", "");
+            //}
+            //else {
+            //    $('#SendType_1').removeAttr("disabled");
+            //    $('#SendType_4').removeAttr("disabled");
+            //    $('#SendType_5').removeAttr("disabled");
+            //    $('#SendType_6').attr("disabled", "true");
+            //    $('#PostalCode').css("display", "none");
+
+            //    $('#SendType_6').removeAttr("checked");
+            //    $('#SendType_4').removeAttr("checked");
+            //    $('#SendType_5').removeAttr("checked");
+            //    $('#SendType_1').prop("checked", true);
+            //    $('#SendType_1').trigger('click');
+            //    $('#tritemsend_1').css("display", "");
+            //    $('#tritemsend_4').css("display", "");
+            //    $('#tritemsend_5').css("display", "");
+            //    $('#tritemsend_6').css("display", "none");
+            //}
+        }
+    </script>
+}

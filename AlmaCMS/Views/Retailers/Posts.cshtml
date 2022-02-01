@@ -1,0 +1,54 @@
+﻿@model List<AlmaCMS.ViewModels.VMSecureArticle>
+@using AlmaCMS.Helpers
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="breadcrumb-box">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/Home">صفحه اصلی</a>
+                </li>
+                <li class="active">لیست اطلاعیه نمایندگان</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="page-section" style="padding-top: 10px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-sm-6">
+                        <div class="post-item">
+                            <div class="post-image pull-right" style="padding-left:20px;">
+                                <img src="@item.Image" alt="@item.Title" title="@item.Title" width="100" height="100">
+                            </div>
+                            <h2 class="post-title" style="font-size:16px;">
+                                <a href="/Retailers/details/@item.id/@item.Title.Replace(" ","-").Replace(".","")">@item.Title</a>
+                            </h2>
+                           
+                            <div class="post-meta">
+                                <span class="time pull-left">
+                                    @item.DateInsert.ToPersianShortDate() <i class="fa fa-calendar"></i>
+                                </span>
+                                <span class="category pull-right">
+                                    <a href="/Retailers/details/@item.id/@item.Title.Replace(" ","-").Replace(".","")" style="font-size: 12px; color: #81c45a;" class="FontISB">نمایش مطلب</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+

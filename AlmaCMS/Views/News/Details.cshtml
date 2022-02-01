@@ -1,0 +1,98 @@
+﻿@model AlmaCMS.ViewModels.VMNews
+@using AlmaCMS.Helpers
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Keywords = Model.Keyword;
+    ViewBag.Description = Model.ShortDesc;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<style>
+    .btntag {
+        border-color: #EBEBEB !important;
+        border-radius: 2px !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        height: 30px !important;
+        padding: 6px;
+        font-size: 12px;
+        color: #7a7a7a !important;
+    }
+
+        .btntag:hover {
+            border-color: #ED1B24 !important;
+            background-color: #ED1B24 !important;
+            color: #ffffff !important;
+        }
+</style>
+
+<div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-12 vc_col-md-12">
+        <div class="vc_column-inner vc_custom_1499612435663">
+            <div class="wpb_wrapper">
+                <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
+
+                    <div class="liner-continer">
+                        <span class="left-line"></span>
+                        <h3 class="woodmart-title-container title  woodmart-font-weight-">  @Model.Title</h3>								<span class="right-line"></span>
+                    </div>
+
+
+                </div>
+
+                <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner">
+                            <div class="wpb_wrapper">
+                                <div class="info-box-wrapper ">
+                                    <div id="wd-5e02250148175" class=" woodmart-info-box text-right box-icon-align-right box-style- color-scheme- woodmart-bg-none box-title-small vc_custom_1577198871754">
+
+                                        <div class="info-box-content">
+                                            <!--<h4 class="info-box-title woodmart-font-weight- box-title-style-default">
+
+                                                آمار بازدید @Model.VisitCount
+                                            </h4>	-->
+                                            <div class="info-box-inner reset-mb-10">
+                                                <p style="font-size:12pt; text-align:justify">
+                                                    @Model.ShortDesc
+
+                                                </p><p style="font-size:12pt; text-align:justify">
+                                                    @Html.Raw(Model.NewsContent)
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-12 vc_col-md-12 vc_col-has-fill">
+        <div class="vc_column-inner vc_custom_1499612446263">
+            <div class="wpb_wrapper">
+                <div id="gallery_195" class="woodmart-images-gallery view-grid photoswipe-images">
+                    <div class="gallery-images row woodmart-spacing-10">
+
+                        <div class="woodmart-gallery-item col-12">
+                            <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
+
+                                <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" />
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "کیف پول";
+    Layout = "~/Areas/Expert/Views/Shared/_LayoutDashboardExpert.cshtml";
+
+    var currentInfo = ViewBag.currentUserInfo as AlmaCMS.ViewModels.VMUserInfo;
+    var BagInfo = ViewBag.BagInfo as AlmaCMS.Models.UserBag;
+}
+
+@section Styles{
+    <style>
+        .tg-statistic {
+            border: solid 1px #ccc;
+            margin-bottom: 15px;
+        }
+
+        .shcartbank {
+            text-align: left;
+            letter-spacing: 2px;
+            font-family: IranSansEN;
+        }
+
+        .irshebabox {
+            position: relative;
+        }
+
+        .irshebainput {
+            padding-left: 45px !important;
+            text-align: left;
+            letter-spacing: 2px;
+            font-family: IranSansEN;
+        }
+
+        .irsheba {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            background-color: #ffffdf;
+            padding: 9px 12px;
+            border-radius: 3px 0px 0px 3px;
+            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0,0.5);
+        }
+    </style>
+}
+
+<div class="tg-dashboardbanner">
+    <h1>حساب کاربری</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+
+        <li>
+            <span>کیف پوا</span>
+        </li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="col-xs-12 tg-lgcolwidthhalf">
+                        <div class="tg-dashboardbox">
+                            <div class="tg-dashboardboxtitle">
+                                <h2>کیف پول</h2>
+                            </div>
+                            <div class="tg-dashboardholder">
+                                @*<p class="text-success">@ViewBag.StatusMessage</p>*@
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                                        <div class="tg-dashboardbox tg-statistic">
+                                            <img src="~/Content/images/icons/Home/wallet.svg" style="height:80px;" class="center-block mb-10">
+                                            <div class="tg-contentbox">
+
+                                                <a href="#" style="color:#363b4d">موجودی کیف پول :   @BagInfo.BagPrice</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                                        <div class="tg-dashboardbox tg-statistic" data-toggle="tooltip" title="" data-original-title="">
+                                            <img src="~/Content/images/icons/Home/DepositBuyer.svg" style="height:80px;" class="center-block mb-10">
+                                            <div class="tg-contentbox">
+
+                                                <a href="/expert/Profile/ChargeBag" style="color:#363b4d">شارژ کیف پول  </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                                        <div class="tg-dashboardbox tg-statistic">
+                                            <img src="~/Content/images/icons/home/pie-chart.svg" style="height:80px;" class="center-block mb-10">
+                                            <div class="tg-contentbox">
+                                                <a href="/expert/Profile/takereport" style="color:#363b4d">گزارش برداشت کیف پول</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                                        <div class="tg-dashboardbox tg-statistic">
+                                            <img src="~/Content/images/icons/dashboard/save-money.svg" style="height:80px;" class="center-block mb-10">
+                                            <div class="tg-contentbox">
+                                                <a href="/expert/Profile/ChargeReport" style="color:#363b4d">گزارش شارژ حساب</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="tg-dashboardboxtitle">
+                                <h2> پیش نمایش اطلاعات شخصی </h2>
+                            </div>
+                            <div class="tg-dashboardholder" style="padding-bottom:0px;">
+                                <div class="col-sm-12">
+
+
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control" disabled value="@currentInfo.Name" placeholder="نام و نام خانوادگی" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" disabled value="@currentInfo.BirthDate" placeholder="تاریخ تولد" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" disabled value="@currentInfo.CodeMelli" placeholder="کد ملی" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" disabled value="@currentInfo.Phone" placeholder="شماره ثابت" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" disabled value="@currentInfo.Mobile" placeholder="شماره موبایل" />
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" disabled value="@currentInfo.Address" placeholder="آدرس" />
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>
+

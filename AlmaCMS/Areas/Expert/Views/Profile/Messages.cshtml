@@ -1,0 +1,84 @@
+﻿@using AlmaCMS.Helpers
+@model AlmaCMS.ViewModels.VMShortMessage
+@{
+    ViewBag.Title = "مدیریت  پیام ها";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    var MEssageList = ViewBag.MEssageList as List<AlmaCMS.Models.UsersShortMessage>;
+    var CurrentUser = ViewBag.UserInfo as AlmaCMS.Models.VWUserInfo;
+}
+
+<div class="tg-dashboardbanner">
+    <h1>پیام ها</h1>
+    <ol class="tg-breadcrumb">
+        <li><a href="/">صفحه اصلی</a></li>
+        <li><a href="/expert/Profile">حساب کاربری</a></li>
+        <li class="tg-active">پیام ها</li>
+    </ol>
+</div>
+<main id="tg-main" class="tg-main tg-haslayout">
+    <section class="tg-dbsectionspace tg-haslayout">
+        <div class="row">
+            <div class="tg-formtheme tg-formdashboard">
+                <fieldset>
+                    <div class="tg-dashboardbox">
+                        <div class="col-xs-12 tg-lgcolwidthhalf" style="margin-bottom:0px;">
+                            <div class="tg-dashboardboxtitle">
+                                <h2> پیام ها </h2>
+                            </div>
+                            <div class="tg-chatarea">
+@using (Html.BeginForm())
+            {
+                                <div class="tg-replaybox">
+                                    @Html.ValidationMessageFor(model => model.Messagetext, "", new { @class = "text-danger" })
+                                    @Html.TextAreaFor(model => model.Messagetext, new { @class = "form-control", @style = "" })
+                                  
+                                    <button class="tg-btn tg-btnreply " type="submit">ارسال</button>
+                                </div>
+}
+                                <div class="tg-messages tg-verticalscrollbar tg-dashboardscrollbar">
+
+                                    @foreach (var item in MEssageList)
+                                    {
+                                        if (string.IsNullOrEmpty(item.MessageBody))
+                                        {
+                                            <div class="tg-offerermessage  tg-readmessage">
+                                                <figure><img src="/Content/profile/images/author/UserProfileTest1.PNG" alt="@item.UserId"></figure>
+                                                <div class="tg-description">
+                                                    <p>@item.usermessage </p>
+                                                    <div class="clearfix"></div>
+                                                    <time datetime="2017-08-08">@item.dateinsert.Value.ToPersianShortDate()</time>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="tg-memessage tg-readmessage">
+                                                <figure><img src="/Content/profile/images/author/p.png" alt=""></figure>
+                                                <div class="tg-description">
+                                                    <p>@item.MessageBody </p>
+                                                    <div class="clearfix"></div>
+                                                    <p>پیام مدیر</p>
+                                              
+                                                    <div class="clearfix"></div>
+                                                    <time datetime="2017-08-08">@item.dateinsert.Value.ToPersianShortDate()</time>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    }
+                                    
+                                    
+                                   
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+</main>
+
+

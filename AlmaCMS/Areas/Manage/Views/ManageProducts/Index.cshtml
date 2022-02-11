@@ -8,7 +8,69 @@
 @section styles{
     <link href="~/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+    <style>
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        .dropdown-menu .sub-menu {
+            left: 100%;
+            position: absolute;
+            top: 0;
+            visibility: hidden;
+            margin-top: -1px;
+        }
+
+        .dropdown-menu li:hover .sub-menu {
+            visibility: visible;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+            margin-top: 0;
+        }
+
+        .navbar .sub-menu:before {
+            border-bottom: 7px solid transparent;
+            border-left: none;
+            border-right: 7px solid rgba(0, 0, 0, 0.2);
+            border-top: 7px solid transparent;
+            left: -7px;
+            top: 10px;
+        }
+
+        .navbar .sub-menu:after {
+            border-top: 6px solid transparent;
+            border-left: none;
+            border-right: 6px solid #fff;
+            border-bottom: 6px solid transparent;
+            left: 10px;
+            top: 11px;
+            left: -6px;
+        }
+    </style>
 }
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="d-none d-xl-block col-xl-2 bd-toc">
+                <ul class="section-nav">
+                    <li class="toc-entry toc-h2">
+                        <a href="#"></a>
+                        <ul id="basegroup">
+                            <li class="toc-entry toc-h2"><button></button></li>
+                            <li class="toc-entry toc-h2"><button></button></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -57,32 +119,36 @@
                             @foreach (var item in Model)
                             {
                                 i++;
-                            <tr>
-                                <td class="size-40 text-center">
-                                    @i
-                                </td>
+                                <tr>
+                                    <td class="size-40 text-center">
+                                        @i
+                                    </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                </td>
-                                <td>
-                                    <input style="border:0;direction:ltr;width:100%" onclick="this.select()" type="text" value="/products/details/@item.id/@item.Title.Replace(" ","-").Replace(".","")" readonly />
-                                </td>
-                                <td class="siz-100 text-center">
-                                    <a href="@Url.Action("Edit", "ManageProducts", new { id = item.id })" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="ویرایش"><i class="fa fa-edit"></i></a>
-                                    <a href="@Url.Action("Delete", "ManageProducts", new { id = item.id })" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="حذف"><i class="fa fa-close"></i></a>
-                                    <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title="مدیریت تصاویر">
-                                        <a href="@Url.Action("index", "ManageProductsImage", new { id = item.id })" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-image"></i>
-                                        </a>
-                                    </span>
-                                </td>
-                            </tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        <input style="border:0;direction:ltr;width:100%" onclick="this.select()" type="text" value="/products/details/@item.id/@item.Title.Replace(" ","-").Replace(".","")" readonly />
+                                    </td>
+                                    <td class="siz-100 text-center">
+                                        <a href="@Url.Action("Edit", "ManageProducts", new { id = item.id })" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="ویرایش"><i class="fa fa-edit"></i></a>
+                                        <a href="@Url.Action("Delete", "ManageProducts", new { id = item.id })" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="حذف"><i class="fa fa-close"></i></a>
+                                        <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title="مدیریت تصاویر">
+                                            <a href="@Url.Action("index", "ManageProductsImage", new { id = item.id })" class="btn btn-xs btn-primary">
+                                                <i class="fa fa-image"></i>
+                                            </a>
+                                        </span>
+                                        <button id="changeGroup" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            <i class="fa icon-facebook-squared"></i>
+                                        </button>
+
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -98,4 +164,23 @@
     <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
     <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
     <script src="~/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>
+    <script>
+        $('#changeGroup').on('click', function () {
+            $.ajax({
+                url: '/ManageProductsGroup/GetProductGroup',
+                type: 'post',
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $('#basegroup').append(
+                            ' <li class="toc-entry toc-h2">' +
+                            '<a data-groupid="' + value.Id + '"> ' + value.Name + '</a>' +
+                            '</li> ')
+                    })
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+    </script>
 }

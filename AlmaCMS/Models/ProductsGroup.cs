@@ -27,6 +27,7 @@ namespace AlmaCMS.Models
         public Nullable<int> Priority { get; set; }
         public string Keywords { get; set; }
         public Nullable<int> TypeId { get; set; }
+        public Nullable<int> ParentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

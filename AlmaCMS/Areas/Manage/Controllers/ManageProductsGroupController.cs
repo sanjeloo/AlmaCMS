@@ -19,13 +19,13 @@ using System.Web.Security;
 namespace AlmaCMS.Areas.Manage.Controllers
 {
 
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     [HasPermission("ManageProducts")]
 
     public class ManageProductsGroupController : Controller
     {
         // GET: Manage/ManageProductsGroup
-          public static bool premission = false;
+        public static bool premission = false;
         private DB_AlmaCmsEntities db;
         private ProductsGroupRepository repProductsGroup;
         ProductsRepository RepProducts;
@@ -50,6 +50,7 @@ namespace AlmaCMS.Areas.Manage.Controllers
             {
                 vmGroupList.Add(item.toVMProductGroup());
             }
+            // groupList.ToList().Where(c=>c.ParentId==item.id)
             int pageSize = 300;
             int pageNumber = (page ?? 1);
             ViewBag.pageNumber = pageNumber;
@@ -57,12 +58,46 @@ namespace AlmaCMS.Areas.Manage.Controllers
 
         }
 
-        #region Create
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult GetProductGroupForGrid(int? groupid = 0)
         {
+            var data = new List<dynamic>();
+            var groupList = new List<ProductsGroup>();
+            if (groupid > 0)
+                groupList = repProductsGroup.Where(c => c.ParentId==groupid).ToList();
+            else
+                groupList = repProductsGroup.GetAll().ToList();
 
+            foreach (var item in groupList)
+            {
+                data.Add(new
+                {
+                    Title = item.Title,
+                    id = item.id,
+                });
+            }
+            return Json(data);
+        }
+        [HttpPost]
+        public ActionResult GetProductGroup()
+        {
+            var data = new List<dynamic>();
+            var groupList = new List<ProductsGroup>();
 
+            groupList = repProductsGroup.GetAll().ToList();
+            foreach (var item in groupList)
+            {
+                data.Add(new { Name = item.Title, Id = item.id });
+            }
 
+            return Json(data);
+        }
+        #region Create
+        
+        public ActionResult Create(int? groupid = 0)
+        {
+            if (groupid>0)
+                ViewBag.Groupid = groupid;
 
             return View();
         }
@@ -71,7 +106,7 @@ namespace AlmaCMS.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(VMProductGroup vmGroup)
         {
-         
+
             if (ModelState.IsValid)
             {
 
@@ -104,12 +139,12 @@ namespace AlmaCMS.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(VMProductGroup vmProductsgroup)
         {
-          
+
             if (!ModelState.IsValid)
                 return View(vmProductsgroup.toProductsGroup());
 
-            
-        
+
+
 
             repProductsGroup.Update(vmProductsgroup.toProductsGroup());
             Helpers.UserLogHelper.AddLog("گروه محصولات", (User.Identity.Name), "ویرایش", vmProductsgroup.Title);
@@ -159,6 +194,6 @@ namespace AlmaCMS.Areas.Manage.Controllers
             base.Dispose(disposing);
         }
 
-        
+
     }
 }

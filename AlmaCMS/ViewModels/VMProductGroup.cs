@@ -25,6 +25,8 @@ namespace AlmaCMS.ViewModels
 
         [Required(ErrorMessage = "*")]
         public string Keywords { get; set; }
+       // [Required(ErrorMessage = "*")]
+        public int? ParentId { get; set; }
 
 
     }

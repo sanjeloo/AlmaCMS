@@ -20,6 +20,17 @@
     <link href="~/Areas/Manage/Content/css/bootstrap-rtl.min.css" rel="stylesheet">
     <link href="~/Areas/Manage/Content/css/integral-rtl-core.css" rel="stylesheet">
     <link href="~/Areas/Manage/Content/css/bootstrap-tagsinput.css" rel="stylesheet" />
+    <style>
+        #loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('/Areas/Manage/Content/images/loading_UpAndDown.gif') 50% 50% no-repeat rgb(249,249,249);
+        }  
+    </style>
     <script type="text/javascript">
     function Showdate() {
         week = new Array("يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
@@ -55,11 +66,12 @@
 </head>
 <body>
     @*<div class="loader-backdrop">
-        <div class="loader">
-            <div class="bounce-1"></div>
-            <div class="bounce-2"></div>
-        </div>
-    </div>*@
+            <div class="loader">
+                <div class="bounce-1"></div>
+                <div class="bounce-2"></div>
+            </div>
+        </div>*@
+    <div style="display:none" id="loader"></div>
     <div class="page-container">
         <div class="page-sidebar">
             <header class="site-header">
@@ -71,7 +83,7 @@
                 <li class="navigation-header"> سیستم مدیریت محتوای نیووب</li>
                 <li><a href="/manage/admin/dashboard"><i class="icon-gauge"></i><span class="title">میز کار</span></a></li>
 
-               @* <li><a href="/manage/ManageMenuItems"><i class="icon-layout"></i><span class="title">مدیریت منوی اصلی</span></a></li>*@
+                @* <li><a href="/manage/ManageMenuItems"><i class="icon-layout"></i><span class="title">مدیریت منوی اصلی</span></a></li>*@
                 @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManagePages"))
                 {
                     <li><a href="/manage/ManagePages"><i class="icon-docs"></i><span class="title">مدیریت صفحات</span></a></li>
@@ -90,79 +102,79 @@
                     <li><a href="/manage/ManageCustomeProducts/index/1"><i class=" icon-megaphone"></i><span class="title">مدیریت محصولات سفارشی</span></a></li>
                 }
                 @*@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageArticles"))
-                {
-                    <li><a href="/manage/ManageArticleGroup"><i class="icon-doc-text-inv"></i><span class="title">مدیریت مقالات</span></a></li>
-                }*@
+                    {
+                        <li><a href="/manage/ManageArticleGroup"><i class="icon-doc-text-inv"></i><span class="title">مدیریت مقالات</span></a></li>
+                    }*@
 
                 @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageImageGallery"))
                 {
-                <li><a href="/manage/ManageAlbumes"><i class="icon-picture"></i><span class="title">مدیریت گالری</span></a></li>
+                    <li><a href="/manage/ManageAlbumes"><i class="icon-picture"></i><span class="title">مدیریت گالری</span></a></li>
                 }
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageLinks"))
-{
-    <li><a href="/manage/ManageLinksGroup"><i class="icon-link"></i><span class="title">مدیریت پیوندها</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProductComments"))
-{
-    <li><a href="/manage/ManageProductReview"><i class="icon-mail"></i><span class="title">مدیریت نظرات محصولات</span></a></li>
-}
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageLinks"))
+                {
+                    <li><a href="/manage/ManageLinksGroup"><i class="icon-link"></i><span class="title">مدیریت پیوندها</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProductComments"))
+                {
+                    <li><a href="/manage/ManageProductReview"><i class="icon-mail"></i><span class="title">مدیریت نظرات محصولات</span></a></li>
+                }
 
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageOrders"))
-{
-    <li><a href="/manage/ManageProductReview"><i class="icon-mail"></i><span class="title">مدیریت سفارش ها</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageDiscountCode"))
-{
-    <li><a href="/manage/ManageDiscountCode"><i class="icon-mail"></i><span class="title">مدیریت کد تخفیف</span></a></li>
-}
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageOrders"))
+                {
+                    <li><a href="/manage/ManageProductReview"><i class="icon-mail"></i><span class="title">مدیریت سفارش ها</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageDiscountCode"))
+                {
+                    <li><a href="/manage/ManageDiscountCode"><i class="icon-mail"></i><span class="title">مدیریت کد تخفیف</span></a></li>
+                }
 
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageTasks"))
-{
-    <li><a href="/manage/ManageTasks"><i class="icon-mail"></i><span class="title">مدیریت وظایف</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProductReports"))
-{
-    <li><a href="/manage/ManageProductReports"><i class="icon-mail"></i><span class="title">گزارشات محصول</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageSliders"))
-{
-    <li><a href="/manage/manageSlider"><i class="icon-mail"></i><span class="title">مدیریت اسلایدر</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageUsers"))
-{
-    <li><a href="/manage/manageusers"><i class="icon-user"></i><span class="title">مدیریت کاربران سایت</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageAdmins"))
-{
-    <li><a href="/manage/Manageadmins"><i class="icon-user"></i><span class="title">مدیریت مدیران سایت</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageSiteSettings"))
-{
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageTasks"))
+                {
+                    <li><a href="/manage/ManageTasks"><i class="icon-mail"></i><span class="title">مدیریت وظایف</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageProductReports"))
+                {
+                    <li><a href="/manage/ManageProductReports"><i class="icon-mail"></i><span class="title">گزارشات محصول</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageSliders"))
+                {
+                    <li><a href="/manage/manageSlider"><i class="icon-mail"></i><span class="title">مدیریت اسلایدر</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageUsers"))
+                {
+                    <li><a href="/manage/manageusers"><i class="icon-user"></i><span class="title">مدیریت کاربران سایت</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageAdmins"))
+                {
+                    <li><a href="/manage/Manageadmins"><i class="icon-user"></i><span class="title">مدیریت مدیران سایت</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("ManageSiteSettings"))
+                {
 
-    <li><a href="/manage/ManageSiteSettings"><i class="icon-mail"></i><span class="title">تنظیمات سایت</span></a></li>
-}
-@if (AlmaCMS.Helpers.Extentions.HAsPermission("BagTransactionReport"))
-{
+                    <li><a href="/manage/ManageSiteSettings"><i class="icon-mail"></i><span class="title">تنظیمات سایت</span></a></li>
+                }
+                @if (AlmaCMS.Helpers.Extentions.HAsPermission("BagTransactionReport"))
+                {
 
-    <li><a href="/manage/ManageBagTransactionsReport"><i class="icon-mail"></i><span class="title">گزارش کیف پول </span></a></li>
-}
+                    <li><a href="/manage/ManageBagTransactionsReport"><i class="icon-mail"></i><span class="title">گزارش کیف پول </span></a></li>
+                }
 
                 @*<li><a href="/manage/ManageProjectsGroup"><i class="icon-archive"></i><span class="title">مدیریت پروژه ها</span></a></li>*@
                 @*<li><a href="/manage/ManageCertificateGroup"><i class="icon-vcard"></i><span class="title">مدیریت گواهینامه ها</span></a></li>*@
-             
+
                 @*<li><a href="/manage/ManageQuestions"><i class="icon-chat"></i><span class="title">مدیریت پرسش و پاسخ</span></a></li>*@
                 <li>@*<a href="/manage/ManageSiteMessages"><i class="icon-mail"></i><span class="title">مدیریت پیام ها</span></a>*@</li>
-               
-               
-              
-              
-              
-              
+
+
+
+
+
+
                 @*<li><a href="/manage/ManageRssReader"><i class="icon-rss"></i><span class="title">مدیریت خبر خوان</span></a></li>*@
                 @*<li><a href="/manage/ManageRetailers"><i class="icon-users"></i><span class="title">مدیریت نمایندگان</span></a></li>
-                <li><a href="/manage/ManageSecureArticles"><i class="icon-bookmarks"></i><span class="title">مدیریت اطلاعیه نمایندگان</span></a></li>*@
-             
-                     
+                    <li><a href="/manage/ManageSecureArticles"><i class="icon-bookmarks"></i><span class="title">مدیریت اطلاعیه نمایندگان</span></a></li>*@
+
+
             </ul>
         </div>
         <div class="main-container">
@@ -186,9 +198,9 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="~/Areas/Manage/Content/images/logoadmin.png"> @name <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 @*<li><a href="#/"><i class="icon-user"></i>پروفایل من</a></li>
-                                <li><a href="#/"><i class="icon-mail"></i>پیام ها</a></li>
-                                <li><a href="#"><i class="icon-clipboard"></i>اعلان ها</a></li>
-                                <li class="divider"></li>*@
+                                    <li><a href="#/"><i class="icon-mail"></i>پیام ها</a></li>
+                                    <li><a href="#"><i class="icon-clipboard"></i>اعلان ها</a></li>
+                                    <li class="divider"></li>*@
                                 <li><a href="/Manage/ManageAdmins/Edit/@userid"><i class="icon-cog"></i>تنظیمات حساب</a></li>
                                 <li><a href="@Url.Action("LogOut","Admin")"><i class="icon-logout"></i>خروج</a></li>
                             </ul>
@@ -294,11 +306,11 @@
 
     <script type="text/javascript">
 
-    $(document).keypress(function (e) {
-        if (e.which == 13 && e.target.tagName != 'TEXTAREA') {
-            return false;
-        }
-    });
+        $(document).keypress(function (e) {
+            if (e.which == 13 && e.target.tagName != 'TEXTAREA') {
+                return false;
+            }
+        });
 
     </script>
 

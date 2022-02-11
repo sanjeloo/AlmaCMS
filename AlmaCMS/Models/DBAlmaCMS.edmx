@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DB_AlmaCmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_AlmaCmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -615,6 +615,7 @@
           <Property Name="Priority" Type="int" />
           <Property Name="Keywords" Type="nvarchar" MaxLength="2550" />
           <Property Name="TypeId" Type="int" />
+          <Property Name="ParentId" Type="int" />
         </EntityType>
         <EntityType Name="ProductsImage">
           <Key>
@@ -783,8 +784,8 @@
           <Property Name="SendTaxPrice" Type="bigint" />
           <Property Name="SendInsurancePrice" Type="bigint" />
           <Property Name="SentVatPrice" Type="bigint" />
-          <Property Name="SendBirthDateGift" Type="bit" />
           <Property Name="BirthDateGiftPrice" Type="bigint" />
+          <Property Name="SendBirthDateGift" Type="bit" />
           <Property Name="ProfitPercentCount" Type="int" />
           <Property Name="ProfitPercent" Type="int" />
         </EntityType>
@@ -927,8 +928,7 @@
           <Property Name="DateInsert" Type="datetime" />
           <Property Name="Descriptions" Type="nvarchar(max)" />
           <Property Name="StatusId" Type="int" />
-          <Property Name="UserNessage" Type="nvarchar(max)" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="AdminIId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="UsersShortMessage">
           <Key>
@@ -941,7 +941,7 @@
           <Property Name="usermessage" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWBagTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWBagTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWBagTransactions">
           <Key>
             <PropertyRef Name="id" />
@@ -959,7 +959,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWBagTransactions' does not have a p
           <Property Name="persiandate" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWExpertReports' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWExpertReports' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWExpertReports">
           <Key>
             <PropertyRef Name="id" />
@@ -976,7 +976,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWExpertReports' does not have a pri
           <Property Name="persiandateinsert" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWExpertTask' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWExpertTask' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWExpertTask">
           <Key>
             <PropertyRef Name="id" />
@@ -995,7 +995,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWExpertTask' does not have a primar
           <Property Name="persianexpiredate" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWMessageAnswers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWMessageAnswers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWMessageAnswers">
           <Key>
             <PropertyRef Name="id" />
@@ -1009,7 +1009,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWMessageAnswers' does not have a pr
           <Property Name="Name" Type="nvarchar" MaxLength="1550" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWMessageUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWMessageUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWMessageUsers">
           <Key>
             <PropertyRef Name="id" />
@@ -1021,7 +1021,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWMessageUsers' does not have a prim
           <Property Name="id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWPeyments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWPeyments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWPeyments">
           <Key>
             <PropertyRef Name="id" />
@@ -1042,7 +1042,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWPeyments' does not have a primary 
           <Property Name="MemberID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWProducReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWProducReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWProducReport">
           <Key>
             <PropertyRef Name="id" />
@@ -1061,7 +1061,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWProducReport' does not have a prim
           <Property Name="ProductTitle" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWProductReportAnswer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWProductReportAnswer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWProductReportAnswer">
           <Key>
             <PropertyRef Name="id" />
@@ -1078,7 +1078,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWProductReportAnswer' does not have
           <Property Name="Name" Type="nvarchar" MaxLength="1550" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWProductReportExpert' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWProductReportExpert' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWProductReportExpert">
           <Key>
             <PropertyRef Name="id" />
@@ -1089,7 +1089,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWProductReportExpert' does not have
           <Property Name="id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWTaskAnswers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWTaskAnswers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWTaskAnswers">
           <Key>
             <PropertyRef Name="id" />
@@ -1106,7 +1106,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWTaskAnswers' does not have a prima
           <Property Name="answerpersiandateinsert" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWTaskList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWTaskList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWTaskList">
           <Key>
             <PropertyRef Name="id" />
@@ -1128,7 +1128,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWTaskList' does not have a primary 
           <Property Name="CreatorId" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWTaskUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWTaskUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWTaskUsers">
           <Key>
             <PropertyRef Name="id" />
@@ -1140,7 +1140,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWTaskUsers' does not have a primary
           <Property Name="id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWUserInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -1162,8 +1162,8 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary 
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="256" />
           <Property Name="ReagentCode" Type="int" />
-          <Property Name="UserInfoId" Type="int" Nullable="false" />
           <Property Name="BirthDate" Type="datetime" />
+          <Property Name="UserInfoId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_AdminRoles_Admins">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -2132,8 +2132,8 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary 
     [VWUserInfo].[RoleId] AS [RoleId], 
     [VWUserInfo].[RoleName] AS [RoleName], 
     [VWUserInfo].[ReagentCode] AS [ReagentCode], 
-    [VWUserInfo].[UserInfoId] AS [UserInfoId], 
-    [VWUserInfo].[BirthDate] AS [BirthDate]
+    [VWUserInfo].[BirthDate] AS [BirthDate], 
+    [VWUserInfo].[UserInfoId] AS [UserInfoId]
     FROM [dbo].[VWUserInfo] AS [VWUserInfo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AdminRoles_Admins" Association="Self.FK_AdminRoles_Admins">
@@ -2877,6 +2877,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary 
           <Property Name="Keywords" Type="String" MaxLength="2550" FixedLength="false" Unicode="true" />
           <Property Name="TypeId" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="DB_AlmaCmsModel.FK_Products_PtoductsGroup" FromRole="ProductsGroup" ToRole="Product" />
+          <Property Name="ParentId" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductsImage">
           <Key>
@@ -4484,9 +4485,10 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary 
           <Property Name="DateInsert" Type="DateTime" Precision="3" />
           <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StatusId" Type="Int32" />
-          <Property Name="UserNessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <!--<Property Name="UserNessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />-->
+          <!--<Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />-->
           <NavigationProperty Name="MessageAnswers" Relationship="DB_AlmaCmsModel.FK_MessageAnswers_UsersMessages" FromRole="UsersMessage" ToRole="MessageAnswer" />
+          <Property Name="AdminIId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_MessageAnswers_UsersMessages">
           <End Type="DB_AlmaCmsModel.UsersMessage" Role="UsersMessage" Multiplicity="0..1">
@@ -4802,6 +4804,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary 
           <EntitySetMapping Name="ProductsGroups">
             <EntityTypeMapping TypeName="DB_AlmaCmsModel.ProductsGroup">
               <MappingFragment StoreEntitySet="ProductsGroup">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="Keywords" ColumnName="Keywords" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
@@ -5730,8 +5733,7 @@ warning 6002: The table/view 'DB_GlbCMS.dbo.VWUserInfo' does not have a primary 
           <EntitySetMapping Name="UsersMessages">
             <EntityTypeMapping TypeName="DB_AlmaCmsModel.UsersMessage">
               <MappingFragment StoreEntitySet="UsersMessages">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserNessage" ColumnName="UserNessage" />
+                <ScalarProperty Name="AdminIId" ColumnName="AdminIId" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
                 <ScalarProperty Name="DateInsert" ColumnName="DateInsert" />

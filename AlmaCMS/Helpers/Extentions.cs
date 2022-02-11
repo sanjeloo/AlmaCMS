@@ -779,6 +779,7 @@ namespace AlmaCMS.Helpers
                   Image=productGroup.Image,
                    Keywords=productGroup.Keywords,
                     Priority=(int)productGroup.Priority,
+                    ParentId = productGroup.ParentId,
                      Title=productGroup.Title
             };
         }
@@ -792,7 +793,8 @@ namespace AlmaCMS.Helpers
                 Image = vmProductGroup.Image,
                 Keywords = vmProductGroup.Keywords,
                 Priority = (int)vmProductGroup.Priority,
-                Title = vmProductGroup.Title
+                Title = vmProductGroup.Title,
+                ParentId = vmProductGroup.ParentId,
 
             };
         }

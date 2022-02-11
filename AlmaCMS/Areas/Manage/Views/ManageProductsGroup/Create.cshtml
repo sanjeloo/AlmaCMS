@@ -47,7 +47,10 @@
                                     @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div>
+                            <input type="hidden" name="ParentId" value="@ViewBag.Groupid" />
 
+                            </div>
                             <div class="form-group">
                                 <div class="control-label col-md-2" style="padding:0px;">
                                     کلمات کلیدی

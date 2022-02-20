@@ -87,11 +87,12 @@ namespace AlmaCMS.Areas.Manage.Controllers
             groupList = repProductsGroup.GetAll().ToList();
             foreach (var item in groupList)
             {
-                data.Add(new { Name = item.Title, Id = item.id });
+                data.Add(new { Name = item.Title, Id = item.id , ParentId = item.ParentId });
             }
 
             return Json(data);
         }
+        
         #region Create
         
         public ActionResult Create(int? groupid = 0)
@@ -151,6 +152,7 @@ namespace AlmaCMS.Areas.Manage.Controllers
 
             return RedirectToAction("Index");
         }
+      
         #endregion
 
         #region Delete

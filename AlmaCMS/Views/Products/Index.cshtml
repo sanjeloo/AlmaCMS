@@ -9,9 +9,9 @@
 
 }
 
-    <link href="/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
-    <link href="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
-    <link href="~/Areas/Manage/Content/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+<link href="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Areas/Manage/Content/css/bootstrap.min.css" rel="stylesheet">
 
 
 
@@ -49,23 +49,15 @@
                                         <div class="woocommerce columns-3 ">
                                             <div class="products elements-grid align-items-start woodmart-products-holder  woodmart-spacing-0 pagination-pagination row grid-columns-4" data-source="main_loop" data-min_price="" data-max_price="">
 
-
                                                 @{ int i = (ViewBag.pageNumber - 1) * 10; }
                                                 @foreach (var item in Model)
                                                 {
                                                     i++;
 
-
                                                     <div class="product-grid-item wd-with-labels product product-no-swatches woodmart-hover-base  col-md-3 col-sm-4 col-12 last  type-product post-3664 status-publish last instock product_cat-78 has-post-thumbnail sale shipping-taxable purchasable product-type-simple" data-loop="8" data-id="3664">
-
-
                                                         <div class="product-wrapper">
                                                             <div class="content-product-imagin"></div>
-                                                            <div style="    background-color: white;
-    padding-top: 33px;" class="product-element-top">
-
-                                                                <!--<div class="product-labels labels-rounded"><span class="onsale product-label">@item.Keywords</span></div>-->
-
+                                                            <div style=" background-color: white; padding-top: 33px;" class="product-element-top">
                                                                 <a href="/products/details/@item.id/@item.Title.toSlugify()">
                                                                     <img class="w-100" src="@item.Image" alt="@item.Title">
                                                                 </a>
@@ -73,26 +65,11 @@
                                                                     <a href="/products/details/@item.id/@item.Title.toSlugify()">@item.Title</a>
 
                                                                 </div>
-
                                                                 <p runat="server" Visible="true">
-
-
-
-
-
-
-
-
                                                                     <a href="/cart/addtocart/@item.id" class="btn card-cart">افزودن به سبد</a>
-
-
-
-
-
                                                                 </p>
 
-                                                                <div style="    padding-bottom: 17px;
-    padding-top: 7px;" class="product-rating-price">
+                                                                <div style="padding-bottom: 17px;padding-top: 7px;" class="product-rating-price">
                                                                     <div class="wrapp-product-price">
 
                                                                         <span class="price">
@@ -112,26 +89,16 @@
                                                                 </div>
                                                                 <div class="wrapp-swatches"></div>
 
-                                                                <div style="    background-color: white;
-    padding: 0px 25px 10px 30px;
-    border-top: 1px solid #f3f3f3;" class="product-information">
-
-
-
-
+                                                                <div style="background-color: white; padding: 0px 25px 10px 30px; border-top: 1px solid #f3f3f3;" class="product-information">
                                                                     <ul>
                                                                         <li></li>
                                                                         <li></li>
-
-
-
                                                                         <li>
                                                                             <div class="woodmart-add-btn wd-action-btn wd-add-cart-btn wd-style-icon">
                                                                                 <a href="http://www.dartkala.com/cart" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart add-to-cart-loop"
                                                                                    data-product_sku="" rel="nofollow" title="مشاهده سبد خرید"><span>مشاهده سبد خرید</span></a>
                                                                             </div>
                                                                         </li>
-
                                                                         <li>
                                                                             <div class="wrap-quickview-button">
                                                                                 <div class="quick-view wd-action-btn wd-quick-view-btn wd-style-icon">
@@ -141,14 +108,6 @@
                                                                             </div>
                                                                         </li>
                                                                     </ul>
-
-
-
-
-
-
-
-
                                                                 </div>
                                                             </div>
                                                             <style>

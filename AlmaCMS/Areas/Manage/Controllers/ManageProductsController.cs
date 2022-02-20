@@ -155,6 +155,16 @@ namespace AlmaCMS.Areas.Manage.Controllers
             }
             return View(vmProduct);
         }
+
+        [HttpPost]
+        public ActionResult UpdateProductGroup(int groupId, int proudctId)
+        {
+            Product product = repProducts.FindById(proudctId);
+            product.GroupID = groupId;
+            repProducts.Update(product);
+            Helpers.UserLogHelper.AddLog("محصولات", (User.Identity.Name), "ویرایش", product.Title);
+            return Json("ok");
+        }
         #endregion
 
         #region Delete

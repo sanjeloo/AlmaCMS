@@ -50,7 +50,7 @@ namespace AlmaCMS.Controllers
 
             ViewBag.GroupInfo = currentGroup;
 
-            int pageSize = 15;
+            int pageSize = 16;
             int pageNumber = (page ?? 1);
             ViewBag.pageNumber = pageNumber;
             return View(vmList.ToPagedList(pageNumber, pageSize));

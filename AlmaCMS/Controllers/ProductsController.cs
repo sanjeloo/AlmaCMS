@@ -56,7 +56,20 @@ namespace AlmaCMS.Controllers
             ViewBag.pageNumber = pageNumber;
             return View(vmList.ToPagedList(pageNumber, pageSize));
         }
+        [HttpPost]
+        public ActionResult GetProductGroup()
+        {
+            var data = new List<dynamic>();
+            var groupList = new List<ProductsGroup>();
 
+            groupList = repProductsGroup.GetAll().ToList();
+            foreach (var item in groupList)
+            {
+                data.Add(new { Name = item.Title, Id = item.id, ParentId = item.ParentId });
+            }
+
+            return Json(data);
+        }
         public ActionResult Details(int id, string Title)
         {
             var currentProduct = repProducts.FindById(id);

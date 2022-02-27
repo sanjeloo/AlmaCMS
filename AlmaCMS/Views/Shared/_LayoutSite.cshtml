@@ -2392,7 +2392,7 @@
         }
         $(document).ready(function () {
             $.ajax({
-                url: '/ManageProductsGroup/GetProductGroup',
+                url: '/Products/GetProductGroup',
                 type: 'post',
                 success: function (data) {
                     var rootGroups = data.filter(x => x.ParentId == null || x.ParentId == '');

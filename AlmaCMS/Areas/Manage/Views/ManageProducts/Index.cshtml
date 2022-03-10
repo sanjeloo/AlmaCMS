@@ -1,6 +1,5 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
-@model List<AlmaCMS.ViewModels.VMProducts>
 @{
     ViewBag.Title = "مدیریت محصولات";
     Layout = "~/Areas/Manage/Views/Shared/_LayoutAdmin.cshtml";
@@ -54,6 +53,7 @@
                     background: #337ab7;
                     color: #fff !important;
                 }
+
         .sidebar-nav {
             padding: 9px 0;
         }
@@ -104,7 +104,6 @@
             .a-subGroup:hover {
                 color: red;
             }
-
     </style>
 }
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -139,6 +138,8 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
+                <input id="input_GroupID" type="hidden" value="@ViewBag.GroupID" />
+                <input id="input_pagenumber" type="hidden" value="1" />
                 <h4 class="panel-title">مدیریت محصولات - @ViewBag.GroupTitle</h4>
                 <ul class="panel-tool-options">
                     <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
@@ -170,7 +171,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                    <table id="example1" class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr>
                                 <th>ردیف</th>
@@ -180,36 +181,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{ int i = 0; }
-                            @foreach (var item in Model)
-                            {
-                                i++;
-                                <tr>
-                                    <td class="size-40 text-center">
-                                        @i
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Title)
-                                    </td>
-                                    <td>
-                                        <input style="border:0;direction:ltr;width:100%" onclick="this.select()" type="text" value="/products/details/@item.id/@item.Title.Replace(" ","-").Replace(".","")" readonly />
-                                    </td>
-                                    <td class="siz-100 text-center">
-                                        <a href="@Url.Action("Edit", "ManageProducts", new { id = item.id })" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="ویرایش"><i class="fa fa-edit"></i></a>
-                                        <a href="@Url.Action("Delete", "ManageProducts", new { id = item.id })" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="حذف"><i class="fa fa-close"></i></a>
-                                        <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title="مدیریت تصاویر">
-                                            <a href="@Url.Action("index", "ManageProductsImage", new { id = item.id })" class="btn btn-xs btn-primary">
-                                                <i class="fa fa-image"></i>
-                                            </a>
-                                        </span>
-                                        <button data-productid="@item.id" onclick="showChangeGroupModal(this)" id="changeGroup"  title="تغییر دسته بندی" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                            <i class="fa fa-list-alt"></i>
-                                        </button>
-
-                                    </td>
-                                </tr>
-                            }
                         </tbody>
                     </table>
                 </div>
@@ -228,7 +199,7 @@
     <script src="~/Areas/Manage/Content/plugins/datatables/js/vfs_fonts.js"></script>
     <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
     <script src="~/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
-    <script src="~/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>
+    @*<script src="~/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>*@
     <script>
         function showChangeGroupModal(el) {
             $('#selectedProduct').val($(el).attr('data-productid'));
@@ -243,7 +214,7 @@
                 success: function (data) {
                     $.each(data, function (index, value) {
                         var active = '';
-                        if (index == 0) 
+                        if (index == 0)
                             active = 'active';
 
                         if (value.ParentId == null || value.ParentId == '')
@@ -291,23 +262,66 @@
         function changeGroupId(el) {
             if (!confirm('آیا از انتقال این محصول به این دسته بندی اطمینان دارید؟'))
                 return;
-
+           
             var groupId = $(el).attr('data-GroupId');
             var proudctId = $('#selectedProduct').val();
             $.ajax({
                 url: '/ManageProducts/UpdateProductGroup',
-                type:'post',
+                type: 'post',
                 data: { groupId: groupId, proudctId: proudctId },
                 success: function (result) {
                     debugger;
                     if (result == "ok")
                         alert('دسته بندی باموفقیت ویرایش گردید')
-                        window.location.reload(true);
+                   // window.location.reload(true);
+                    $('button.close')[0].click()
+                    $('li.paginate_button.active')[0].click()
                 },
                 error: function (error) {
                     console.log(error)
                 }
             })
         }
+        $(document).ready(function () {
+            $('#example1').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/ManageProducts/ProductDataTable",
+                    "type": "POST",
+                    "data": { id: $('#input_GroupID').val()}
+                },
+                "columns": [
+                    { "data": "radif" },
+                    { "data": "title" },
+                    { "data": "link" },
+                    { "data": "operation" }
+                ],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            return `<input style="border:0;direction:ltr;width:100%" onclick="this.select()" type="text" value="/products/details/${row['id']}/${row['title'].replace(" ", "-").replace(".", "")}" readonly />`;
+                        },
+                        "targets": 2
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return `<a href="/Manage/ManageProducts/Edit/${row['id']}" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="ویرایش"><i class="fa fa-edit"></i></a>
+                                                <a href="/Manage/ManageProducts/Delete/${row['id']}" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="حذف"><i class="fa fa-close"></i></a>
+                                                <span class="tooltipLink " data-placement="top" data-toggle="tooltip" data-original-title="مدیریت تصاویر">
+                                                    <a href="/Manage/ManageProductsImage/index/${row['id']}" class="btn btn-xs btn-primary">
+                                                        <i class="fa fa-image"></i>
+                                                    </a>
+                                                </span>
+                                                <button data-productid="${row['id']}" onclick="showChangeGroupModal(this)" id="changeGroup"  title="تغییر دسته بندی" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                    <i class="fa fa-list-alt"></i>
+                                                </button>`
+                        },
+                        "targets": 3
+                    }
+                ]
+
+            });
+        });
     </script>
 }

@@ -17,8 +17,8 @@
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:type" content="product" />
     <meta property="og:title" content="@Model.Title" />
-    <meta name="description" content="@Model.Description"
-    <meta property="og:description" content="@Model.Description" />
+    <meta name="description" content="@Model.Keywords"
+    <meta property="og:description" content="@Model.Keywords" />
     />
 
 
@@ -31,132 +31,143 @@
 <meta property="og:type" content="product" />
 <meta property="og:title" content="@Model.PriceBeforeDiscount" />
 @*<meta property="og:description" content="@Model.Keywords" />*@
-<div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
-    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6 vc_col-md-6">
-        <div class="vc_column-inner vc_custom_1499612435663">
-            <div class="wpb_wrapper">
-                <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
 
-                    <div class="liner-continer">
-                        <span class="left-line"></span>
-                        <h1 class="woodmart-title-container title  woodmart-font-weight-">
-                            <input type="hidden" value="@Model.id" id="PublicProductID" />
-                            @Model.Title
-                        </h1>								<span class="right-line"></span>
-                    </div>
+<link rel="stylesheet" href="/css/app.css">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="post-context post-full-context">
 
+                <div class="post-image post-full-image">
 
                 </div>
 
-                <div class="vc_row wpb_row vc_inner vc_row-fluid">
-                    <div class="wpb_column vc_column_container vc_col-sm-12">
-                        <div class="vc_column-inner">
-                            <div class="wpb_wrapper">
-                                <div class="info-box-wrapper ">
-                                    <div id="wd-5e02250148175" class=" woodmart-info-box text-right box-icon-align-right box-style- color-scheme- woodmart-bg-none box-title-small vc_custom_1577198871754">
+                <h1 class="post-title post-full-title">
+                    <input type="hidden" value="@Model.id" id="PublicProductID" />
+                    <span id="ContentPlaceHolder1_lblTitle2">@Model.Title</span>
+                </h1>
 
-                                        <div class="info-box-content">
-                                            <div class="info-box-inner reset-mb-10">
-                                                <p>
-                                                    <h6 class="midFooter-about-title text-right" style="color:#000000">
-                                                        <i class="fa fa-clock-o" aria-hidden="true"></i>دسته بندی این محصول:
-                                                        <a class="active" href="/products/@GroupInfo.id/@GroupInfo.Title.toSlugify()">
-                                                            @GroupInfo.Title
+                <div class="post-content post-full-content figure-content break-word">
+
+
+                    <article class="blog-post blog-compact-post">
+
+                        <div class="blog-post-image blog-compact-post-image">
+                            <div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
+
+                                <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-10 vc_col-md-10 vc_col-has-fill">
+                                    <div class="vc_column-inner vc_custom_1499612446263">
+                                        <div class="wpb_wrapper">
+                                            <div id="gallery_195" class="woodmart-images-gallery view-grid photoswipe-images">
+                                                <div class="gallery-images row woodmart-spacing-10">
+                                                   
+
+                                                    <div class="woodmart-gallery-item col-12">
+                                                        <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
+
+                                                            <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" />
                                                         </a>
-                                                    </h6>
-                                                    <h2>
-                                                        <h class="midFooter-about-text" style="text-align:justify;direction:rtl">
-                                                            @Model.Description
-                                                    </h2>
-                                                    <br />
+                                                    </div>
 
-                                                    <br />
-                                                    <h2>
-                                                        @Html.Raw(Model.Specification)
-                                                    </h2>
-                                                    <br />
-                                                    تعداد بازدید:  @Model.VisitCount
-                                                    @if (Model.ExistStatus == true)
-                                                    {
+                                                    @foreach (var item in ImageList)
+                        {
+                                                    <div class="woodmart-gallery-item col-12">
+                                                        <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
 
-                                                        <a href="#" style="padding: 12px 20px; background: #ff0000; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl">
-
-                                                            <strike>
-                                                                قیمت قبلی  @Model.PriceBeforeDiscount ریال
-                                                            </strike>
-
-
+                                                            <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" />
                                                         </a>
+                                                    </div>
 
-                                                        <a style="padding: 12px 20px; background: #009dcd; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl"
-                                                           href="/cart/addtocart/@Model.id" rel="nofollow">
-                                                            خرید محصول - قیمت     @Model.Price ریال
-
-                                                        </a>
                                                     }
-                                                    else
-                                                    {
-                                                        <a href="#" style="padding: 12px 20px; background: #ff0000; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl">
-
-                                                            <strike>
-                                                                ناموجود
-                                                            </strike>
-
-
-                                                        </a>
-                                                    }
-
-
-                                                    <asp:ListView ID="ListView1" runat="server" ItemPlaceholderID="itemPlaceHolder">
-                                                        <LayoutTemplate>
-                                                            <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
-                                                        </LayoutTemplate>
-                                                        <ItemTemplate>
-                                                        </ItemTemplate>
-                                                    </asp:ListView>
-                                                </p>
-                                                </p>
+                                                </div>
                                             </div>
-
-
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
+
+
+
                         </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-6 vc_col-md-6 vc_col-has-fill">
-        <div class="vc_column-inner vc_custom_1499612446263">
-            <div class="wpb_wrapper">
-                <div id="gallery_195" class="woodmart-images-gallery view-grid photoswipe-images">
-                    <div class="gallery-images row woodmart-spacing-10">
 
 
-                        <div class="woodmart-gallery-item col-12">
-                            <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
-
-                                <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" alt="@Model.Title" />
+                        @*<h2 class="blog-post-title blog-compact-post-title">
+                            <a href="#" class="blog-post-link blog-compact-post-link" title="">
+                                <span id="ContentPlaceHolder1_lblTitle">@Model.Title</span>
                             </a>
+                        </h2>*@
+                        <div class="blog-post-excerpt blog-compact-post-excerpt break-word">
+                            <p>
+                                <!--<span id="ContentPlaceHolder1_lblTitle1">درباره ما</span>-->
+
+                                <span id="ContentPlaceHolder1_lblText">
+                            <p dir="RTL">
+                                <strong>
+                                    <h3 class="midFooter-about-title text-right" style="color: #000000; font-size: 12px ">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>دسته بندی این محصول:
+                                        <a class="active" href="/products/@GroupInfo.id/@GroupInfo.Title.toSlugify()">
+                                            @GroupInfo.Title
+                                        </a>
+                                    </h3>
+                                    <br />
+                                    <h2 class="midFooter-about-title text-right" style="font-size: 16px">
+                                        @Model.Description <br />
+                                    </h2>
+                                    <br />
+                                    <h2  style="font-size: 14px">
+                                    @Html.Raw(Model.Specification)
+                                    </h2>
+                                    <br />
+                                    تعداد بازدید:  @Model.VisitCount
+                                    @if (Model.ExistStatus == true)
+                                    {
+
+                                        <a href="#" style="padding: 12px 20px; background: #ff0000; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl">
+
+                                            <strike>
+                                                قیمت قبلی  @Model.PriceBeforeDiscount ریال
+                                            </strike>
+
+
+                                        </a>
+
+                                        <a style="padding: 12px 20px; background: #009dcd; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl"
+                                           href="/cart/addtocart/@Model.id" rel="nofollow">
+                                            خرید محصول - قیمت     @Model.Price ریال
+
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" style="padding: 12px 20px; background: #ff0000; font-weight: bold; color: #fff; font-size: 14px; float: left; direction: rtl">
+
+                                            <strike>
+                                                ناموجود
+                                            </strike>
+
+
+                                        </a>
+                                    }
+
+
+                                    <asp:ListView ID="ListView1" runat="server" ItemPlaceholderID="itemPlaceHolder">
+                                        <LayoutTemplate>
+                                            <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+                                        </LayoutTemplate>
+                                        <ItemTemplate>
+
+
+                                        </ItemTemplate>
+                                    </asp:ListView>
+                                </strong><strong><span dir="LTR">.</span></strong>
+                            </p>
+                            </span></p>
                         </div>
-                        @foreach (var item in ImageList)
-                        {
-                            <div class="woodmart-gallery-item col-12">
-                                <a href="@Model.Image" data-index="2" data-width="1000" data-height="594">
 
-                                    <img class="woodmart-gallery-image image-2 " src="@Model.Image" width="500" height="643" alt="@Model.Title" />
-                                </a>
-                            </div>
-                        }
+                    </article>
 
 
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -172,21 +183,6 @@
 
 
 
-
-
-
-
-
-
-<br />
-<div class="divider">
-    <div class="line red"></div>
-    <span class="section">
-        <span class="title">برای مشاهده هر عکس، بر روی آن کلیک کنید</span>
-    </span>
-    <div class="line red"></div>
-</div>
-<br />
 
 
 @*<section class="speak-about-us">

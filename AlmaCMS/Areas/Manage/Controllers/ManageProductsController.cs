@@ -16,12 +16,12 @@ using PagedList;
 using PagedList.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
- 
+
 namespace AlmaCMS.Areas.Manage.Controllers
 {
-    [Authorize(Roles="Admin")]
+    [Authorize(Roles = "Admin")]
     [HasPermission("ManageProducts")]
-  
+
     public class ManageProductsController : Controller
     { // GET: Manage/ManageArticles
         private DB_AlmaCmsEntities db;
@@ -35,33 +35,33 @@ namespace AlmaCMS.Areas.Manage.Controllers
             db = new DB_AlmaCmsEntities();
             repProducts = new ProductsRepository(db);
             repProductsGroup = new ProductsGroupRepository(db);
-           
+
         }
         #region Index
         public ActionResult Index(int id, string searchString, int? page)
         {
-            var vmProductsList = new List<VMProducts>();
+            //var vmProductsList = new List<VMProducts>();
 
-            var ProductsList = repProducts.getByGroupID(id);
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                ProductsList = ProductsList.Where(s => s.Title.Contains(searchString)).ToList();
-                ViewBag.SearchString = searchString;
-            }
+            //var ProductsList = repProducts.getByGroupID(id);
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    ProductsList = ProductsList.Where(s => s.Title.Contains(searchString)).ToList();
+            //    ViewBag.SearchString = searchString;
+            //}
 
 
-            foreach (var item in ProductsList)
-            {
-                vmProductsList.Add(item.toVMProduct());
-            }
+            //foreach (var item in ProductsList)
+            //{
+            //    vmProductsList.Add(item.toVMProduct());
+            //}
             var ProductGroup = repProductsGroup.FindById(id);
             if (ProductGroup != null)
                 ViewBag.GroupTitle = ProductGroup.Title;
             ViewBag.GroupID = ProductGroup.id;
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            ViewBag.pageNumber = pageNumber;
-            return View(vmProductsList.ToList());
+            //int pageSize = 10;
+            //int pageNumber = (page ?? 1);
+            //ViewBag.pageNumber = pageNumber;
+            return View();
         }
         #endregion
 
@@ -69,11 +69,11 @@ namespace AlmaCMS.Areas.Manage.Controllers
         public ActionResult Create(int id)
         {
             VMProducts vmProducts = new VMProducts();
-            
+
             ViewBag.GroupID = id;
             vmProducts.GroupID = id;
 
-        
+
             vmProducts.Price = 0;
             vmProducts.PriceBeforeDiscount = 0;
             return View(vmProducts);
@@ -81,7 +81,7 @@ namespace AlmaCMS.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( VMProducts vmProducts)
+        public ActionResult Create(VMProducts vmProducts)
         {
 
 
@@ -132,7 +132,7 @@ namespace AlmaCMS.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( VMProducts vmProduct)
+        public ActionResult Edit(VMProducts vmProduct)
         {
             if (ModelState.IsValid)
             {
@@ -196,7 +196,48 @@ namespace AlmaCMS.Areas.Manage.Controllers
         }
         #endregion
 
+        [HttpPost]
+        public ActionResult ProductDataTable(int id = 0)
+        {
+            // todo if id was not pass or was 0 return
 
+            //int pagenumber = Int32.Parse( Request.Form["draw"].ToString());
+            int start = Int32.Parse(Request.Form["start"].ToString());
+            string search = Request.Form["search[value]"].ToString();
+            int length = Int32.Parse(Request.Form["length"].ToString());
+
+            //================== todo for search ===================//
+            dynamic result = new List<dynamic>();
+            var ProductsList = new List<Product>();
+            int count = 0;
+            if (!String.IsNullOrEmpty(search))
+            {
+                ProductsList = repProducts.Where(p => p.GroupID==id && p.Title.Contains(search)).Skip(start).Take(length).ToList();
+                count = repProducts.Where(p => p.GroupID==id && p.Title.Contains(search)).OrderByDescending(p => p.id).Count();
+
+            }
+            else
+            {
+                ProductsList = repProducts.Where(p => p.GroupID==id).OrderByDescending(p => p.id).Skip(start).Take(length).ToList();
+                count = repProducts.Where(p => p.GroupID==id).OrderByDescending(p => p.id).Count();
+
+            }
+            int i = 1;
+            foreach (var item in ProductsList)
+            {
+                result.Add(new
+                {
+                    id = item.id,
+                    radif = start+i,
+                    title = item.Title,
+                    link = "",
+                    operation = ""
+                });
+                i++;
+            }
+
+            return Json(new { recordsTotal = count, recordsFiltered = count, data = result });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -206,7 +247,7 @@ namespace AlmaCMS.Areas.Manage.Controllers
             base.Dispose(disposing);
         }
 
-       
+
     }
- 
+
 }

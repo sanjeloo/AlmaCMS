@@ -455,6 +455,10 @@ ul.wysihtml5-toolbar > li {
     margin-right: 0;
 	margin-left: 12px;
 }
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_info {
+	float: right;
+	position: relative;
+}
 /* 15. Custom HM
     ========================================================================= */
 .pagination{margin:0px !important}

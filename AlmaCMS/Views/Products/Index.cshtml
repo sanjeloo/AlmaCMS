@@ -66,30 +66,7 @@
                                         </div>
                                         <input type="hidden" id="groupid" value="@ViewBag.GroupId" />
                                         <div id="listContainer" class="row col-md-12">
-                                            <div class="card col-md-3 card-container">
-                                                <a href="/products/details/7141/مجموعه-منیفولد-هوا-بنزینی-موتور-رانا-TU5–-کروز----">
-                                                    <img class="card-img-top" src="/Uploads/Web/products/76392بوستر ترمز پراید dart kala.jpg" alt="Card image cap">
-                                                </a>
-                                                <div class="card-body">
-                                                    <a href="/products/details/7141/مجموعه-منیفولد-هوا-بنزینی-موتور-رانا-TU5–-کروز----">
-                                                        <h5 class="card-title">کیت منبع روغن بوستر ترمز سمند AM– کروز    </h5>
-                                                    </a>
-                                                    <a href="/cart/addtocart/item.id" class="btn card-cart" rel="nofollow">افزودن به سبد</a>
-                                                    <div>  <span class="discount-text">1 ریال</span></div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="card-footer-item">
-                                                        <a href="http://dartkala.com/cart" data-quantity="1" data-product_sku="" rel="nofollow" title="مشاهده سبد خرید">
-                                                            <i class="fa fa-shopping-cart card-icons"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="card-footer-item">
-                                                        <a href="/products/details/7141/مجموعه-منیفولد-هوا-بنزینی-موتور-رانا-TU5–-کروز----" data-id="3639" title="اطلاعات بیشتر">
-                                                            <i class="fa fa-search card-icons"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -107,20 +84,6 @@
 
         <nav aria-label="...">
             <ul id="pageination" class="pagination">
-
-                <li class="page-item"><a onclick="loadlist(this)" class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item ">
-                    <a class="page-link" href="#" tabindex="-1">
-                        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">اخرین</a>
-                </li>
             </ul>
         </nav>
     </div>
@@ -221,7 +184,6 @@
             setPageination(content);
         }
         function setPageination(data) {
-            debugger;
             $('#pageination').children().remove();
             if (data.totalCount / data.pageSize < 2)
                 return;
@@ -271,7 +233,6 @@
             $('#loader').css('display', 'none');
         }
         function loadlist(e) {
-            debugger;
             if ($(e).closest('li').hasClass('disabled'))
                 return;
             var start = ($(e).attr('data-value') -1) * 16;

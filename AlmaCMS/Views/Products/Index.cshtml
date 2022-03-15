@@ -3,235 +3,91 @@
 @using AlmaCMS.Helpers
 @model IPagedList<AlmaCMS.ViewModels.VMProducts>
 
-    @{
+@{
 
 
-        var GroupInfo = ViewBag.GroupInfo as AlmaCMS.Models.ProductsGroup;
-        Layout = "~/Views/Shared/_LayoutSite.cshtml";
-        ViewBag.Title = @GroupInfo.Keywords;
-    }
+    var GroupInfo = ViewBag.GroupInfo as AlmaCMS.Models.ProductsGroup;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    ViewBag.Title = @GroupInfo.Keywords;
+}
 
-    @section HeaderSection
+@section HeaderSection
 {
-        @*<meta name="description" content=" @GroupInfo.Keywords"
+    @*<meta name="description" content=" @GroupInfo.Keywords"
         <meta property="og:description" content=" @GroupInfo.Keywords" />*@
 
 
-        <meta name="description" content="دارت کالا بزرگترین فروشگاه اینترنتی لوازم یدکی خودرو برای انواع خودروهای داخلی و خارجی،ارسال کلیه قطعات خودرو به صورت عمده و تک در 24 ساعت به سراسر ایران
+    <meta name="description" content="دارت کالا بزرگترین فروشگاه اینترنتی لوازم یدکی خودرو برای انواع خودروهای داخلی و خارجی،ارسال کلیه قطعات خودرو به صورت عمده و تک در 24 ساعت به سراسر ایران
             (لوازم یدکی اورجینال و با کیفیت با مناسب ترین قیمت) " />
-                   <link rel="canonical" href="https://dartkala.com/Products/@GroupInfo.id/@GroupInfo.Title" />
+    <link rel="canonical" href="https://dartkala.com/Products/@GroupInfo.id/@GroupInfo.Title" />
+    <link href="~/Content/Site/css/Product.css" rel="stylesheet" />
+
+
+}
 
 
 
-    }
+<link href="/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+<link href="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Areas/Manage/Content/css/bootstrap.min.css" rel="stylesheet">
 
 
 
-    <link href="/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
-    <link href="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
-    <link href="~/Areas/Manage/Content/css/bootstrap.min.css" rel="stylesheet">
+<div class="main-page-wrapper">
+
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="container col-md-12 ">
+        <div class="row content-layout-wrapper align-items-start">
 
 
 
-    <div class="main-page-wrapper">
+            <div class="overlaysitecustom"></div>
+            <div class="site-content col-lg-12 col-12 col-md-12" role="main">
 
+                <article id="post-809" class="post-809 page type-page status-publish hentry">
 
-        <!-- MAIN CONTENT AREA -->
-        <div class="container">
-            <div class="row content-layout-wrapper align-items-start">
+                    <div class="entry-content">
+                        <div class="vc_row wpb_row vc_row-fluid">
+                            <div class="wpb_column vc_column_container vc_col-sm-12">
+                                <div class="vc_column-inner">
+                                    <div class="wpb_wrapper">
+                                        <div id="wd-5ea71900c04f2" class="title-wrapper  woodmart-title-color-primary woodmart-title-style-bordered woodmart-title-width-100 text-center woodmart-title-size-default vc_custom_1474541679842">
+                                            <div class="title-subtitle  font-default subtitle-style-default woodmart-font-weight-"><br />دارت کالا</div>
 
-
-
-                <div class="overlaysitecustom"></div>
-                <div class="site-content col-lg-12 col-12 col-md-12" role="main">
-
-                    <article id="post-809" class="post-809 page type-page status-publish hentry">
-
-                        <div class="entry-content">
-                            <div class="vc_row wpb_row vc_row-fluid">
-                                <div class="wpb_column vc_column_container vc_col-sm-12">
-                                    <div class="vc_column-inner">
-                                        <div class="wpb_wrapper">
-                                            <div id="wd-5ea71900c04f2" class="title-wrapper  woodmart-title-color-primary woodmart-title-style-bordered woodmart-title-width-100 text-center woodmart-title-size-default vc_custom_1474541679842">
-                                                <div class="title-subtitle  font-default subtitle-style-default woodmart-font-weight-"><br />دارت کالا</div>
-
-                                                <div class="liner-continer">
-                                                    <span class="left-line"></span>
-                                                    <h4 class="woodmart-title-container title  woodmart-font-weight-"><strong>آخرین محصولات</strong></h4>								<span class="right-line"></span>
-                                                </div>
-                                                <h1 class="woodmart-title-container title  woodmart-font-weight-">
-                                                    <div class="title-after_title">@GroupInfo.Keywords</div>
-                                                </h1>
-
+                                            <div class="liner-continer">
+                                                <span class="left-line"></span>
+                                                <h4 class="woodmart-title-container title  woodmart-font-weight-"><strong>آخرین محصولات</strong></h4>								<span class="right-line"></span>
                                             </div>
+                                            <h1 class="woodmart-title-container title  woodmart-font-weight-">
+                                                <div class="title-after_title">@GroupInfo.Keywords</div>
+                                            </h1>
 
-                                            <div class="woocommerce columns-3 ">
-                                                <div class="products elements-grid align-items-start woodmart-products-holder  woodmart-spacing-0 pagination-pagination row grid-columns-4" data-source="main_loop" data-min_price="" data-max_price="">
-
-
-                                                    @{ int i = (ViewBag.pageNumber - 1) * 10; }
-                                                    @foreach (var item in Model)
-                                                    {
-                                                        i++;
-
-
-                                                        <div class="product-grid-item wd-with-labels product product-no-swatches woodmart-hover-base  col-md-3 col-sm-4 col-12 last  type-product post-3664 status-publish last instock product_cat-78 has-post-thumbnail sale shipping-taxable purchasable product-type-simple" data-loop="8" data-id="3664">
-
-
-                                                            <div class="product-wrapper">
-                                                                <div class="content-product-imagin"></div>
-                                                                <div style="    background-color: white;
-    padding-top: 33px;" class="product-element-top">
-
-                                                                    <!--<div class="product-labels labels-rounded"><span class="onsale product-label">@item.Keywords</span></div>-->
-
-                                                                    <a href="/products/details/@item.id/@item.Title.toSlugify()">
-                                                                        <img class="w-100" src="@item.Image" alt="@item.Title">
-                                                                    </a>
-
-                                                                    <div class="col-md-12 card-title productCard-title" style="height:60px">
-
-
-                                                                        <a href="/products/details/@item.id/@item.Title.toSlugify()">@item.Title</a>
-
-                                                                    </div>
-
-                                                                    <p runat="server" Visible="true">
-
-
-
-
-
-
-                                                                        <a href="/cart/addtocart/@item.id" class="btn card-cart" rel="nofollow">افزودن به سبد</a>
-
-
-
-
-
-                                                                    </p>
-
-                                                                    <div style="    padding-bottom: 17px;
-    padding-top: 7px;" class="product-rating-price">
-                                                                        <div class="wrapp-product-price">
-
-                                                                            <span class="price">
-                                                                                <del>
-                                                                                    <span class="woocommerce-Price-amount amount">
-                                                                                        <span class="discount-text">@item.Price ریال</span>
-                                                                                    </span>
-                                                                                </del>
-                                                                                <ins>
-                                                                                    <span class="woocommerce-Price-amount amount">
-
-                                                                                        &nbsp;<span class="woocommerce-Price-currencySymbol"></span>
-                                                                                    </span>
-                                                                                </ins>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="wrapp-swatches"></div>
-
-                                                                    <div style="    background-color: white;
-    padding: 0px 25px 10px 30px;
-    border-top: 1px solid #f3f3f3;" class="product-information">
-
-
-
-
-                                                                        <ul>
-                                                                            <li></li>
-                                                                            <li></li>
-
-
-
-                                                                            <li>
-                                                                                <div class="woodmart-add-btn wd-action-btn wd-add-cart-btn wd-style-icon">
-                                                                                    <a href="http://dartkala.com/cart" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart add-to-cart-loop"
-                                                                                       data-product_sku="" rel="nofollow" title="مشاهده سبد خرید"><span>مشاهده سبد خرید</span></a>
-                                                                                </div>
-                                                                            </li>
-
-                                                                            <li>
-                                                                                <div class="wrap-quickview-button">
-                                                                                    <div class="quick-view wd-action-btn wd-quick-view-btn wd-style-icon">
-                                                                                        <a href="/products/details/@item.id/@item.Title.toSlugify()" class="open-quick-view quick-view-button" data-id="3639">اطلاعات بیشتر </a>
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-
-
-
-
-
-
-
-
-                                                                    </div>
-                                                                </div>
-                                                                <style>
-                                                                    .woodmart-highlighted-products .woodmart-hover-base.product-in-carousel {
-                                                                        border-radius: 20px;
-                                                                    }
-
-                                                                    .product-grid-item .product-image-link img, .product-grid-item .hover-img img {
-                                                                        width: 68%;
-                                                                        padding-top: 30px;
-                                                                        padding-bottom: 92px;
-                                                                    }
-
-                                                                    .product-information ul li {
-                                                                        float: left;
-                                                                    }
-
-                                                                    .woodmart-hover-base .wd-bottom-actions .wd-action-btn.wd-style-icon > a, .woodmart-hover-base .wd-compare-btn > a {
-                                                                        height: 50px;
-                                                                    }
-
-                                                                    .woodmart-highlighted-products .elements-grid, .woodmart-highlighted-products.woodmart-carousel-container {
-                                                                        border: 0px !important;
-                                                                    }
-
-                                                                    .woodmart-highlighted-products .elements-grid, .woodmart-highlighted-products.woodmart-carousel-container {
-                                                                        padding-top: 0px;
-                                                                    }
-
-                                                                    .title-wrapper {
-                                                                        margin-bottom: 11px;
-                                                                    }
-
-                                                                    .woodmart-highlighted-products:not(.with-title) .owl-nav > div[class*="prev"] {
-                                                                        right: 5px;
-                                                                        width: 25px;
-                                                                        font-size: 14px;
-                                                                        height: 25px;
-                                                                        border-radius: 0;
-                                                                        background-color: transparent;
-                                                                        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-                                                                    }
-
-                                                                    .woodmart-highlighted-products:not(.with-title) .owl-nav > div[class*="next"] {
-                                                                        left: 5px;
-                                                                        width: 25px;
-                                                                        font-size: 14px;
-                                                                        height: 25px;
-                                                                        border-radius: 0;
-                                                                        background-color: transparent;
-                                                                        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-                                                                    }
-
-                                                                    .woodmart-highlighted-products .owl-nav > div:after, .woodmart-highlighted-products .wrap-loading-arrow > div:after {
-                                                                        font-size: 17px;
-                                                                    }
-                                                                </style>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    }
+                                        </div>
+                                        <input type="hidden" id="groupid" value="@ViewBag.GroupId" />
+                                        <div id="listContainer" class="row col-md-12">
+                                            <div class="card col-md-3 card-container">
+                                                <a href="/products/details/7141/مجموعه-منیفولد-هوا-بنزینی-موتور-رانا-TU5–-کروز----">
+                                                    <img class="card-img-top" src="/Uploads/Web/products/76392بوستر ترمز پراید dart kala.jpg" alt="Card image cap">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a href="/products/details/7141/مجموعه-منیفولد-هوا-بنزینی-موتور-رانا-TU5–-کروز----">
+                                                        <h5 class="card-title">کیت منبع روغن بوستر ترمز سمند AM– کروز    </h5>
+                                                    </a>
+                                                    <a href="/cart/addtocart/item.id" class="btn card-cart" rel="nofollow">افزودن به سبد</a>
+                                                    <div>  <span class="discount-text">1 ریال</span></div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="card-footer-item">
+                                                        <a href="http://dartkala.com/cart" data-quantity="1" data-product_sku="" rel="nofollow" title="مشاهده سبد خرید">
+                                                            <i class="fa fa-shopping-cart card-icons"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-footer-item">
+                                                        <a href="/products/details/7141/مجموعه-منیفولد-هوا-بنزینی-موتور-رانا-TU5–-کروز----" data-id="3639" title="اطلاعات بیشتر">
+                                                            <i class="fa fa-search card-icons"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,75 +95,188 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </article><!-- #post -->
+            </div><!-- .site-content -->
+        </div><!-- .main-page-wrapper -->
+    </div> <!-- end row -->
+</div>
 
+<div class="row">
+    <div class="col-xs-12" style="text-align:center">
 
-                    </article><!-- #post -->
+        <nav aria-label="...">
+            <ul id="pageination" class="pagination">
 
-
-
-                </div><!-- .site-content -->
-
-
-
-            </div><!-- .main-page-wrapper -->
-        </div> <!-- end row -->
+                <li class="page-item"><a onclick="loadlist(this)" class="page-link" href="#">1</a></li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item ">
+                    <a class="page-link" href="#" tabindex="-1">
+                        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">اخرین</a>
+                </li>
+            </ul>
+        </nav>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-xs-12">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
+<div class="overlaysitecustom"></div>
+<div class="site-content col-lg-12 col-12 col-md-12" role="main">
 
-                    @Html.PagedListPager(Model, page => Url.Action("Index",
-          new { searchString = ViewBag.SearchString, page }))
+    <article id="post-809" class="post-809 page type-page status-publish hentry">
+
+        <div class="entry-content">
+            <div class="vc_row wpb_row vc_row-fluid">
+                <div class="wpb_column vc_column_container vc_col-sm-12">
+                    <div class="vc_column-inner">
+                        <div class="wpb_wrapper">
+                            <div id="wd-5ea71900c04f2" class="title-wrapper  woodmart-title-color-primary woodmart-title-style-bordered woodmart-title-width-100 text-center woodmart-title-size-default vc_custom_1474541679842">
+                                <div class="title-subtitle  font-default subtitle-style-default woodmart-font-weight-"><br />دارت کالا</div>
+
+                                <div class="liner-continer">
+                                    <span class="left-line"></span>
+                                    <h4 class="woodmart-title-container title  woodmart-font-weight-"><strong>@GroupInfo.Keywords</strong></h4>								<span class="right-line"></span>
+                                </div>
+                                <h2 class="woodmart-title-container title  woodmart-font-weight-">
+                                    <div class="title-after_title">@Html.Raw(GroupInfo.Description)</div>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
-    </div>
-
-
-    <div class="overlaysitecustom"></div>
-    <div class="site-content col-lg-12 col-12 col-md-12" role="main">
-
-        <article id="post-809" class="post-809 page type-page status-publish hentry">
-
-            <div class="entry-content">
-                <div class="vc_row wpb_row vc_row-fluid">
-                    <div class="wpb_column vc_column_container vc_col-sm-12">
-                        <div class="vc_column-inner">
-                            <div class="wpb_wrapper">
-                                <div id="wd-5ea71900c04f2" class="title-wrapper  woodmart-title-color-primary woodmart-title-style-bordered woodmart-title-width-100 text-center woodmart-title-size-default vc_custom_1474541679842">
-                                    <div class="title-subtitle  font-default subtitle-style-default woodmart-font-weight-"><br />دارت کالا</div>
-
-                                    <div class="liner-continer">
-                                        <span class="left-line"></span>
-                                        <h4 class="woodmart-title-container title  woodmart-font-weight-"><strong>@GroupInfo.Keywords</strong></h4>								<span class="right-line"></span>
-                                    </div>
-                                    <h2 class="woodmart-title-container title  woodmart-font-weight-">
-                                        <div class="title-after_title">@GroupInfo.Description</div>
-                                    </h2>
-        </article>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+    </article>
+</div>
 
 
 
-    @section Scripts{
-        <script src="/Areas/Manage/Content/plugins/datatables/js/jquery.dataTables.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/js/jszip.min.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/js/pdfmake.min.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/js/vfs_fonts.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
-        <script src="/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>
-    }
+@section Scripts{
+    <script src="/Areas/Manage/Content/plugins/datatables/js/jquery.dataTables.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/js/jszip.min.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/js/pdfmake.min.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/js/vfs_fonts.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
+    <script src="/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>
+    <script>
+        $(document).ready(function () {
+            var groupid = '@ViewBag.GroupId';
+            getData(0, groupid);
+
+        })
+        function getData(start, groupid) {
+            $('#loader').css('display', '')
+            $.ajax({
+                url: '/Products/GetProducts',
+                type: "post",
+                data: { start: start, pagesize:16, groupid: groupid },
+                success: function (result) {
+                    setContent(result);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+        function setContent(content) {
+            $('#listContainer').children().remove();
+            var data = content.data;
+            $.each(data, function (index, value) {
+                var item = ` <div class="card col-md-3 card-container">
+                                                <a href="/products/details/${value.id}/${value.title}">
+                                                    <img class="card-img-top" src="${value.image}" alt="${value.title}">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a href="/products/details/${value.id}/${value.title}">
+                                                        <h5 class="card-title">${value.normalTitle}</h5>
+                                                    </a>
+                                                    <a href="/cart/addtocart/${value.id}" class="btn card-cart" rel="nofollow">افزودن به سبد</a>
+                                                    <div>  <span class="discount-text">1 ریال</span></div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="card-footer-item">
+                                                        <a href="/cart" rel="nofollow" title="مشاهده سبد خرید">
+                                                            <i class="fa fa-shopping-cart card-icons"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-footer-item">
+                                                        <a href="/products/details/${value.id}/${value.title}" title="اطلاعات بیشتر">
+                                                            <i class="fa fa-search card-icons"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div> `;
+                $('#listContainer').append(item);
+            });
+            setPageination(content);
+        }
+        function setPageination(data) {
+            debugger;
+            $('#pageination').children().remove();
+            if (data.totalCount / data.pageSize < 2)
+                return;
+
+            var currentpage = 1;
+            var firstpagedisabled = 'disabled'
+            var lastpagedisabled = 'disabled'
+            if (data.start > data.pageSize) {
+                currentpage = parseInt(data.start / data.pageSize) +1;
+                firstpagedisabled = ''
+            }
+
+            var lastpage = parseInt(data.totalCount / data.pageSize)
+            if (currentpage != lastpage) {
+                lastpagedisabled = '';
+            }
+            var item = `  <li class="page-item ${firstpagedisabled}">
+                    <a class="page-link" onclick="loadlist(this)" data-value="1" tabindex="-1">نخستین</a>
+                </li>
+                <li class="page-item  ${firstpagedisabled}">
+                    <a class="page-link" onclick="loadlist(this)" data-value="${currentpage-1}" tabindex="-1">
+                        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+                    </a>
+                </li>`
+            var pagestart = currentpage - 5 >= 1 ? currentpage - 5 : 1;
+            var pageend = currentpage + 5 >= lastpage ? lastpage : currentpage + 5;
+            for (var i = pagestart; i <= pageend; i++) {
+                var currentpageActive = '';
+                if (i == currentpage)
+                    currentpageActive = 'active';
+
+                item += `<li class="page-item ${currentpageActive}">
+                            <a class="page-link"  onclick="loadlist(this)" data-value="${i}" >${i}</a></li>`
+            }
+            item += `  <li class="page-item ${lastpagedisabled}">
+                    <a class="page-link" onclick="loadlist(this)" data-value="${currentpage+1}" tabindex="-1">
+                        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item  ${lastpagedisabled}">
+                    <a class="page-link" onclick="loadlist(this)" data-value="${lastpage}" tabindex="-1">  آخرین           
+                    </a>
+                </li>`;
+
+            $('#pageination').append(item);
+            window.scrollTo(0, 200);
+            $('#loader').css('display', 'none');
+        }
+        function loadlist(e) {
+            debugger;
+            if ($(e).closest('li').hasClass('disabled'))
+                return;
+            var start = ($(e).attr('data-value') -1) * 16;
+            var groupid = $('#groupid').val();
+            getData(start, groupid);
+        }
+    </script>
+}

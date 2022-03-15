@@ -277,6 +277,8 @@
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="CustomAttr\CodeMelliAttribute.cs" />
+    <Compile Include="DTOS\ProductListItemDTO.cs" />
+    <Compile Include="DTOS\ProductsListDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1957,6 +1959,7 @@
     <Content Include="Content\profile\js\tinymce.min.js" />
     <Content Include="Content\profile\plugins\placeholder\css\jquery.flying-labels.css" />
     <Content Include="Content\profile\plugins\placeholder\js\jquery.flying-labels.js" />
+    <Content Include="Content\Site\css\Product.css" />
     <Content Include="Content\Site\images\logo.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -4240,7 +4243,6 @@
     <Folder Include="Content\Plugins\rating\rating\js\dist\" />
     <Folder Include="Content\Plugins\rating\rating\js\lib\" />
     <Folder Include="Content\Plugins\rating\rating\js\src\" />
-    <Folder Include="Content\Site\css\" />
     <Folder Include="Content\Site\fonts\" />
     <Folder Include="Content\Site\js\" />
     <Folder Include="Views\AlbumeRepository\" />

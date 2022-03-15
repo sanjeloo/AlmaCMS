@@ -9,12 +9,13 @@ using AlmaCMS.Helpers;
 using AlmaCMS.Models;
 using PagedList;
 using PagedList.Mvc;
+using AlmaCMS.DTOS;
 
 namespace AlmaCMS.Controllers
 {
     public class ProductsController : Controller
     {
-              ProductsRepository repProducts;
+        ProductsRepository repProducts;
         ProductsGroupRepository repProductsGroup;
         DB_AlmaCmsEntities db;
 
@@ -22,7 +23,7 @@ namespace AlmaCMS.Controllers
         ProductReviewRepository repPReview;
         public ProductsController()
         {
-        
+
             db = new DB_AlmaCmsEntities();
             repProducts = new ProductsRepository(db);
             repProductsGroup = new ProductsGroupRepository(db);
@@ -30,16 +31,16 @@ namespace AlmaCMS.Controllers
             repPReview = new ProductReviewRepository(db);
         }
         // GET: Productss
-        public ActionResult Index(int id,string Title, int? page)
+        public ActionResult Index(int id, string Title, int? page)
         {
             var vMProducts = new List<VMProductGroup>();
-            var ProductsList = repProducts.getByGroupID(id).ToList();
-            List<VMProducts> vmList = new List<VMProducts>();
-            foreach (var item in ProductsList)
-            {
-                vmList.Add(item.toVMProduct());
-            }
-           
+            //var ProductsList = repProducts.getByGroupID(id).ToList();
+            //List<VMProducts> vmList = new List<VMProducts>();
+            //foreach (var item in ProductsList)
+            //{
+            //    vmList.Add(item.toVMProduct());
+            //}
+
 
             var currentGroup = repProductsGroup.FindById(id);
 
@@ -47,14 +48,36 @@ namespace AlmaCMS.Controllers
             ViewBag.Title = currentGroup.Title;
             ViewBag.Keywords = currentGroup.Keywords;
             ViewBag.Description = currentGroup.Title + currentGroup.Keywords;
-
+            ViewBag.GroupId = currentGroup.id;
             ViewBag.GroupInfo = currentGroup;
 
             int pageSize = 16;
             //=============added by amin =================//
             int pageNumber = (page ?? 1);
             ViewBag.pageNumber = pageNumber;
-            return View(vmList.ToPagedList(pageNumber, pageSize));
+            //return View(vmList.ToPagedList(pageNumber, pageSize));
+            return View();
+        }
+        [HttpPost]
+        public ActionResult GetProducts(int start, int pagesize, int groupid)
+        {
+            List<ProductListItemDTO> data = repProducts.Where(p => p.GroupID == groupid).OrderByDescending(p => p.id).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
+            {
+                id = s.id,
+                image = s.Image,
+                title = s.Title.toSlugify(),
+                normalTitle = s.Title
+            }).ToList();
+            start+=1;
+            int totalcount = repProducts.Where(p => p.GroupID == groupid).Count();
+            var result = new ProductsListDTO()
+            {
+                data = data,
+                pageSize = pagesize,
+                start = start,
+                totalCount =  totalcount
+            };
+            return Json(result);
         }
         [HttpPost]
         public ActionResult GetProductGroup()

@@ -1,0 +1,42 @@
+.card-footer {
+    text-align: center;
+    border-top: 1px solid;
+    margin-top: 1vw;
+    padding: 0.5vw;
+}
+
+.card-footer-item {
+    display: inline;
+}
+
+.card-container {
+    background-color: white;
+    text-align: center;
+    margin-top: 1vw;
+    border: 2px solid #f6f6f6;
+}
+
+    .card-container:hover {
+        transform: scale(1.02);
+        z-index: 100 !important;
+        transition: 0.43s;
+        box-shadow: 0px 3px 18px 3px rgb(23 42 76 / 50%);
+    }
+
+.card-icons {
+    font-size: 1.3vw !important;
+    color: #918b8b;
+    margin-right: 1vw;
+    margin-bottom: 0.5vw;
+    margin-top: 0.5vw;
+}
+
+    .card-icons:hover {
+        color: #f5931dfc !important;
+        transform: scale(1.5);
+        transition: 0.3s;
+    }
+
+a.page-link{
+    cursor : pointer !important;
+}

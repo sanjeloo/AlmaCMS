@@ -66,7 +66,7 @@
                                         </div>
                                         <input type="hidden" id="groupid" value="@ViewBag.GroupId" />
                                         <div id="listContainer" class="row col-md-12">
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -194,11 +194,11 @@
             var firstpagedisabled = 'disabled'
             var lastpagedisabled = 'disabled'
             if (data.start > data.pageSize) {
-                currentpage = parseInt(data.start / data.pageSize) +1;
+                currentpage = Math.ceil( data.start / data.pageSize );
                 firstpagedisabled = ''
             }
 
-            var lastpage = parseInt(data.totalCount / data.pageSize)
+            var lastpage = Math.ceil(data.totalCount / data.pageSize)
             if (currentpage != lastpage) {
                 lastpagedisabled = '';
             }
@@ -210,6 +210,12 @@
                         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
                     </a>
                 </li>`
+            if (currentpage - 5 > 1)
+                item += `<li class="page-item ">
+                    <a class="page-link" onclick="loadlist(this)" data-value="${currentpage - 5}">
+                       ...
+                    </a>
+                </li>`;
             var pagestart = currentpage - 5 >= 1 ? currentpage - 5 : 1;
             var pageend = currentpage + 5 >= lastpage ? lastpage : currentpage + 5;
             for (var i = pagestart; i <= pageend; i++) {
@@ -220,13 +226,19 @@
                 item += `<li class="page-item ${currentpageActive}">
                             <a class="page-link"  onclick="loadlist(this)" data-value="${i}" >${i}</a></li>`
             }
-            item += `  <li class="page-item ${lastpagedisabled}">
+            if (currentpage + 5 < lastpage)
+                item += `<li class="page-item ">
+                    <a class="page-link" onclick="loadlist(this)" data-value="${currentpage + 5}">
+                       ...
+                    </a>
+                </li>`;
+            item += ` <li class="page-item ${lastpagedisabled}">
                     <a class="page-link" onclick="loadlist(this)" data-value="${currentpage+1}" tabindex="-1">
                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li class="page-item  ${lastpagedisabled}">
-                    <a class="page-link" onclick="loadlist(this)" data-value="${lastpage}" tabindex="-1">  آخرین           
+                    <a class="page-link" onclick="loadlist(this)" data-value="${lastpage}" tabindex="-1">  آخرین
                     </a>
                 </li>`;
 

@@ -33,17 +33,7 @@ namespace AlmaCMS.Controllers
         // GET: Productss
         public ActionResult Index(int id, string Title, int? page)
         {
-            var vMProducts = new List<VMProductGroup>();
-            //var ProductsList = repProducts.getByGroupID(id).ToList();
-            //List<VMProducts> vmList = new List<VMProducts>();
-            //foreach (var item in ProductsList)
-            //{
-            //    vmList.Add(item.toVMProduct());
-            //}
-
-
             var currentGroup = repProductsGroup.FindById(id);
-
 
             ViewBag.Title = currentGroup.Title;
             ViewBag.Keywords = currentGroup.Keywords;
@@ -51,11 +41,8 @@ namespace AlmaCMS.Controllers
             ViewBag.GroupId = currentGroup.id;
             ViewBag.GroupInfo = currentGroup;
 
-            int pageSize = 16;
-            //=============added by amin =================//
             int pageNumber = (page ?? 1);
             ViewBag.pageNumber = pageNumber;
-            //return View(vmList.ToPagedList(pageNumber, pageSize));
             return View();
         }
         [HttpPost]

@@ -7,6 +7,7 @@ using AlmaCMS.Models;
 using AlmaCMS.Helpers;
 using AlmaCMS.ViewModels;
 using PagedList;
+using AlmaCMS.DTOS;
 
 namespace AlmaCMS.Controllers
 {
@@ -36,7 +37,7 @@ namespace AlmaCMS.Controllers
             repCustomProduct = new CustomeProductsRepository(db);
         }
 
-        public ActionResult Index(string q , int? page)
+        public ActionResult Index(string q)
         {
 
             if (string.IsNullOrEmpty(q))
@@ -44,48 +45,58 @@ namespace AlmaCMS.Controllers
                 return RedirectToAction("index", "home");
             }
             ViewBag.SearchString = q;
-            int pageNumber = (page ?? 1);
-            //var PagesList = repPages.Where(c => (c.Title!=null && c.Title.Contains(q))||(c.Keywords!=null && c.Keywords.Contains(q))).Where(c => c.PegeID != 0).ToList();
-            //ViewBag.PagesResult = PagesList;
-
-
-            //var ArticleList = repArticle.Where(c =>( c.Title!=null && c.Title.Contains(q)) || ( c.Keyword !=null &&c.Keyword.Contains(q))).ToList();
-            //ViewBag.ArticlesResult = ArticleList;
-
-            //var NewsList = repNew.Where(c => c.Active==true && (c.Title!=null &&c.Title.Contains(q)) ||(c.Keyword!=null && c.Keyword.Contains(q))).ToList();
-            //ViewBag.NewsList = NewsList;
-
-            //var CustomerProductList = repCustomProduct.Where(c => (c.Title!=null && c.Title.Contains(q)) || (c.Keywords!=null && c.Keywords.Contains(q))).ToList();
-            //ViewBag.CustomerProductList = CustomerProductList;
-            //var ProjectsList = repProject.Where(c =>( c.Title!=null && c.Title.Contains(q) )||(c.Keywords!=null && c.Keywords.Contains(q))).ToList();
-            //ViewBag.ProjectsList = ProjectsList;
-
-            var ProductsList = repProducts.Where(c => (c.Title!=null && c.Title.Contains(q)) || (c.Keywords!=null && c.Keywords.Contains(q))).OrderByDescending(p=>p.id).ToList();
-            List<VMProducts> vmList = new List<VMProducts>();
-            foreach (var item in ProductsList)
-            {
-                vmList.Add(item.toVMProduct());
-            }
-            int pageSize = 16;
-            ViewBag.pageNumber = pageNumber;
-            return View(vmList.ToPagedList(pageNumber, pageSize));
+            return View();
         }
         [HttpPost]
         public ActionResult QuickSearch(string text)
         {
             if (string.IsNullOrEmpty(text))
                 return Json("");
-            var ProductsList = repProducts.Where(c => (c.Title!=null && c.Title.Contains(text)) || (c.Keywords!=null && c.Keywords.Contains(text))).Take(8).ToList();
-            var GroupList = repProductsGroup.Where(c => c.Title.Contains(text)).Take(2).ToList();
+            var searchlist = text.Split(' ').ToList();
+            var ProductsList = repProducts.Where(c => (c.Title!=null && c.Title.Contains(text)))
+                .Take(8).ToList();
+            if (ProductsList.Count<8)
+                ProductsList.AddRange(repProducts.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i)))
+                .Take(8 - ProductsList.Count).ToList());
+           
+            var GroupList = repProductsGroup.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Take(2).ToList();
             var result = new List<dynamic>();
             foreach (var product in ProductsList)
             {
-                result.Add(new { Title = product.Title, Id = product.id, TitleUrl= product.Title.toSlugify(), IsGroup = false });
+                result.Add(new { Title = product.Title, Id = product.id, TitleUrl = product.Title.toSlugify(), IsGroup = false });
             }
             foreach (var group in GroupList)
             {
-                result.Add(new { Title = group.Title, Id = group.id, TitleUrl ="", IsGroup = true });
+                result.Add(new { Title = group.Title, Id = group.id, TitleUrl = "", IsGroup = true });
             }
+            return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult GetMoreResult(string q , int start, int pagesize)
+        {
+            if (string.IsNullOrEmpty(q))
+                return Json("");
+
+            var searchlist = q.Split(' ').ToList();
+          
+
+            List<ProductListItemDTO> data = repProducts.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).OrderByDescending(p => p.id).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
+            {
+                id = s.id,
+                image = s.Image,
+                title = s.Title.toSlugify(),
+                normalTitle = s.Title
+            }).ToList();
+            start+=1;
+            int totalcount = repProducts.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Count();
+            var result = new ProductsListDTO()
+            {
+                data = data,
+                pageSize = pagesize,
+                start = start,
+                totalCount =  totalcount
+            };
             return Json(result);
         }
     }

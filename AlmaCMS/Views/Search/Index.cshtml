@@ -12,6 +12,7 @@
 <link href="/Areas/Manage/Content/plugins/datatables/css/jquery.dataTables.css" rel="stylesheet" />
 <link href="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
 <link href="~/Areas/Manage/Content/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Content/Site/css/Product.css" rel="stylesheet" />
 
 
 
@@ -33,137 +34,15 @@
                                             <div class="title-subtitle  font-default subtitle-style-default woodmart-font-weight-"><br />دارت کالا</div>
                                             <div class="liner-continer">
                                                 <span class="left-line"></span>
-                                                <h4 class="woodmart-title-container title  woodmart-font-weight-"><strong>آخرین محصولات</strong></h4>								<span class="right-line"></span>
+                                                <h4 class="woodmart-title-container title  woodmart-font-weight-"><strong>@ViewBag.SearchString </strong></h4>								<span class="right-line"></span>
                                             </div>
 
-                                          @*  <div class="title-after_title">@GroupInfo.Title</div>*@
+                                            @*  <div class="title-after_title">@GroupInfo.Title</div>*@
 
                                         </div>
+                                        <input type="hidden" id="searchString" value="@ViewBag.SearchString" />
+                                        <div id="listContainer" class="row col-md-12">
 
-                                        <div class="woocommerce columns-3 ">
-                                            <div class="products elements-grid align-items-start woodmart-products-holder  woodmart-spacing-0 pagination-pagination row grid-columns-4" data-source="main_loop" data-min_price="" data-max_price="">
-
-                                                @{ int i = (ViewBag.pageNumber - 1) * 10; }
-                                                @foreach (var item in Model)
-                                                {
-                                                    i++;
-
-                                                    <div class="product-grid-item wd-with-labels product product-no-swatches woodmart-hover-base  col-md-3 col-sm-4 col-12 last  type-product post-3664 status-publish last instock product_cat-78 has-post-thumbnail sale shipping-taxable purchasable product-type-simple" data-loop="8" data-id="3664">
-                                                        <div class="product-wrapper">
-                                                            <div class="content-product-imagin"></div>
-                                                            <div style=" background-color: white; padding-top: 33px;" class="product-element-top">
-                                                                <a href="/products/details/@item.id/@item.Title.toSlugify()">
-                                                                    <img class="w-100" src="@item.Image" alt="@item.Title">
-                                                                </a>
-                                                                <div class="col-md-12 card-title productCard-title" style="height:60px">
-                                                                    <a href="/products/details/@item.id/@item.Title.toSlugify()">@item.Title</a>
-
-                                                                </div>
-                                                                <p runat="server" Visible="true">
-                                                                    <a href="/cart/addtocart/@item.id" class="btn card-cart">افزودن به سبد</a>
-                                                                </p>
-
-                                                                <div style="padding-bottom: 17px;padding-top: 7px;" class="product-rating-price">
-                                                                    <div class="wrapp-product-price">
-
-                                                                        <span class="price">
-                                                                            <del>
-                                                                                <span class="woocommerce-Price-amount amount">
-                                                                                    <span class="discount-text">@item.Price ریال</span>
-                                                                                </span>
-                                                                            </del>
-                                                                            <ins>
-                                                                                <span class="woocommerce-Price-amount amount">
-
-                                                                                    &nbsp;<span class="woocommerce-Price-currencySymbol"></span>
-                                                                                </span>
-                                                                            </ins>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="wrapp-swatches"></div>
-
-                                                                <div style="background-color: white; padding: 0px 25px 10px 30px; border-top: 1px solid #f3f3f3;" class="product-information">
-                                                                    <ul>
-                                                                        <li></li>
-                                                                        <li></li>
-                                                                        <li>
-                                                                            <div class="woodmart-add-btn wd-action-btn wd-add-cart-btn wd-style-icon">
-                                                                                <a href="http://www.dartkala.com/cart" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart add-to-cart-loop"
-                                                                                   data-product_sku="" rel="nofollow" title="مشاهده سبد خرید"><span>مشاهده سبد خرید</span></a>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="wrap-quickview-button">
-                                                                                <div class="quick-view wd-action-btn wd-quick-view-btn wd-style-icon">
-                                                                                    <a href="/products/details/@item.id/@item.Title.toSlugify()" class="open-quick-view quick-view-button" data-id="3639">اطلاعات بیشتر </a>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <style>
-                                                                .woodmart-highlighted-products .woodmart-hover-base.product-in-carousel {
-                                                                    border-radius: 20px;
-                                                                }
-
-                                                                .product-grid-item .product-image-link img, .product-grid-item .hover-img img {
-                                                                    width: 68%;
-                                                                    padding-top: 30px;
-                                                                    padding-bottom: 92px;
-                                                                }
-
-                                                                .product-information ul li {
-                                                                    float: left;
-                                                                }
-
-                                                                .woodmart-hover-base .wd-bottom-actions .wd-action-btn.wd-style-icon > a, .woodmart-hover-base .wd-compare-btn > a {
-                                                                    height: 50px;
-                                                                }
-
-                                                                .woodmart-highlighted-products .elements-grid, .woodmart-highlighted-products.woodmart-carousel-container {
-                                                                    border: 0px !important;
-                                                                }
-
-                                                                .woodmart-highlighted-products .elements-grid, .woodmart-highlighted-products.woodmart-carousel-container {
-                                                                    padding-top: 0px;
-                                                                }
-
-                                                                .title-wrapper {
-                                                                    margin-bottom: 11px;
-                                                                }
-
-                                                                .woodmart-highlighted-products:not(.with-title) .owl-nav > div[class*="prev"] {
-                                                                    right: 5px;
-                                                                    width: 25px;
-                                                                    font-size: 14px;
-                                                                    height: 25px;
-                                                                    border-radius: 0;
-                                                                    background-color: transparent;
-                                                                    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-                                                                }
-
-                                                                .woodmart-highlighted-products:not(.with-title) .owl-nav > div[class*="next"] {
-                                                                    left: 5px;
-                                                                    width: 25px;
-                                                                    font-size: 14px;
-                                                                    height: 25px;
-                                                                    border-radius: 0;
-                                                                    background-color: transparent;
-                                                                    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-                                                                }
-
-                                                                .woodmart-highlighted-products .owl-nav > div:after, .woodmart-highlighted-products .wrap-loading-arrow > div:after {
-                                                                    font-size: 17px;
-                                                                }
-                                                            </style>
-
-                                                        </div>
-                                                    </div>
-                                                }
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -185,16 +64,12 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12" style="text-align:center">
 
-        <div class="row">
-            <div class="col-lg-12">
-                صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) از @Model.PageCount
-                @Html.PagedListPager(Model, page => Url.Action("Index",
-      new { q = ViewBag.SearchString, page }))
-            </div>
-
-        </div>
+        <nav aria-label="...">
+            <ul id="pageination" class="pagination">
+            </ul>
+        </nav>
     </div>
 </div>
 @section Scripts{
@@ -207,4 +82,65 @@
     <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
     <script src="/Areas/Manage/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
     <script src="/Areas/Manage/Content/plugins/datatables/js/dataTables-script.js"></script>
+    <script src="~/Content/Site/js/Pageination.js"></script>
+    <script>
+        $(document).ready(function () {
+            var SearchString = '@ViewBag.SearchString';
+            getData(0, SearchString);
+
+        })
+        function getData(start, SearchString) {
+            $('#loader').css('display', '')
+            $.ajax({
+                url: '/Search/GetMoreResult',
+                type: "post",
+                data: { q: SearchString, start: start, pagesize:16},
+                success: function (result) {
+                    setContent(result);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+        function setContent(content) {
+            $('#listContainer').children().remove();
+            var data = content.data;
+            $.each(data, function (index, value) {
+                var item = ` <div class="card col-md-3 card-container">
+                                                <a href="/products/details/${value.id}/${value.title}">
+                                                    <img class="card-img-top" src="${value.image}" alt="${value.title}">
+                                                </a>
+                                                <div class="card-body">
+                                                    <a href="/products/details/${value.id}/${value.title}">
+                                                        <h5 class="card-title">${value.normalTitle}</h5>
+                                                    </a>
+                                                    <a href="/cart/addtocart/${value.id}" class="btn card-cart" rel="nofollow">افزودن به سبد</a>
+                                                    <div>  <span class="discount-text">1 ریال</span></div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="card-footer-item">
+                                                        <a href="/cart" rel="nofollow" title="مشاهده سبد خرید">
+                                                            <i class="fa fa-shopping-cart card-icons"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-footer-item">
+                                                        <a href="/products/details/${value.id}/${value.title}" title="اطلاعات بیشتر">
+                                                            <i class="fa fa-search card-icons"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div> `;
+                $('#listContainer').append(item);
+            });
+            setPageination(content);
+        }
+        function loadlist(e) {
+            if ($(e).closest('li').hasClass('disabled'))
+                return;
+            var start = ($(e).attr('data-value') - 1) * 16;
+            var searchString = $('#searchString').val();
+            getData(start, searchString);
+        }
+    </script>
 }

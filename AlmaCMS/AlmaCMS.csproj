@@ -4244,7 +4244,6 @@
     <Folder Include="Content\Plugins\rating\rating\js\lib\" />
     <Folder Include="Content\Plugins\rating\rating\js\src\" />
     <Folder Include="Content\Site\fonts\" />
-    <Folder Include="Content\Site\js\" />
     <Folder Include="Views\AlbumeRepository\" />
     <Folder Include="Views\ManageAdmins\" />
     <Folder Include="Views\UserBah\" />
@@ -4257,6 +4256,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -4277,6 +4277,9 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>AlmaCMS_ir_smsran_SendSMS</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Site\js\Pageination.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

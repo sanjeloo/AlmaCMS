@@ -1,6 +1,6 @@
 ﻿function setPageination(data) {
     $('#pageination').children().remove();
-    if (data.totalCount / data.pageSize < 2) {
+    if (Math.ceil(data.totalCount / data.pageSize) < 2) {
         $('#loader').css('display', 'none');
         return;
     }

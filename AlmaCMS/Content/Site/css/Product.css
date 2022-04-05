@@ -9,6 +9,11 @@
     display: inline;
 }
 
+
+.h3-customfont {
+    font-size: 16px;
+}
+
 .card-container {
     background-color: white;
     text-align: center;

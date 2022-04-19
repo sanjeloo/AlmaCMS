@@ -1,7 +1,7 @@
 ﻿@using AlmaCMS.Helpers
 @{
-    ViewBag.Title = "فروشگاه لوازم یدکی دارت کالا";
-    ViewBag.Descriptions = "فروشگاه لوازم یدکی دارت کالا";
+    ViewBag.Title = "دارت کالا فروشگاه آنلاین لوازم یدکی و قطعات خودرو انواع ماشین ";
+    //ViewBag.Descriptions = "فروشگاه لوازم یدکی دارت کالا";
     ViewBag.Keywords = "فروشگاه لوازم یدکی دارت کالا";
 
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
@@ -18,6 +18,17 @@
     var section4 = HomePageInfo.Where(c => c.id == 31).FirstOrDefault();
 }
 
+@section HeaderSection
+{
+
+
+
+    <meta name="description" content="دارت کالا بزرگترین فروشگاه اینترنتی لوازم یدکی خودرو برای انواع خودروهای داخلی و خارجی،ارسال کلیه قطعات خودرو به صورت عمده و تک در 24 ساعت به سراسر ایران
+            (لوازم یدکی اورجینال و با کیفیت با مناسب ترین قیمت) " />
+
+
+}
+
 
 <div class="vc_row wpb_row vc_row-fluid vc_rtl-columns-reverse vc_row-o-content-top vc_row-flex">
     <div class="wpb_column vc_column_container vc_col-sm-4 vc_hidden-sm vc_hidden-xs">
@@ -27,7 +38,7 @@
 
                     <figure class="wpb_wrapper vc_figure">
                         <div class="vc_single_image-wrapper   vc_box_border_grey">
-                            
+
 
 
                             <a href='@section4.LinkUrl' target='_self' title="@section4.Title">
@@ -35,7 +46,7 @@
 
                                 <img width="502" height="455" src="@section4.Image" alt="@section4.Title" class="vc_single_image-img attachment-full" sizes="(max-width: 502px) 100vw, 502px" />
                             </a>
-                           
+
 
                         </div>
                     </figure>
@@ -141,37 +152,37 @@
                                                         });
                     </script>
                     <script>
-                                                        var htmlDivCss = unescape("%23woodmart-black-friday-demo_wrapper%20%7B%0A%09height%3A%20465px%3B%0A%7D%0A%0A%40media%20%28max-width%3A%201024px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D%0A%20%20%20%20%20%20%0A%40media%20%28max-width%3A%20778px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D%0A%20%20%20%20%20%20%20%20%0A%40media%20%28max-width%3A%20480px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D");
-                                                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
-                                                        if (htmlDiv) {
-                                                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
-                                                        } else {
-                                                            var htmlDiv = document.createElement('div');
-                                                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
-                                                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
-                                                        }
+                        var htmlDivCss = unescape("%23woodmart-black-friday-demo_wrapper%20%7B%0A%09height%3A%20465px%3B%0A%7D%0A%0A%40media%20%28max-width%3A%201024px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D%0A%20%20%20%20%20%20%0A%40media%20%28max-width%3A%20778px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D%0A%20%20%20%20%20%20%20%20%0A%40media%20%28max-width%3A%20480px%29%20%7B%0A%20%20%20%20%0A%23woodmart-black-friday-demo_wrapper%20%7B%0A%20%20height%3A465px%3B%0A%7D%0A%7D");
+                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+                        if (htmlDiv) {
+                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+                        } else {
+                            var htmlDiv = document.createElement('div');
+                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+                        }
                     </script>
                     <script>
-                                                        var htmlDivCss = unescape("%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%20%7B%0A%09cursor%3Apointer%3B%0A%09background%3Argba%280%2C0%2C0%2C0.5%29%3B%0A%09width%3A40px%3B%0A%09height%3A40px%3B%0A%09position%3Aabsolute%3B%0A%09display%3Ablock%3B%0A%09z-index%3A1000%3B%0A%20%20%20%20border-radius%3A50%25%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%3Ahover%20%7B%0A%09background%3A%23000000%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%3Abefore%20%7B%0A%09font-family%3A%20%27revicons%27%3B%0A%09font-size%3A18px%3B%0A%09color%3A%23ffffff%3B%0A%09display%3Ablock%3B%0A%09line-height%3A%2040px%3B%0A%09text-align%3A%20center%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows.tp-leftarrow%3Abefore%20%7B%0A%09content%3A%20%27%5Ce82c%27%3B%0A%20%20%20%20margin-left%3A-2px%3B%0A%20%20%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows.tp-rightarrow%3Abefore%20%7B%0A%09content%3A%20%27%5Ce82d%27%3B%0A%20%20%20%20margin-right%3A-2px%3B%0A%7D%0A%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab%20%7B%20%0A%20%20opacity%3A1%3B%20%20%20%20%20%20%0A%20%20box-sizing%3Aborder-box%3B%0A%7D%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab-title%20%7B%20%0Adisplay%3A%20block%3B%0Atext-align%3A%20center%3B%0Abackground%3A%20rgba%280%2C0%2C0%2C0.25%29%3B%0Afont-family%3A%20%27Roboto%20Slab%27%2C%20serif%3B%20%0Afont-weight%3A%20700%3B%20%0Afont-size%3A%2013px%3B%20%0Aline-height%3A%2013px%3B%0Acolor%3A%20%23ffffff%3B%20%0Apadding%3A%209px%2010px%3B%20%7D%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab%3Ahover%20.tp-tab-title%2C%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab.selected%20.tp-tab-title%20%7B%0A%20%20color%3A%20%23000000%3B%0A%20%20background%3A%23ffffff%3B%20%0A%7D%0A");
-                                                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
-                                                        if (htmlDiv) {
-                                                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
-                                                        } else {
-                                                            var htmlDiv = document.createElement('div');
-                                                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
-                                                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
-                                                        }
+                        var htmlDivCss = unescape("%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%20%7B%0A%09cursor%3Apointer%3B%0A%09background%3Argba%280%2C0%2C0%2C0.5%29%3B%0A%09width%3A40px%3B%0A%09height%3A40px%3B%0A%09position%3Aabsolute%3B%0A%09display%3Ablock%3B%0A%09z-index%3A1000%3B%0A%20%20%20%20border-radius%3A50%25%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%3Ahover%20%7B%0A%09background%3A%23000000%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows%3Abefore%20%7B%0A%09font-family%3A%20%27revicons%27%3B%0A%09font-size%3A18px%3B%0A%09color%3A%23ffffff%3B%0A%09display%3Ablock%3B%0A%09line-height%3A%2040px%3B%0A%09text-align%3A%20center%3B%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows.tp-leftarrow%3Abefore%20%7B%0A%09content%3A%20%27%5Ce82c%27%3B%0A%20%20%20%20margin-left%3A-2px%3B%0A%20%20%0A%7D%0A%23woodmart-black-friday-demo_wrapper%20.hephaistos.tparrows.tp-rightarrow%3Abefore%20%7B%0A%09content%3A%20%27%5Ce82d%27%3B%0A%20%20%20%20margin-right%3A-2px%3B%0A%7D%0A%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab%20%7B%20%0A%20%20opacity%3A1%3B%20%20%20%20%20%20%0A%20%20box-sizing%3Aborder-box%3B%0A%7D%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab-title%20%7B%20%0Adisplay%3A%20block%3B%0Atext-align%3A%20center%3B%0Abackground%3A%20rgba%280%2C0%2C0%2C0.25%29%3B%0Afont-family%3A%20%27Roboto%20Slab%27%2C%20serif%3B%20%0Afont-weight%3A%20700%3B%20%0Afont-size%3A%2013px%3B%20%0Aline-height%3A%2013px%3B%0Acolor%3A%20%23ffffff%3B%20%0Apadding%3A%209px%2010px%3B%20%7D%0A%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab%3Ahover%20.tp-tab-title%2C%0A%23woodmart-black-friday-demo_wrapper%20.zeus%20.tp-tab.selected%20.tp-tab-title%20%7B%0A%20%20color%3A%20%23000000%3B%0A%20%20background%3A%23ffffff%3B%20%0A%7D%0A");
+                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+                        if (htmlDiv) {
+                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+                        } else {
+                            var htmlDiv = document.createElement('div');
+                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+                        }
                     </script>
                     <script>
-                                                        var htmlDivCss = unescape("%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab-title%7B%0Abackground%3A%20rgba%280%2C0%2C0%2C0.25%29%20%21important%3B%0Acolor%3A%20%23ffffff%20%21important%3B%0Afont-size%3A%2013px%20%21important%3B%0Aline-height%3A%2013px%20%21important%3B%0A%7D%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab%3Ahover%20.tp-tab-title%2C%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab.selected%20.tp-tab-title%7B%0Abackground%3A%20%23ffffff%20%21important%3B%0Acolor%3A%20%23000000%20%21important%3B%0A%7D%0A%0A%0A%0A%0A%0A%0A%0A");
-                                                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
-                                                        if (htmlDiv) {
-                                                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
-                                                        } else {
-                                                            var htmlDiv = document.createElement('div');
-                                                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
-                                                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
-                                                        }
+                        var htmlDivCss = unescape("%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab-title%7B%0Abackground%3A%20rgba%280%2C0%2C0%2C0.25%29%20%21important%3B%0Acolor%3A%20%23ffffff%20%21important%3B%0Afont-size%3A%2013px%20%21important%3B%0Aline-height%3A%2013px%20%21important%3B%0A%7D%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab%3Ahover%20.tp-tab-title%2C%0A%23woodmart-black-friday-demo%5Bdata-slideactive%3D%22rs-14%22%5D%20.zeus%20.tp-tab.selected%20.tp-tab-title%7B%0Abackground%3A%20%23ffffff%20%21important%3B%0Acolor%3A%20%23000000%20%21important%3B%0A%7D%0A%0A%0A%0A%0A%0A%0A%0A");
+                        var htmlDiv = document.getElementById('rs-plugin-settings-inline-css');
+                        if (htmlDiv) {
+                            htmlDiv.innerHTML = htmlDiv.innerHTML + htmlDivCss;
+                        } else {
+                            var htmlDiv = document.createElement('div');
+                            htmlDiv.innerHTML = '<style>' + htmlDivCss + '</style>';
+                            document.getElementsByTagName('head')[0].appendChild(htmlDiv.childNodes[0]);
+                        }
                     </script>
                 </rs-module-wrap>
                 <!-- END REVOLUTION SLIDER -->
@@ -292,7 +303,7 @@
                         </div>
                         <div class="info-box-content">
                             <a href="/product.aspx?type=box">
-                                <h4 class="woodmart-font-weight- box-title-style-default">جعبه واکس خودرو</h4>
+                                <h4 class="woodmart-font-weight- box-title-style-default">محصولات جدید</h4>
                             </a>
                             <div class="info-box-inner reset-mb-10">
                             </div>
@@ -319,7 +330,7 @@
                         </div>
                         <div class="info-box-content">
                             <a href="/product.aspx?type=off">
-                                <h4 class="woodmart-font-weight- box-title-style-default">کادوهای تخفیف دار</h4>
+                                <h4 class="woodmart-font-weight- box-title-style-default">لوازم تخفیف دار</h4>
                             </a>
                             <div class="info-box-inner reset-mb-10">
                             </div>
@@ -455,12 +466,14 @@ padding-top: 33px;" class="product-element-top">
                                                 <div class="product-labels labels-rounded"><span class="onsale product-label">@item.Description</span></div>
                                             </a>
                                             <div class="card col-md-12">
+
                                                 <a href="/products/details/@item.id/@item.Title.toSlugify()" class="product-image-link">
+
 
                                                     <img width="600" height="600" src="@item.Image" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="@item.Title" sizes="(max-width: 600px) 100vw, 600px" />
                                                 </a>
                                                 <div class="col-md-12 card-title productCard-title">
-                                                    <a href="" style="font-size:12pt">
+                                                    <a href="/products/details/@item.id/@item.Title.toSlugify()" style="font-size:12pt">
                                                         @item.Title
                                                     </a>
                                                 </div>
@@ -626,7 +639,7 @@ padding-top: 33px;" class="product-element-top">
 
 
 
-                                            <div class="slide-post owl-carousel-item" >
+                                            <div class="slide-post owl-carousel-item">
                                                 <article id="post-126" class="blog-post-loop post-slide blog-style-shadow blog-design-masonry post-126 post type-post status-publish format-standard has-post-thumbnail hentry category-decoration">
                                                     <div class="article-inner">
                                                         <header class="entry-header">

@@ -7,6 +7,18 @@
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
 }
 
+@section HeaderSection
+{
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="@Model.Title" />
+    <meta name="description" content="@Model.Keyword" />
+    <meta property="og:description" content="@Model.Keyword" />
+
+
+
+}
+
 <style>
     .btntag {
         border-color: #EBEBEB !important;
@@ -35,7 +47,7 @@
 
                     <div class="liner-continer">
                         <span class="left-line"></span>
-                        <h3 class="woodmart-title-container title  woodmart-font-weight-">  @Model.Title</h3>								<span class="right-line"></span>
+                        <h1 class="woodmart-title-container title  woodmart-font-weight-">  @Model.Title</h1>								<span class="right-line"></span>
                     </div>
 
 

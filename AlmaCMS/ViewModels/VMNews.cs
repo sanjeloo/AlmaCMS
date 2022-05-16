@@ -45,7 +45,7 @@ namespace AlmaCMS.ViewModels
 
 
         [Required(ErrorMessage = "*")]
-        [Display(Name = "کلمات کلیدی")]
+        [Display(Name = "توضیحات متا")]
         public string Keyword { get; set; }
 
         public string persianDate { get; set; }

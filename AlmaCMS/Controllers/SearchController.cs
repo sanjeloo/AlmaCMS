@@ -58,7 +58,7 @@ namespace AlmaCMS.Controllers
             if (ProductsList.Count<8)
                 ProductsList.AddRange(repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i)))
                 .Take(8 - ProductsList.Count).ToList());
-           
+
             var GroupList = repProductsGroup.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Take(2).ToList();
             var result = new List<dynamic>();
             foreach (var product in ProductsList)
@@ -73,21 +73,22 @@ namespace AlmaCMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetMoreResult(string q , int start, int pagesize)
+        public ActionResult GetMoreResult(string q, int start, int pagesize)
         {
             if (string.IsNullOrEmpty(q))
                 return Json("");
 
             var searchlist = q.Split(' ').ToList();
-          
 
-            List<ProductListItemDTO> data = repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i))).OrderByDescending(p => p.id).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
-            {
-                id = s.id,
-                image = s.Image,
-                title = s.Title.toSlugify(),
-                normalTitle = s.Title
-            }).ToList();
+
+            List<ProductListItemDTO> data = repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i))).OrderByDescending(p => p.id &p.Priority)
+                .OrderByDescending(p => p.ExistStatus).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
+                {
+                    id = s.id,
+                    image = s.Image,
+                    title = s.Title.toSlugify(),
+                    normalTitle = s.Title
+                }).ToList();
             start+=1;
             int totalcount = repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Count();
             var result = new ProductsListDTO()

@@ -48,7 +48,7 @@ namespace AlmaCMS.Controllers
         [HttpPost]
         public ActionResult GetProducts(int start, int pagesize, int groupid)
         {
-            List<ProductListItemDTO> data = repProducts.Where(p => p.GroupID == groupid).OrderByDescending(p => p.Priority & p.id)
+            List<ProductListItemDTO> data = repProducts.Where(p => p.GroupID == groupid && p.Visibility).OrderByDescending(p => p.Priority & p.id)
                 .Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
             {
                 id = s.id,

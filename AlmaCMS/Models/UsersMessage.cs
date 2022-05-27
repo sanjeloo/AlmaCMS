@@ -25,8 +25,6 @@ namespace AlmaCMS.Models
         public Nullable<System.DateTime> DateInsert { get; set; }
         public string Descriptions { get; set; }
         public Nullable<int> StatusId { get; set; }
-        //public string UserNessage { get; set; }
-        //public string UserId { get; set; }
         public string AdminIId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

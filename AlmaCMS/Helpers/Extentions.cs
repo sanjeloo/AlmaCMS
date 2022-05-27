@@ -101,18 +101,18 @@ namespace AlmaCMS.Helpers
             return new VMDiscountCode()
             {
                 id = DiscountCode.id,
-               DiscountPrice=(long)DiscountCode.Discount_price,
+                DiscountPrice=(long)DiscountCode.Discount_price,
 
 
 
 
                 strCode=DiscountCode.Code,
-                 Descriptions=DiscountCode.Descriptions,
-                  Used=(bool)DiscountCode.Used,
-                   CreateDate=(DateTime)DiscountCode.CreateDate,
-                    ExpireDate=(DateTime)DiscountCode.ExpireDate,
-                     
-                  
+                Descriptions=DiscountCode.Descriptions,
+                Used=(bool)DiscountCode.Used,
+                CreateDate=(DateTime)DiscountCode.CreateDate,
+                ExpireDate=(DateTime)DiscountCode.ExpireDate,
+
+
             };
 
         }
@@ -176,11 +176,11 @@ namespace AlmaCMS.Helpers
                 UserId = userinfo.UserId,
                 Mobile = userinfo.Mobile,
                 CodeMelli = userinfo.CodeMelli,
-                 City=userinfo.City,
-                  IntroductionTypeId=(int)userinfo.IntroductionTypeId,
-                   Tel=userinfo.Tel,
-                    Stateid=(int)userinfo.SatetId,
-                     PostalCode=userinfo.PostalCode
+                City=userinfo.City,
+                IntroductionTypeId=(int)userinfo.IntroductionTypeId,
+                Tel=userinfo.Tel,
+                Stateid=(int)userinfo.SatetId,
+                PostalCode=userinfo.PostalCode
             };
         }
 
@@ -196,11 +196,11 @@ namespace AlmaCMS.Helpers
                 UserId = vmUserInfo.UserId,
                 CodeMelli = vmUserInfo.CodeMelli,
                 Mobile = vmUserInfo.Mobile,
-                 City=vmUserInfo.City,
-                  IntroductionTypeId=vmUserInfo.IntroductionTypeId,
-                   PostalCode=vmUserInfo.PostalCode,
-                    SatetId=vmUserInfo.Stateid,
-                     Tel=vmUserInfo.Tel
+                City=vmUserInfo.City,
+                IntroductionTypeId=vmUserInfo.IntroductionTypeId,
+                PostalCode=vmUserInfo.PostalCode,
+                SatetId=vmUserInfo.Stateid,
+                Tel=vmUserInfo.Tel
             };
         }
         #endregion
@@ -242,7 +242,7 @@ namespace AlmaCMS.Helpers
                 Title = customeproduct.Title,
                 GroupID = (int)customeproduct.GroupId,
                 PageContent = customeproduct.PageContent,
-                 
+
             };
         }
 
@@ -258,7 +258,7 @@ namespace AlmaCMS.Helpers
                 Title = vmcustomeProducts.Title,
                 GroupId = (int)vmcustomeProducts.GroupID,
                 PageContent = vmcustomeProducts.PageContent,
-              
+
 
             };
         }
@@ -415,13 +415,13 @@ namespace AlmaCMS.Helpers
         {
             return new SubPage()
             {
-                 id=vmSubPages.id,
-                  PageId=(int)vmSubPages.PageId,
-                   Image=vmSubPages.Image,
-                    PageContent=vmSubPages.PageContent,
-                     Priority=(int)vmSubPages.Priority,
-                      ShortDescriptions=vmSubPages.ShortDescriptions,
-                       Title=vmSubPages.ShortDescriptions
+                id=vmSubPages.id,
+                PageId=(int)vmSubPages.PageId,
+                Image=vmSubPages.Image,
+                PageContent=vmSubPages.PageContent,
+                Priority=(int)vmSubPages.Priority,
+                ShortDescriptions=vmSubPages.ShortDescriptions,
+                Title=vmSubPages.ShortDescriptions
             };
         }
         #endregion
@@ -516,7 +516,8 @@ namespace AlmaCMS.Helpers
                 NewsContent = news.NewsContent,
                 Title = news.Title,
                 persianDate = pc.GetYear((DateTime)news.DateInsert) + "/" + pc.GetMonth((DateTime)news.DateInsert) + "/" + pc.GetDayOfMonth((DateTime)news.DateInsert)
-                ,VisitCount=(int)news.VisitCount
+                ,
+                VisitCount=(int)news.VisitCount
             };
         }
 
@@ -533,7 +534,7 @@ namespace AlmaCMS.Helpers
                 NewsContent = vmNews.NewsContent,
                 Title = vmNews.Title,
                 NewsGroupID = vmNews.NewsGroupID,
-                 VisitCount=vmNews.VisitCount
+                VisitCount=vmNews.VisitCount
             };
         }
         #endregion
@@ -676,21 +677,21 @@ namespace AlmaCMS.Helpers
                 Title = vmLinkGroup.Title
             };
         }
-    
+
         #endregion
 
-    #region Links extensions
-        public static VMLinks   toVMlinks(this Link link)
+        #region Links extensions
+        public static VMLinks toVMlinks(this Link link)
         {
             return new VMLinks()
             {
-                Active=(bool) link.Active,
-                 id=link.id,
-                  Image=link.Image,
-                   LinkUrl=link.LinkUrl,
-                    LinkGroupID=(int)link.LinkGroupID,
-                     Title=link.Title,
-                      Descriptions=link.DEscriptions
+                Active=(bool)link.Active,
+                id=link.id,
+                Image=link.Image,
+                LinkUrl=link.LinkUrl,
+                LinkGroupID=(int)link.LinkGroupID,
+                Title=link.Title,
+                Descriptions=link.DEscriptions
             };
         }
 
@@ -704,24 +705,24 @@ namespace AlmaCMS.Helpers
                 LinkUrl = vmLink.LinkUrl,
                 LinkGroupID = (int)vmLink.LinkGroupID,
                 Title = vmLink.Title,
-                 DEscriptions=vmLink.Descriptions
+                DEscriptions=vmLink.Descriptions
             };
         }
-    
+
         #endregion
 
-    #region Question extensions
-        public static VMQuestions   toVMQuestion(this Question question)
+        #region Question extensions
+        public static VMQuestions toVMQuestion(this Question question)
         {
             return new VMQuestions()
             {
-                Active=(bool) question.Active,
-                 id=question.id,
-                   DateInsert=(DateTime)question.DateInsert,
-                    Email=question.Email,
-                     Title=question.Title,
-                      AnswerText=question.AnswerText, 
-                       Name=question.Name
+                Active=(bool)question.Active,
+                id=question.id,
+                DateInsert=(DateTime)question.DateInsert,
+                Email=question.Email,
+                Title=question.Title,
+                AnswerText=question.AnswerText,
+                Name=question.Name
             };
         }
 
@@ -731,15 +732,15 @@ namespace AlmaCMS.Helpers
             {
                 Active = (bool)vmQuestion.Active,
                 id = vmQuestion.id,
-                 DateInsert=vmQuestion.DateInsert,
-                  Email=vmQuestion.Email, 
-                   Name=vmQuestion.Name,
-                    Title=vmQuestion.Title,
-                     AnswerText=vmQuestion.AnswerText
-               
+                DateInsert=vmQuestion.DateInsert,
+                Email=vmQuestion.Email,
+                Name=vmQuestion.Name,
+                Title=vmQuestion.Title,
+                AnswerText=vmQuestion.AnswerText
+
             };
         }
-    
+
         #endregion
 
         #region Answer extensions
@@ -749,8 +750,8 @@ namespace AlmaCMS.Helpers
             {
                 AnswerText=answer.AnswerText,
                 DateInsert=(DateTime)answer.DateInsert,
-                 id=answer.id,
-                  QuestionID=(int)answer.QuestionID
+                id=answer.id,
+                QuestionID=(int)answer.QuestionID
             };
         }
 
@@ -775,12 +776,12 @@ namespace AlmaCMS.Helpers
             return new VMProductGroup()
             {
                 Description = productGroup.Description,
-                 id=productGroup.id,
-                  Image=productGroup.Image,
-                   Keywords=productGroup.Keywords,
-                    Priority=(int)productGroup.Priority,
-                    ParentId = productGroup.ParentId,
-                     Title=productGroup.Title
+                id=productGroup.id,
+                Image=productGroup.Image,
+                Keywords=productGroup.Keywords,
+                Priority=(int)productGroup.Priority,
+                ParentId = productGroup.ParentId,
+                Title=productGroup.Title
             };
         }
 
@@ -812,16 +813,17 @@ namespace AlmaCMS.Helpers
                 Keywords = product.Keywords,
                 Priority = (int)product.Priority,
                 Title = product.Title,
-                 GroupID=(int)product.GroupID,
-                  Specification=product.Specification,
+                GroupID=(int)product.GroupID,
+                Specification=product.Specification,
                 Price = product.price ?? 0,
                 PriceBeforeDiscount = product.PriceBeforeDiscount ?? 0,
 
                 SpecialSaleStartDate = product.SpecialSaleStartDate,
                 SpeciaSaleEndDate = product.SpeciaSaleEndDate,
-                ExistStatus=(bool) product.ExistStatus,
-                 ExistCount=(int)product.ExistCount,
-                  VisitCount=product.VisitCount
+                ExistStatus=(bool)product.ExistStatus,
+                Visibility= product.Visibility,
+                ExistCount=(int)product.ExistCount,
+                VisitCount=product.VisitCount
             };
         }
 
@@ -837,15 +839,16 @@ namespace AlmaCMS.Helpers
                 Title = vmProducts.Title,
                 GroupID = (int)vmProducts.GroupID,
                 Specification = vmProducts.Specification,
-                price = (long)vmProducts.Price ,
-                PriceBeforeDiscount = vmProducts.PriceBeforeDiscount ,
+                price = (long)vmProducts.Price,
+                PriceBeforeDiscount = vmProducts.PriceBeforeDiscount,
 
                 SpecialSaleStartDate = vmProducts.SpecialSaleStartDate,
                 SpeciaSaleEndDate = vmProducts.SpeciaSaleEndDate,
                 ExistStatus = (bool)vmProducts.ExistStatus,
+                Visibility= vmProducts.Visibility,
                 ExistCount = (int)vmProducts.ExistCount,
-                 VisitCount=vmProducts.VisitCount
-                 
+                VisitCount=vmProducts.VisitCount
+
 
             };
         }
@@ -862,7 +865,7 @@ namespace AlmaCMS.Helpers
                 Image = productimage.Image,
 
                 Title = productimage.Title,
-               
+
             };
         }
 
@@ -884,15 +887,15 @@ namespace AlmaCMS.Helpers
         public static VMCertificateGroup toVMCertificateGroup(this CerticicateGroup certGroup)
         {
             return new VMCertificateGroup()
-           {
-               Descriotion = certGroup.Descriotion,
-             
-               id = certGroup.id,
-               Image = certGroup.Image,
-               Keywords = certGroup.Keywords,
-         
-               Title = certGroup.Title
-           };
+            {
+                Descriotion = certGroup.Descriotion,
+
+                id = certGroup.id,
+                Image = certGroup.Image,
+                Keywords = certGroup.Keywords,
+
+                Title = certGroup.Title
+            };
         }
 
         public static CerticicateGroup toCertificateGroup(this VMCertificateGroup vmCertificateGroup)
@@ -900,11 +903,11 @@ namespace AlmaCMS.Helpers
             return new CerticicateGroup()
             {
                 Descriotion = vmCertificateGroup.Descriotion,
-      
+
                 id = vmCertificateGroup.id,
                 Image = vmCertificateGroup.Image,
                 Keywords = vmCertificateGroup.Keywords,
-    
+
                 Title = vmCertificateGroup.Title
 
             };
@@ -921,13 +924,13 @@ namespace AlmaCMS.Helpers
             return new VMCertificates()
             {
                 Descriotion = certificate.Descriptions,
-                GroupID =(int) certificate.GroupID,
+                GroupID =(int)certificate.GroupID,
                 id = certificate.id,
                 Image = certificate.Image,
                 Keywords = certificate.Keywords,
                 Prority = (int)certificate.Prority,
                 Title = certificate.Title
-                
+
             };
         }
 
@@ -1049,19 +1052,19 @@ namespace AlmaCMS.Helpers
         {
             return new VMRetailers()
             {
-               ActiveState=(bool)retaile.ActiveState,
+                ActiveState=(bool)retaile.ActiveState,
                 Address=retaile.Address,
-                 Comments=retaile.Comments,
-                  CompanyName=retaile.CompanyName,
-                   Email=retaile.Email,
-                   id=retaile.id,
-                    Mobile=retaile.Mobile,
-                     Name=retaile.Name,
-                      Pass=retaile.Pass,
-                        Tel=retaile.Tel,
-                         USerName=retaile.USerName,
-                          Website=retaile.Website
-                    
+                Comments=retaile.Comments,
+                CompanyName=retaile.CompanyName,
+                Email=retaile.Email,
+                id=retaile.id,
+                Mobile=retaile.Mobile,
+                Name=retaile.Name,
+                Pass=retaile.Pass,
+                Tel=retaile.Tel,
+                USerName=retaile.USerName,
+                Website=retaile.Website
+
 
             };
         }
@@ -1082,7 +1085,7 @@ namespace AlmaCMS.Helpers
                 Tel = vmretailers.Tel,
                 USerName = vmretailers.USerName,
                 Website = vmretailers.Website
-                    
+
 
             };
         }
@@ -1095,16 +1098,16 @@ namespace AlmaCMS.Helpers
             return new VMSecureArticle()
             {
                 ArticleContent=securearticle.ArticleContent,
-                 DateInsert=(DateTime)securearticle.DateInsert,
-                  id=securearticle.id,
-                   Image=securearticle.image,
-                    Title= securearticle.Title
+                DateInsert=(DateTime)securearticle.DateInsert,
+                id=securearticle.id,
+                Image=securearticle.image,
+                Title= securearticle.Title
 
 
             };
         }
 
-        public static SecureArticle toRetoSecureArticle(this VMSecureArticle vmsecurearticle  )
+        public static SecureArticle toRetoSecureArticle(this VMSecureArticle vmsecurearticle)
         {
             return new SecureArticle()
             {
@@ -1156,12 +1159,12 @@ namespace AlmaCMS.Helpers
                 SendBoxingPrice = (double)sitesetting.SendBoxingPrice,
                 SendInsurancePrice = (double)sitesetting.SendInsurancePrice,
                 SendTaxPrice = (double)sitesetting.SendTaxPrice,
-                SentVatPrice = (double)sitesetting.SentVatPrice, 
+                SentVatPrice = (double)sitesetting.SentVatPrice,
 
-                 BirtDateGift=(bool)sitesetting.SendBirthDateGift,
-                  BirtDateGiftPrice=(long) sitesetting.BirthDateGiftPrice,
-                   ProfitPercent=(int)sitesetting.ProfitPercent,
-                    ProfitPercentCount=(int)sitesetting.ProfitPercentCount
+                BirtDateGift=(bool)sitesetting.SendBirthDateGift,
+                BirtDateGiftPrice=(long)sitesetting.BirthDateGiftPrice,
+                ProfitPercent=(int)sitesetting.ProfitPercent,
+                ProfitPercentCount=(int)sitesetting.ProfitPercentCount
 
 
             };
@@ -1192,12 +1195,12 @@ namespace AlmaCMS.Helpers
                 SentVatPrice = (long)vmsitesetting.SentVatPrice,
                 SendBirthDateGift = (bool)vmsitesetting.BirtDateGift,
                 BirthDateGiftPrice = (long)vmsitesetting.BirtDateGiftPrice,
-                 ProfitPercent=vmsitesetting.ProfitPercent,
-                  ProfitPercentCount=vmsitesetting.ProfitPercentCount
+                ProfitPercent=vmsitesetting.ProfitPercent,
+                ProfitPercentCount=vmsitesetting.ProfitPercentCount
 
 
             };
         }
         #endregion
-}
+    }
 }

@@ -107,6 +107,15 @@
                             </div>
                             <div class="form-group">
                                 <div class="control-label col-md-2" style="padding:0px;">
+                                    نمایش در لیست محصولات
+                                </div>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Visibility, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Visibility, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2" style="padding:0px;">
                                     تعداد موجودی
                                 </div>
                                 <div class="col-md-10">

@@ -53,10 +53,10 @@ namespace AlmaCMS.Controllers
             if (string.IsNullOrEmpty(text))
                 return Json("");
             var searchlist = text.Split(' ').ToList();
-            var ProductsList = repProducts.Where(c => (c.Title!=null && c.Title.Contains(text)))
+            var ProductsList = repProducts.Where(c => c.Visibility && (c.Title!=null && c.Title.Contains(text)))
                 .Take(8).ToList();
             if (ProductsList.Count<8)
-                ProductsList.AddRange(repProducts.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i)))
+                ProductsList.AddRange(repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i)))
                 .Take(8 - ProductsList.Count).ToList());
            
             var GroupList = repProductsGroup.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Take(2).ToList();
@@ -81,7 +81,7 @@ namespace AlmaCMS.Controllers
             var searchlist = q.Split(' ').ToList();
           
 
-            List<ProductListItemDTO> data = repProducts.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).OrderByDescending(p => p.id).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
+            List<ProductListItemDTO> data = repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i))).OrderByDescending(p => p.id).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
             {
                 id = s.id,
                 image = s.Image,
@@ -89,7 +89,7 @@ namespace AlmaCMS.Controllers
                 normalTitle = s.Title
             }).ToList();
             start+=1;
-            int totalcount = repProducts.Where(c => c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Count();
+            int totalcount = repProducts.Where(c => c.Visibility && c.Title!=null && searchlist.All(i => c.Title.Contains(i))).Count();
             var result = new ProductsListDTO()
             {
                 data = data,

@@ -603,6 +603,7 @@
           <Property Name="ExistStatus" Type="bit" />
           <Property Name="ExistCount" Type="int" />
           <Property Name="VisitCount" Type="int" Nullable="false" />
+          <Property Name="Visibility" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductsGroup">
           <Key>
@@ -3278,6 +3279,7 @@ warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary 
           <NavigationProperty Name="ProductReports" Relationship="DB_AlmaCmsModel.FK_ProductReport_Products" FromRole="Product" ToRole="ProductReport" />
           <Property Name="VisitCount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductComments" Relationship="DB_AlmaCmsModel.FK_ProductComments_Products" FromRole="Product" ToRole="ProductComment" />
+          <Property Name="Visibility" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Products_PtoductsGroup">
           <End Type="DB_AlmaCmsModel.ProductsGroup" Role="ProductsGroup" Multiplicity="0..1">
@@ -5042,6 +5044,7 @@ warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary 
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DB_AlmaCmsModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Visibility" ColumnName="Visibility" />
                 <ScalarProperty Name="VisitCount" ColumnName="VisitCount" />
                 <ScalarProperty Name="ExistCount" ColumnName="ExistCount" />
                 <ScalarProperty Name="ExistStatus" ColumnName="ExistStatus" />

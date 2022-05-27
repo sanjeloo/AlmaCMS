@@ -42,6 +42,7 @@ namespace AlmaCMS.ViewModels
         public DateTime? SpeciaSaleEndDate { get; set; }
 
         public bool ExistStatus { get; set; }
+        public bool Visibility { get; set; }
 
         public int  ExistCount { get; set; }
 

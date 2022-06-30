@@ -1959,6 +1959,7 @@
     <Content Include="Content\profile\js\tinymce.min.js" />
     <Content Include="Content\profile\plugins\placeholder\css\jquery.flying-labels.css" />
     <Content Include="Content\profile\plugins\placeholder\js\jquery.flying-labels.js" />
+    <Content Include="Content\Site\css\LayoutSite.css" />
     <Content Include="Content\Site\css\Product.css" />
     <Content Include="Content\Site\images\logo.png" />
     <Content Include="Content\themes\base\accordion.css" />

@@ -1007,7 +1007,7 @@
                         $('.offerbox').find('a').remove();
                         $.each(result, function (index, value) {
                             if (value.IsGroup)
-                                $('.offerbox').append(`<a data-isGroup="1" onclick="selectItem(this)" data-title="${value.Title}"  data-itemId="${value.Id}" class="offerItem">${value.Title}                  (${'دسته بندی'})</a>`)
+                                $('.offerbox').append(`<a data-isGroup="1" onclick="selectItem(this)" data-title="${value.Title}"  data-itemId="${value.Id}" class="offerItem">${value.Title}'دسته بندی   ')</a>`)
                             else
                                 $('.offerbox').append(`<a data-isGroup="0" onclick="selectItem(this)" data-titleUrl="${value.TitleUrl}" data-itemId="${value.Id}" class="offerItem">${value.Title}</a>`)
                         })
@@ -1038,11 +1038,11 @@
             $('#txtSearch').val($(el).html());
             var url = '/products/'
             if ($(el).attr('data-isGroup') == 1) {
-                url += $(el).attr('data-itemId') + '/' + $(el).attr('data-title')
+                url += $(el).attr('data-itemId') + '/' + $(el).attr('data-title').replaceAll(' ', '-')
             }
             else {
 
-                url += 'details/' + $(el).attr('data-itemId') + '/' + $(el).attr('data-titleUrl')
+                url += 'details/' + $(el).attr('data-itemId') + '/' + $(el).attr('data-titleUrl').replaceAll(' ', '-')
             }
             $('#txtSearch').attr('data-url', url);
             location.href = url;
@@ -1055,7 +1055,7 @@
             var level = getLiLevelMoblie(allGroups, groupid, 0);
             var result = '<ul class="section-nav'+level+' col1" style="" id="ulSubGroups' + groupid + '">';
             $.each(subGroupList, function (index, value) {
-                result += `<li class="toc-entry toc-h2"><a class="a-subGroup" href="/Products/${value.Id}/${value.Name}">${value.Name}</a>`;
+                result += `<li class="toc-entry toc-h2"><a class="a-subGroup" href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-') }">${value.Name}</a>`;
                 if (allGroups.filter(x => x.ParentId == value.Id).length > 0)
                     result += addSubGroup(allGroups, allGroups.filter(x => x.ParentId == value.Id), value.Id);
                 result += '</li>';
@@ -1067,7 +1067,7 @@
             var level = getLiLevelMoblie(allGroups, groupid, 0);
             var result = `<ul class="submenumobile${level}" id="ulSubGroupsMoblie${groupid}">`;
             $.each(subGroupList, function (index, value) {
-                result += `<li class="menu-item${level}"><a href="/Products/${value.Id}/${value.Name}">${value.Name}</a>`;
+                result += `<li class="menu-item${level}"><a href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-') }">${value.Name}</a>`;
 
                 if (allGroups.filter(x => x.ParentId == value.Id).length > 0) {
                     result += `<i class="iconArrow1"></i>`;
@@ -1107,7 +1107,7 @@
                         //================== append to desktop menu ==================//
                         $('#menu-categories').append(`
                                                             <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item - event - hover">
-                                                                <a href = "/Products/${value.Id}/${value.Name}" class= "woodmart-nav-link" >
+                                                                <a href = "/Products/${value.Id}/${value.Name.replaceAll(' ','-')}" class= "woodmart-nav-link" >
                                                                     <i class="fa fa-car category-icon" ></i >
                                                                     <span class="nav-link-text"> ${value.Name}</span>
                                                                 </a>
@@ -1120,7 +1120,7 @@
                         //=================== append to moblie menu ====================//
                         $('[Name="moblie-root-menu"]').append(`
                                      <li id = "menu-item-376" name="subMenuMoblie${value.Id}" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover" >
-                                     <a href="/Products/${value.Id}/${value.Name}" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">${value.Name}</span></a > <i class="iconArrow"></i>
+                                     <a href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-') }" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">${value.Name}</span></a > <i class="iconArrow"></i>
                                      </li >`);
                     });
                     $.each(rootGroups, function (index, value) {

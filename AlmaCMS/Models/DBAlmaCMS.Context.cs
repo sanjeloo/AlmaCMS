@@ -120,5 +120,6 @@ namespace AlmaCMS.Models
         public virtual DbSet<BirthDateGift> BirthDateGifts { get; set; }
         public virtual DbSet<VWUserInfo> VWUserInfoes { get; set; }
         public virtual DbSet<VWBagTransaction> VWBagTransactions { get; set; }
+        public virtual DbSet<TempUserLogin> TempUserLogins { get; set; }
     }
 }

@@ -40,8 +40,8 @@ namespace AlmaCMS.Models
         public Nullable<bool> ExistStatus { get; set; }
         public Nullable<int> ExistCount { get; set; }
         public int VisitCount { get; set; }
-        public bool Visibility { get; set; } = true;
-
+        public bool Visibility { get; set; }
+    
         public virtual ProductsGroup ProductsGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductsImage> ProductsImages { get; set; }

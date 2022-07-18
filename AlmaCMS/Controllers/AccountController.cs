@@ -11,6 +11,8 @@ using AlmaCMS.ViewModels;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using System.Data.Entity;
+
 namespace AlmaCMS.Controllers
 {
     [Authorize]
@@ -31,10 +33,11 @@ namespace AlmaCMS.Controllers
             repBah = new USerBagRepository(db);
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+           
         }
 
         private ApplicationUserManager _userManager;
@@ -49,9 +52,19 @@ namespace AlmaCMS.Controllers
                 _userManager = value;
             }
         }
+        private ApplicationSignInManager _signInManager;
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set { _signInManager = value; }
+        }
 
 
-       public void SendSMS( string ToNumber,string strMEssage)
+        public void SendSMS(string ToNumber, string strMEssage)
         {
             Helpers.SMSHelper.SendSMS(ToNumber, "ثبت نام", strMEssage);
 
@@ -66,16 +79,7 @@ namespace AlmaCMS.Controllers
             return View();
         }
 
-        private ApplicationSignInManager _signInManager;
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set { _signInManager = value; }
-        }
+       
 
         //
         // POST: /Account/Login
@@ -96,13 +100,13 @@ namespace AlmaCMS.Controllers
             {
                 case SignInStatus.Success:
                     {
-                       
+
                         var user = await UserManager.FindAsync(model.Email, model.Password);
                         if (UserManager.IsInRole(user.Id, "Suspend"))
                         {
                             return RedirectToAction("index", "Home");
                         }
-                        
+
                         if (UserManager.IsInRole(user.Id, "Admin"))
                         {
                             return RedirectToAction("Dashboard", "Admin", new { area = "manage" });
@@ -118,9 +122,9 @@ namespace AlmaCMS.Controllers
 
                         }
                         return RedirectToLocal(returnUrl);
-                      
+
                     }
-                   
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -130,6 +134,84 @@ namespace AlmaCMS.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+
+        [Route("Phonelogin")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Phonelogin(string phoneNumber)
+        {
+            try
+            {
+                var user = await db.AspNetUsers.FirstOrDefaultAsync(u => u.PhoneNumber==phoneNumber);
+
+
+                if (phoneNumber.Length!=11 || user ==null)
+                    return Json(new { Success = false, Message = "شماره تلفن یافت نشد" });
+
+                var t = await db.TempUserLogins.FirstOrDefaultAsync(tu => tu.PhoneNumber==phoneNumber);
+                if (t!=null)
+                    db.TempUserLogins.Remove(t);
+                db.TempUserLogins.Add(new TempUserLogin
+                {
+                    ExpirationDate = DateTime.Now.AddMinutes(3),
+                    PhoneNumber = phoneNumber,
+                    UserId= user.Id,
+                    Code = new Random().Next(10000, 99999)
+                });
+                await db.SaveChangesAsync();
+                return Json(new { Success = true, Message = "کد تایید ارسال شد" });
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+        }
+
+        [Route("VerifyPhonelogin")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyPhonelogin(string phoneNumber, string code)
+        {
+            if (phoneNumber.Length!=11 || code.Length!=5)
+                return Json(new { Success = false, Message = "کد نامعتبر" });
+
+
+            int comparableCode = int.Parse(code);
+            var tempUser = await db.TempUserLogins.FirstOrDefaultAsync(tu => tu.PhoneNumber==phoneNumber
+            && tu.ExpirationDate>DateTime.Now);
+            if (tempUser==null)
+                return Json(new { Success = false, Message = "کد منقضی شده است" });
+            if(tempUser.Code !=comparableCode)
+                return Json(new { Success = false, Message = "کد وارد شده اشتباه است" });
+
+            var user = await UserManager.FindByIdAsync(tempUser.UserId);
+            db.TempUserLogins.Remove(tempUser);
+            await db.SaveChangesAsync();
+            await SignInManager.SignInAsync(user, true, true);
+            string Url = "";
+            if (UserManager.IsInRole(tempUser.UserId, "Suspend"))
+            {
+                Url = "/Index/Home";
+            }
+
+            if (UserManager.IsInRole(tempUser.UserId, "Admin"))
+            {
+                Url = "/Manage/Admin/Dashboard";
+            }
+            if (UserManager.IsInRole(tempUser.UserId, "Expert"))
+            {
+                Url = "/Expert/profile/Index";
+
+            }
+            if (UserManager.IsInRole(tempUser.UserId, "member"))
+            {
+                Url="/userprofile/Index";
+            }
+
+            return Json(new { Success = true, Message = "", Url = Url });
+
         }
 
         //
@@ -151,25 +233,25 @@ namespace AlmaCMS.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-          [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult UserResetPassword()
         {
             ViewBag.message = "0";
             return View();
 
         }
-          [AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult UserResetPassword(VMResetPassword vmreset)
         {
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(vmreset);
             }
 
             var Currentuser = db.AspNetUsers.Where(c => c.UserName == vmreset.MobileNumber).ToList();
-            if(Currentuser.Count==0)
+            if (Currentuser.Count==0)
             {
                 ModelState.AddModelError("MobileNumber", "شماره موبایل وارد شده موجود نمی باشد");
                 return View(vmreset);
@@ -307,26 +389,26 @@ namespace AlmaCMS.Controllers
             #endregion
 
             DateTime dtBirthDate;
-            dtBirthDate = new DateTime(1900,01,01);
-            if (model.BirthDate != null && model.BirthDate < new DateTime(1900,1,1,0,0,0))
+            dtBirthDate = new DateTime(1900, 01, 01);
+            if (model.BirthDate != null && model.BirthDate < new DateTime(1900, 1, 1, 0, 0, 0))
             {
                 dtBirthDate = (DateTime)model.BirthDate;
             }
 
 
-            if(string.IsNullOrEmpty(model.Email))
+            if (string.IsNullOrEmpty(model.Email))
             {
                 model.Email = model.MobileNumber+"@pusnazari.com";
             }
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.MobileNumber, Email = model.Email,PhoneNumber=model.MobileNumber };
-               
+                var user = new ApplicationUser { UserName = model.MobileNumber, Email = model.Email, PhoneNumber=model.MobileNumber };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
 
-                    if(model.RegisterType==1)
+                    if (model.RegisterType==1)
                     {
                         await UserManager.AddToRoleAsync(user.Id, "Member");
                     }
@@ -338,35 +420,37 @@ namespace AlmaCMS.Controllers
                     //user.PhoneNumber = model.MobileNumber;
                     //_userManager.Update(user);
 
-                    var newInfo = new Models.UserInfo() { 
-                    UserId=user.Id,
-                     Address=model.Address,
-                      BirthDate=dtBirthDate,
-                       City=model.City,
+                    var newInfo = new Models.UserInfo()
+                    {
+                        UserId=user.Id,
+                        Address=model.Address,
+                        BirthDate=dtBirthDate,
+                        City=model.City,
                         CodeMelli=model.NationalCode,
-                         IntroductionTypeId=model.introductionId,
-                          Mobile=model.MobileNumber,
-                           Name=model.Name,
-                            Phone=model.Phone,
-                             PostalCode=model.PostalCode,
-                              SatetId=model.StateID,
-                               Tel=model.Phone,
-                                ReagentCode=model.ReagentCode,
-                                 
-                     
+                        IntroductionTypeId=model.introductionId,
+                        Mobile=model.MobileNumber,
+                        Name=model.Name,
+                        Phone=model.Phone,
+                        PostalCode=model.PostalCode,
+                        SatetId=model.StateID,
+                        Tel=model.Phone,
+                        ReagentCode=model.ReagentCode,
+
+
                     };
 
                     repUserinfo.Insert(newInfo);
 
-                    var newbag = new UserBag() {
-                     BagPrice=0,
-                     userId = user.Id
+                    var newbag = new UserBag()
+                    {
+                        BagPrice=0,
+                        userId = user.Id
                     };
 
                     repBah.Insert(newbag);
-                    string strSMS="کاربر گرامی " + model.Name +" نام کاربری شما " + model.MobileNumber + " کلمه عبور شما " + model.Password + " به پی یو نظری خوش آمدید "  ;
-                    SendSMS(model.MobileNumber,strSMS);
-       
+                    string strSMS = "کاربر گرامی " + model.Name +" نام کاربری شما " + model.MobileNumber + " کلمه عبور شما " + model.Password + " به پی یو نظری خوش آمدید ";
+                    SendSMS(model.MobileNumber, strSMS);
+
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");

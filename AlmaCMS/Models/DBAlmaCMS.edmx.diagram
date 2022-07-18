@@ -153,6 +153,7 @@
         <EntityTypeShape EntityType="DB_AlmaCmsModel.BirthDateGift" Width="1.5" PointX="16.375" PointY="29.75" />
         <EntityTypeShape EntityType="DB_AlmaCmsModel.VWUserInfo" Width="1.5" PointX="9.375" PointY="26.75" />
         <EntityTypeShape EntityType="DB_AlmaCmsModel.VWBagTransaction" Width="1.5" PointX="29.375" PointY="19.75" />
+        <EntityTypeShape EntityType="DB_AlmaCmsModel.TempUserLogin" Width="1.5" PointX="26.375" PointY="29.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

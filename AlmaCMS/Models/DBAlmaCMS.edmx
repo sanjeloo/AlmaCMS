@@ -880,6 +880,16 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="TempUserLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserBag">
           <Key>
             <PropertyRef Name="id" />
@@ -1953,6 +1963,7 @@ warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary 
           <EntitySet Name="TaskExperts" EntityType="Self.TaskExperts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TasksList" EntityType="Self.TasksList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskStatus" EntityType="Self.TaskStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempUserLogin" EntityType="Self.TempUserLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserBag" EntityType="Self.UserBag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLog" EntityType="Self.UserLog" Schema="dbo" store:Type="Tables" />
@@ -2662,6 +2673,7 @@ warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary 
           <EntitySet Name="BirthDateGifts" EntityType="DB_AlmaCmsModel.BirthDateGift" />
           <EntitySet Name="VWUserInfoes" EntityType="DB_AlmaCmsModel.VWUserInfo" />
           <EntitySet Name="VWBagTransactions" EntityType="DB_AlmaCmsModel.VWBagTransaction" />
+          <EntitySet Name="TempUserLogins" EntityType="DB_AlmaCmsModel.TempUserLogin" />
           </EntityContainer>
         <EntityType Name="Album">
           <Key>
@@ -4592,6 +4604,16 @@ warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary 
           <Property Name="Mobile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="persiandate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TempUserLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5816,6 +5838,17 @@ warning 6002: The table/view 'darstkala.dbo.VWUserInfo' does not have a primary 
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="BagId" ColumnName="BagId" />
                 <ScalarProperty Name="dateInsert" ColumnName="dateInsert" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempUserLogins">
+            <EntityTypeMapping TypeName="DB_AlmaCmsModel.TempUserLogin">
+              <MappingFragment StoreEntitySet="TempUserLogin">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

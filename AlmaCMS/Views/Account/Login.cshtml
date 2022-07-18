@@ -10,7 +10,8 @@
             <h1 class="entry-title"></h1>
         </header>
     </div>
-</div><br />
+</div>
+<br />
 <div class="divider">
     <div class="line red"></div>
     <span class="section">
@@ -20,7 +21,7 @@
 </div>
 
 <div class="vc_row wpb_row vc_row-fluid vc_custom_1499591488348 vc_row-o-equal-height vc_row-o-content-middle vc_row-flex">
-    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-8 vc_col-md-8">
+    <div class="wpb_column vc_column_container vc_col-sm-12 vc_col-lg-12 vc_col-md-12">
         <div class="vc_column-inner vc_custom_1499612435663">
             <div class="wpb_wrapper">
                 <div id="wd-5e02241d77cfe" class="title-wrapper  woodmart-title-color-default woodmart-title-style-default woodmart-title-width-100 text-right woodmart-title-size-extra-large ">
@@ -59,7 +60,7 @@
                                                                             <a href="/account/register">ثبت عضویت </a>
                                                                             اطلاعات خود را ثبت نمایید
                                                                         </div>
-                                                                        <div class="d-flex">
+                                                                        <div class="col-md-12">
 
                                                                             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                                                             {
@@ -73,7 +74,7 @@
                                                                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
                                                                                 </div>
-                                                                                <div class="mb-3">
+                                                                                <div class="">
                                                                                     <span>کلمه عبور:</span><span style="color:red;">*</span>
 
                                                                                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "width:200px;margin-top:10px" })
@@ -82,11 +83,17 @@
                                                                                     <span id="ContentPlaceHolder1_RequiredFieldValidator1" style="visibility:hidden;">*</span>
                                                                                 </div>
 
-                                                                                <div class="form-group">
-                                                                                    <div class="col-md-offset-2 col-md-10">
+                                                                                <div class="form-group row" style="margin:20px">
+                                                                                    <div class="col-md-6">
                                                                                         <button type="submit" class="btn btn-color-primary btn-style-default btn-shape-semi-round btn-size-small"><i class="fa fa-sign-in"></i> ورود</button>
                                                                                     </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <a value="فراموشی کلمه عبور" href="/account/UserResetPassword" class=" text-danger " style="text-align:center">
+                                                                                            فراموشی کلمه عبور
+                                                                                        </a>
+                                                                                    </div>
                                                                                 </div>
+
 
                                                                             }
 
@@ -97,12 +104,29 @@
                                                                 </div>
                                                                 <div class="col-md-6 col-xs-12">
                                                                     <div class="border p-4">
-                                                                        <div class="text-right">
-                                                                            <p class=""><p>چنانچه کلمه عبور خود را فراموش کرده اید </p><br />موبایل ثبت نام خود را در فیلد موبایل وارد نموده و روی دکمه زیر کلیک نمایید</p>
-                                                                            <div class="text-left mt-5">
-                                                                                <a value="فراموشی کلمه عبور" href="/account/UserResetPassword" class="btn btn-color-primary btn-style-default btn-shape-semi-round btn-size-small " style="text-align:center">
-                                                                                    فراموشی کلمه عبور
-                                                                                </a>
+                                                                        <div class=" text-align-center">
+                                                                            <h3> ورود با رمز عبور یکبار مصرف</h3>
+                                                                            <div class="row form-group text-align-center">
+
+                                                                                <input id="userPhoneNumber" placeholder="موبایل" class=" col-md-4 form-control valid" style="width:200px;margin-top:10px;text-align:center"
+                                                                                       type="number" />
+                                                                                <input id="phoneLogin" type="button" class=" btn btn-color-primary btn-success btn-shape-semi-round"
+                                                                                       style=" padding: 10px; margin: 15px;" value="ارسال" />
+                                                                                <h6 style="color:darkred" class=" col-md-12" id="phoneError"></h6>
+
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <input disabled id="codeBox" placeholder="کد" class="form-control valid" style="width:200px;margin-top:10px;text-align:center"
+                                                                                       type="number" />
+                                                                                <div class="col-md-2">
+                                                                                    <div style=" margin:15px;font-size:large; color: red;" id="counter"></div>
+                                                                                </div>
+                                                                                <h6 style="color:darkred" class=" col-md-12" id="codeError"></h6>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <input value="ورود" id="sendCode" class="btn btn-block btn-color-primary btn-style-default btn-shape-semi-round "
+                                                                                       type="button" style="text-align:center" />
+
                                                                             </div>
                                                                             <span id="ContentPlaceHolder1_lblError" style="color:Red;"></span>
                                                                         </div>
@@ -131,57 +155,80 @@
                 </div>
             </div>
         </div>
-    </div></div>
-    @*<div class="row">
-            <div class="col-md-8">
-                <section id="loginForm">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
-                        @Html.AntiForgeryToken()
-                        <h4>Use a local account to log in.</h4>
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <div class="checkbox">
-                                    @Html.CheckBoxFor(m => m.RememberMe)
-                                    @Html.LabelFor(m => m.RememberMe)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Log in" class="btn btn-default" />
-                            </div>
-                        </div>
-                        <p>
-                            @Html.ActionLink("Register a new user?", "Register")
-                        </p>
-                        <p>
-                            @Html.ActionLink("Forget your password?", "ForgotPassword")
-                        </p>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#phoneLogin').click(function () {
+            $('#codeBox').val('')
+            var phone = $('#userPhoneNumber').val();
+            if (phone.length != 11) {
+                $('#phoneError').html('شماره تلفن باید ۱۱ رقم و با صفر باشد')
+                return;
+            }
+            else {
+                $('#phoneError').html('')
+            }
+
+            $.ajax({
+                url: '/Account/Phonelogin',
+                method: 'post',
+                data: { phoneNumber: $('#userPhoneNumber').val() },
+                success: function (result) {
+                    debugger;
+                    if (!result.Success)
+                        $('#phoneError').html(result.Message)
+                    else {
+                        $('#phoneLogin').attr('disabled', 'disabled')
+                        $('#codeBox').removeAttr('disabled');
+                        let counts = setInterval(updated, 1000);
+                        let upto = 120;
+                        function updated() {
+                            var count = document.getElementById("counter");
+                            count.innerHTML = --upto;
+                            if (upto === 0) {
+                                clearInterval(counts);
+                                $('#phoneLogin').removeAttr('disabled')
+
+                            }
+                        }
                     }
-                </section>
-            </div>
-            <div class="col-md-4">
-                <section id="socialLoginForm">
-                    @Html.Partial("_ExternalLoginsListPartial", new AlmaCMS.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                </section>
-            </div>
-        </div>*@
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+
+
+        });
+        $('#sendCode').click(function () {
+            debugger;
+            var code = $('#codeBox').val();
+            if (code.length != 5) {
+                $('#codeError').html('کد وارد شده صحیح نیست')
+                return;
+            }
+            else {
+                $('#codeError').html('')
+            }
+            $.ajax({
+                url: '/Account/VerifyPhonelogin',
+                method: 'post',
+                data: { phoneNumber: $('#userPhoneNumber').val(), code: $('#codeBox').val() },
+                success: function (result) {
+                    if (result.Success)
+                        location.href = result.Url;
+                    else {
+                        $('#codeError').html(result.Message)
+                    }
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            })
+        })
+    </script>
+}

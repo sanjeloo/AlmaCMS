@@ -37,7 +37,7 @@ namespace AlmaCMS.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
-           
+
         }
 
         private ApplicationUserManager _userManager;
@@ -79,7 +79,7 @@ namespace AlmaCMS.Controllers
             return View();
         }
 
-       
+
 
         //
         // POST: /Account/Login
@@ -174,6 +174,9 @@ namespace AlmaCMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> VerifyPhonelogin(string phoneNumber, string code)
         {
+            try
+            {
+
             if (phoneNumber.Length!=11 || code.Length!=5)
                 return Json(new { Success = false, Message = "کد نامعتبر" });
 
@@ -183,7 +186,7 @@ namespace AlmaCMS.Controllers
             && tu.ExpirationDate>DateTime.Now);
             if (tempUser==null)
                 return Json(new { Success = false, Message = "کد منقضی شده است" });
-            if(tempUser.Code !=comparableCode)
+            if (tempUser.Code !=comparableCode)
                 return Json(new { Success = false, Message = "کد وارد شده اشتباه است" });
 
             var user = await UserManager.FindByIdAsync(tempUser.UserId);
@@ -205,13 +208,19 @@ namespace AlmaCMS.Controllers
                 Url = "/Expert/profile/Index";
 
             }
-            if (UserManager.IsInRole(tempUser.UserId, "member"))
+            if (UserManager.IsInRole(tempUser.UserId, "Member"))
             {
                 Url="/userprofile/Index";
             }
 
             return Json(new { Success = true, Message = "", Url = Url });
 
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         //
@@ -298,190 +307,81 @@ namespace AlmaCMS.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-
-
-
-            #region BaseInfo
-            ViewBag.States = repState.GetAll().ToList();
-            List<VMDropDownOption> VMItroductionList = new List<VMDropDownOption>();
-            VMItroductionList.Add(new VMDropDownOption()
-            {
-                Id = 0,
-                Title = "نحوه آشنایی",
-                icon = "",
-                Customevalue = ""
-
-            });
-
-            ViewBag.Introductions = repIntroduction.GetAll().ToList();
-
-
-            List<VMDropDownOption> vmList = new List<VMDropDownOption>();
-            vmList.Add(new VMDropDownOption()
-            {
-                Id = 1,
-                Title = "کاربر سایت",
-                icon = "",
-                Customevalue = ""
-
-            });
-
-            vmList.Add(new VMDropDownOption()
-            {
-                Id = 2,
-                Title = "پرسنل",
-                icon = "",
-                Customevalue = ""
-
-            });
-
-            ViewBag.RegisterType = vmList;
-
-            #endregion
-
             return View();
         }
 
-        //
-        // POST: /Account/Register
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(ViewModels.VMRegisterMember model)
+        public async Task<ActionResult> Register(VMRegisterMember model)
         {
-
-            #region BaseInfo
-            ViewBag.States = repState.GetAll().ToList();
-            List<VMDropDownOption> VMItroductionList = new List<VMDropDownOption>();
-            VMItroductionList.Add(new VMDropDownOption()
+            try
             {
-                Id = 0,
-                Title = "نحوه آشنایی",
-                icon = "",
-                Customevalue = ""
-
-            });
-
-            ViewBag.Introductions = repIntroduction.GetAll().ToList();
 
 
-            List<VMDropDownOption> vmList = new List<VMDropDownOption>();
-            vmList.Add(new VMDropDownOption()
-            {
-                Id = 1,
-                Title = "کاربر سایت",
-                icon = "",
-                Customevalue = ""
-
-            });
-
-            vmList.Add(new VMDropDownOption()
-            {
-                Id = 2,
-                Title = "پرسنل",
-                icon = "",
-                Customevalue = ""
-
-            });
-
-            ViewBag.RegisterType = vmList;
-
-            #endregion
-
-            DateTime dtBirthDate;
-            dtBirthDate = new DateTime(1900, 01, 01);
-            if (model.BirthDate != null && model.BirthDate < new DateTime(1900, 1, 1, 0, 0, 0))
-            {
-                dtBirthDate = (DateTime)model.BirthDate;
-            }
-
-
-            if (string.IsNullOrEmpty(model.Email))
-            {
-                model.Email = model.MobileNumber+"@pusnazari.com";
-            }
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.MobileNumber, Email = model.Email, PhoneNumber=model.MobileNumber };
-
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (string.IsNullOrEmpty(model.Email))
                 {
-
-                    if (model.RegisterType==1)
+                    model.Email = model.MobileNumber+"@dartkala.com";
+                }
+                if (ModelState.IsValid)
+                {
+                    if (await db.AspNetUsers.AnyAsync(u => u.PhoneNumber == model.MobileNumber))
                     {
-                        await UserManager.AddToRoleAsync(user.Id, "Member");
+                        ModelState.AddModelError("MobileNumber", "نام کاربری تکراری می باشد");
+                        return View(model);
                     }
-                    else
+                    var result = await UserManager.CreateAsync(new ApplicationUser
                     {
-                        await UserManager.AddToRoleAsync(user.Id, "Expert");
+                        UserName = model.MobileNumber,
+                        Email = model.Email,
+                        PhoneNumber=model.MobileNumber
+                    });
+                    if(!result.Succeeded)
+                    {
+                        ModelState.AddModelError("MobileNumber", "خطایی رخ داده");
+                        return View(model);
                     }
-
-                    //user.PhoneNumber = model.MobileNumber;
-                    //_userManager.Update(user);
-
-                    var newInfo = new Models.UserInfo()
+                    var user = await UserManager.FindByNameAsync(model.MobileNumber);
+                    await UserManager.AddToRoleAsync(user.Id, "Member");
+                    var newInfo = new UserInfo()
                     {
                         UserId=user.Id,
-                        Address=model.Address,
-                        BirthDate=dtBirthDate,
-                        City=model.City,
-                        CodeMelli=model.NationalCode,
-                        IntroductionTypeId=model.introductionId,
                         Mobile=model.MobileNumber,
                         Name=model.Name,
-                        Phone=model.Phone,
-                        PostalCode=model.PostalCode,
-                        SatetId=model.StateID,
-                        Tel=model.Phone,
-                        ReagentCode=model.ReagentCode,
-
+                        Tel=model.MobileNumber,
+                        Address = "",
+                        BirthDate = DateTime.Now.AddYears(-30),
+                        City = "",
+                        CodeMelli = "",
+                        Email  = user.Email,
+                        IntroductionTypeId = 1,
+                        Phone = model.MobileNumber,
+                        PostalCode = "",
+                        ReagentCode = 0,
+                        SatetId = 0
 
                     };
 
                     repUserinfo.Insert(newInfo);
-
-                    var newbag = new UserBag()
+                    repBah.Insert(new UserBag()
                     {
                         BagPrice=0,
                         userId = user.Id
-                    };
+                    });
 
-                    repBah.Insert(newbag);
-                    string strSMS = "کاربر گرامی " + model.Name +" نام کاربری شما " + model.MobileNumber + " کلمه عبور شما " + model.Password + " به پی یو نظری خوش آمدید ";
-                    SendSMS(model.MobileNumber, strSMS);
+                    return View("login");
 
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
-                    string CurrentDate = pc.GetYear(DateTime.Now) + "/" + pc.GetMonth(DateTime.Now) + "/" + pc.GetDayOfMonth(DateTime.Now);
-                    var CurrenShamsiDate = pc.GetYear(DateTime.Now) + "/" + pc.GetMonth(DateTime.Now).ToString("00") + "/" + pc.GetDayOfMonth(DateTime.Now).ToString("00") + " " + DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
-
-                    StreamReader sr = new StreamReader(HttpContext.Server.MapPath("/Content/emailtemp/email-format.html"));
-                    string SampleMail = sr.ReadToEnd();
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append("کاربرگرامی ازینکه در سایت  ثبت نام کردید سپاسگذاریم.");
-                    sb.Append("</br>");
-                    sb.Append("لطفا برای فعالسازی حساب کاربری خود روی لینک زیر کلیک کنید");
-                    sb.Append("</br>");
-                    sb.Append("<a href=\"" + callbackUrl + "\">لینک تایید ایمیل</a>");
-                    SampleMail = SampleMail.Replace("{{EmailTitle}}", "ثبت نام در سایت bitmartfx.com");
-                    SampleMail = SampleMail.Replace("{{EmailBody}}", sb.ToString());
-                    SampleMail = SampleMail.Replace("{{EmailDate}}", CurrentDate.ToString());
-                    Helpers.CustomEmail.sendemail("ثبت نام در سایت ", model.Email, SampleMail);
-                    ViewBag.Link = callbackUrl;
-
-
-                    return View("DisplayEmail");
                 }
-                AddErrors(result);
 
-
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
+            catch (Exception e)
+            {
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                throw;
+            }
         }
 
         //

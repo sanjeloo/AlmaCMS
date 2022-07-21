@@ -46,24 +46,46 @@ namespace AlmaCMS.Controllers
             return View();
         }
         [HttpPost]
+        private IEnumerable<int> FindLeafSubCategories(int groupId)
+        {
+            List<int> groupIdList = new List<int> { groupId};
+
+            while (true)
+            {
+                var templist = repProductsGroup.Where(pg => groupIdList.Any(gl => gl ==pg.ParentId))
+                  .Select(c => c.id).ToList();
+
+                if (templist.Count()==0)
+                    break;
+
+                groupIdList = templist;
+            }
+            return groupIdList;
+        }
         public ActionResult GetProducts(int start, int pagesize, int groupid)
         {
-            List<ProductListItemDTO> data = repProducts.Where(p => p.GroupID == groupid && p.Visibility).OrderByDescending(p => p.Priority & p.id)
-              .OrderByDescending(p=>p.ExistStatus).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
+            var leafSubCategories = FindLeafSubCategories(groupid);
+
+            var data = repProducts.Where(p => leafSubCategories.Any(gl => gl ==p.GroupID)
+             && p.Visibility).OrderByDescending(p => p.Priority & p.id)
+            .OrderByDescending(p => p.ExistStatus).Skip(start).Take(pagesize).Select(s => new ProductListItemDTO()
             {
                 id = s.id,
                 image = s.Image,
                 title = s.Title.toSlugify(),
                 normalTitle = s.Title
             }).ToList();
+
+           int  totalCount = repProducts.Where(p => leafSubCategories.Any(gl => gl ==p.GroupID) && p.Visibility).Count();
+
             start+=1;
-            int totalcount = repProducts.Where(p => p.GroupID == groupid).Count();
+
             var result = new ProductsListDTO()
             {
                 data = data,
                 pageSize = pagesize,
                 start = start,
-                totalCount =  totalcount
+                totalCount =  totalCount
             };
             return Json(result);
         }
@@ -73,7 +95,7 @@ namespace AlmaCMS.Controllers
             var data = new List<dynamic>();
             var groupList = new List<ProductsGroup>();
 
-            groupList = repProductsGroup.GetAll().OrderBy(p=>p.Priority).ToList();
+            groupList = repProductsGroup.GetAll().OrderBy(p => p.Priority).ToList();
             foreach (var item in groupList)
             {
                 data.Add(new { Name = item.Title, Id = item.id, ParentId = item.ParentId });

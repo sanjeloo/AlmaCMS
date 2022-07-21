@@ -101,9 +101,9 @@
         </style>
     </noscript>
     <script type="text/javascript">function setREVStartSize(t) { try { var h, e = document.getElementById(t.c).parentNode.offsetWidth; if (e = 0 === e || isNaN(e) ? window.innerWidth : e, t.tabw = void 0 === t.tabw ? 0 : parseInt(t.tabw), t.thumbw = void 0 === t.thumbw ? 0 : parseInt(t.thumbw), t.tabh = void 0 === t.tabh ? 0 : parseInt(t.tabh), t.thumbh = void 0 === t.thumbh ? 0 : parseInt(t.thumbh), t.tabhide = void 0 === t.tabhide ? 0 : parseInt(t.tabhide), t.thumbhide = void 0 === t.thumbhide ? 0 : parseInt(t.thumbhide), t.mh = void 0 === t.mh || "" == t.mh || "auto" === t.mh ? 0 : parseInt(t.mh, 0), "fullscreen" === t.layout || "fullscreen" === t.l) h = Math.max(t.mh, window.innerHeight); else { for (var i in t.gw = Array.isArray(t.gw) ? t.gw : [t.gw], t.rl) void 0 !== t.gw[i] && 0 !== t.gw[i] || (t.gw[i] = t.gw[i - 1]); for (var i in t.gh = void 0 === t.el || "" === t.el || Array.isArray(t.el) && 0 == t.el.length ? t.gh : t.el, t.gh = Array.isArray(t.gh) ? t.gh : [t.gh], t.rl) void 0 !== t.gh[i] && 0 !== t.gh[i] || (t.gh[i] = t.gh[i - 1]); var r, a = new Array(t.rl.length), n = 0; for (var i in t.tabw = t.tabhide >= e ? 0 : t.tabw, t.thumbw = t.thumbhide >= e ? 0 : t.thumbw, t.tabh = t.tabhide >= e ? 0 : t.tabh, t.thumbh = t.thumbhide >= e ? 0 : t.thumbh, t.rl) a[i] = t.rl[i] < window.innerWidth ? 0 : t.rl[i]; for (var i in r = a[0], a) r > a[i] && 0 < a[i] && (r = a[i], n = i); var d = e > t.gw[n] + t.tabw + t.thumbw ? 1 : (e - (t.tabw + t.thumbw)) / t.gw[n]; h = t.gh[n] * d + (t.tabh + t.thumbh) } void 0 === window.rs_init_css && (window.rs_init_css = document.head.appendChild(document.createElement("style"))), document.getElementById(t.c).height = h, window.rs_init_css.innerHTML += "#" + t.c + "_wrapper { height: " + h + "px }" } catch (t) { console.log("Failure at Presize of Slider:" + t) } };</script>
-   
 
-    <link rel="stylesheet" href="/Content/Site/css/LayoutSite.css" type="text/css" media="screen"  />
+
+    <link rel="stylesheet" href="/Content/Site/css/LayoutSite.css" type="text/css" media="screen" />
     <script type='text/javascript' src='/Content/Site/js/avatar-manager.min.js?ver=1.2.1'></script>
 
 
@@ -133,6 +133,7 @@
                                         @if (!User.Identity.IsAuthenticated)
                                         {
                                             <a href="/Account/Register"><i class="pusn-login"></i> عضویت</a>
+                                            <a href="/account/login"><i class="pusn-register"></i> ورود</a>
                                             <a href="/account/login"><i class="pusn-register"></i> ورود</a>
                                         }
                                         else
@@ -232,13 +233,29 @@
                             </div>
                             <div class="whb-column whb-col-right whb-visible-lg">
                                 <div class="whb-space-element " style="width:15px;"></div><div class="woodmart-header-links woodmart-navigation menu-simple-dropdown wd-tools-element item-event-hover  my-account-with-text login-side-opener" title="حساب کاربری من">
-                                    <a href="/Account/login">
-                                        <span class="wd-tools-icon">
-                                        </span>
-                                        <span class="wd-tools-text">
-                                            ورود / ثبت نام
-                                        </span>
-                                    </a>
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <a href="/Account/Register"><i class="pusn-login"></i> عضویت</a>
+                                        <a href="/account/login"><i class="pusn-register"></i> ورود</a>
+                                    }
+                                    else
+                                    {
+                                        if (User.IsInRole("Member"))
+                                        {
+                                            <a href="/profile"><i class="pusn-login"></i> @User.Identity.Name</a>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
+                                        }
+                                        else if (User.IsInRole("Expert"))
+                                        {
+                                            <a href="/Expert/Profile"><i class="pusn-login"></i> @User.Identity.Name</a>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
+                                        }
+                                        else if (User.IsInRole("Admin"))
+                                        {
+                                            <a href="/Manage/Admin/dashboard"><i class="pusn-login"></i> @User.Identity.Name</a>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
+                                        }
+                                    }
 
                                 </div>
 
@@ -812,50 +829,7 @@
         <div class="mobile-menu-tab mobile-categories-menu">
             <div class="menu-%d9%85%d9%86%d9%88%db%8c-%d8%af%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%b9%d9%85%d9%88%d8%af%db%8c-container">
                 <ul id="menu-%d9%85%d9%86%d9%88%db%8c-%d8%af%d8%b3%d8%aa%d9%87-%d8%a8%d9%86%d8%af%db%8c-%d8%b9%d9%85%d9%88%d8%af%db%8c-1" name="moblie-root-menu" class="site-mobile-menu">
-                    @*<li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/16/موتوری" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات موتوری و گیربکس</span></a><i class="iconArrow"></i>
-                            <ul class="submenumobile">
-                                <li class="menu-item1">
-                                    <a href="#">hamid</a>
-                                    <i class="iconArrow1"></i>
-                                    <ul class="subsubmenumobile">
-                                        <li class="menu-item2">
-                                            <a href="#">amin</a>
-                                            <a href="#">amin</a>
-                                            <a href="#">amin</a>
-                                            <a href="#">amin</a>
-                                            <a href="#">amin</a>
-                                            <a href="#">amin</a>
-                                            <a href="#">amin</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>*@
-                    @*<li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/17/بدنه" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات بدنه و سپر</span></a><i class="iconArrow"></i>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/18/الکتریکی" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات برقی</span></a><i class="iconArrow"></i>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/19/جلوبندی" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات جلوبندی</span></a><i class="iconArrow"></i>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/20/امنیتی" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات ایمنی</span></a>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/21/آپشن" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">آپشن خودرو</span></a>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/22/قطعه" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات مصرفی</span></a>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/23/اکسسوری" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">اکسسوری خودرو</span></a>
-                        </li>
-                        <li id="menu-item-376" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover">
-                            <a href="/Products/24/داخل-خودرو" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">قطعات داخل خودرو</span></a>
-                        </li>*@
+                  
                 </ul>
             </div>
         </div><div class="mobile-menu-tab mobile-pages-menu active">
@@ -1053,9 +1027,9 @@
         }
         function addSubGroup(allGroups, subGroupList, groupid) {
             var level = getLiLevelMoblie(allGroups, groupid, 0);
-            var result = '<ul class="section-nav'+level+' col1" style="" id="ulSubGroups' + groupid + '">';
+            var result = '<ul class="section-nav' + level + ' col1" style="" id="ulSubGroups' + groupid + '">';
             $.each(subGroupList, function (index, value) {
-                result += `<li class="toc-entry toc-h2"><a class="a-subGroup" href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-') }">${value.Name}</a>`;
+                result += `<li class="toc-entry toc-h2"><a class="a-subGroup" href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-')}">${value.Name}</a>`;
                 if (allGroups.filter(x => x.ParentId == value.Id).length > 0)
                     result += addSubGroup(allGroups, allGroups.filter(x => x.ParentId == value.Id), value.Id);
                 result += '</li>';
@@ -1067,7 +1041,7 @@
             var level = getLiLevelMoblie(allGroups, groupid, 0);
             var result = `<ul class="submenumobile${level}" id="ulSubGroupsMoblie${groupid}">`;
             $.each(subGroupList, function (index, value) {
-                result += `<li class="menu-item${level}"><a href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-') }">${value.Name}</a>`;
+                result += `<li class="menu-item${level}"><a href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-')}">${value.Name}</a>`;
 
                 if (allGroups.filter(x => x.ParentId == value.Id).length > 0) {
                     result += `<i class="iconArrow1"></i>`;
@@ -1106,22 +1080,22 @@
                     $.each(rootGroups, function (index, value) {
                         //================== append to desktop menu ==================//
                         $('#menu-categories').append(`
-                                                            <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item - event - hover">
-                                                                <a href = "/Products/${value.Id}/${value.Name.replaceAll(' ','-')}" class= "woodmart-nav-link" >
-                                                                    <i class="fa fa-car category-icon" ></i >
-                                                                    <span class="nav-link-text"> ${value.Name}</span>
-                                                                </a>
+                                                                <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item - event - hover">
+                                                                    <a href = "/Products/${value.Id}/${value.Name.replaceAll(' ', '-')}" class= "woodmart-nav-link" >
+                                                                        <i class="fa fa-car category-icon" ></i >
+                                                                        <span class="nav-link-text"> ${value.Name}</span>
+                                                                    </a>
 
-                                                                <div id="div${value.Id}" class="submenu">
+                                                                    <div id="div${value.Id}" class="submenu">
 
-                                                                    </div>
+                                                                        </div>
 
-                                                            </li >`);
+                                                                </li >`);
                         //=================== append to moblie menu ====================//
                         $('[Name="moblie-root-menu"]').append(`
-                                     <li id = "menu-item-376" name="subMenuMoblie${value.Id}" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover" >
-                                     <a href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-') }" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">${value.Name}</span></a > <i class="iconArrow"></i>
-                                     </li >`);
+                                         <li id = "menu-item-376" name="subMenuMoblie${value.Id}" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-376 item-level-0 menu-item-design-sized menu-mega-dropdown item-event-hover" >
+                                         <a href="/Products/${value.Id}/${value.Name.replaceAll(' ', '-')}" class="woodmart-nav-link"><i class="fa fa-car category-icon" /></i> <span class="nav-link-text">${value.Name}</span></a > <i class="iconArrow"></i>
+                                         </li >`);
                     });
                     $.each(rootGroups, function (index, value) {
                         if (data.filter(x => x.ParentId == value.Id).length == 0)
@@ -1143,7 +1117,7 @@
             })
         })
     </script>
-  <link rel='stylesheet' id='qlwapp-css' href='~/Content/Images/frontend.css?ver=4.9.8' type='text/css' media='all' />
+    <link rel='stylesheet' id='qlwapp-css' href='~/Content/Images/frontend.css?ver=4.9.8' type='text/css' media='all' />
     <div id="qlwapp" class="qlwapp-free qlwapp-button qlwapp-bottom-left qlwapp-all qlwapp-rounded">
         <div class="qlwapp-container">
             <div class="qlwapp-box">

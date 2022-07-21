@@ -4139,6 +4139,7 @@
     <Content Include="Views\Products\_CommentsResponsive+.cshtml" />
     <Content Include="Views\Products\_CommentsResponsive.cshtml" />
     <Content Include="Uploads\Web\products\Thumbs.db" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web References\ir.smsran\SendSMS.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -4151,8 +4152,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />

@@ -160,7 +160,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
+<script>
         $('#phoneLogin').click(function () {
             $('#codeBox').val('')
             var phone = $('#userPhoneNumber').val();
@@ -177,7 +177,6 @@
                 method: 'post',
                 data: { phoneNumber: $('#userPhoneNumber').val() },
                 success: function (result) {
-                    debugger;
                     if (!result.Success)
                         $('#phoneError').html(result.Message)
                     else {
@@ -205,8 +204,8 @@
 
         });
         $('#sendCode').click(function () {
-            debugger;
             var code = $('#codeBox').val();
+            var url ='@ViewBag.ReturnUrl'
             if (code.length != 5) {
                 $('#codeError').html('کد وارد شده صحیح نیست')
                 return;
@@ -217,7 +216,7 @@
             $.ajax({
                 url: '/Account/VerifyPhonelogin',
                 method: 'post',
-                data: { phoneNumber: $('#userPhoneNumber').val(), code: $('#codeBox').val() },
+                data: { phoneNumber: $('#userPhoneNumber').val(), code: $('#codeBox').val() ,url:url },
                 success: function (result) {
                     if (result.Success)
                         location.href = result.Url;
@@ -230,5 +229,5 @@
                 }
             })
         })
-    </script>
+</script>
 }

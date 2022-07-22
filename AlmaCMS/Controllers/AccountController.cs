@@ -100,27 +100,32 @@ namespace AlmaCMS.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        AspNetUser a = db.AspNetUsers.FirstOrDefault();
+                        ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
 
-                        var user = await UserManager.FindAsync(model.Email, model.Password);
-                        if (UserManager.IsInRole(user.Id, "Suspend"))
-                        {
-                            return RedirectToAction("index", "Home");
-                        }
+                        HttpCookie shoppingcartCookie = new HttpCookie("name");
+                        shoppingcartCookie.Value = repUserinfo.GetByUserID(user.Id).Name;
+                        Response.SetCookie(shoppingcartCookie);
+                        //user.FullName = repUserinfo.GetByUserID(user.Id).Name;
+                        //if (UserManager.IsInRole(user.Id, "Suspend"))
+                        //{
+                        //    return RedirectToAction("index", "Home");
+                        //}
 
-                        if (UserManager.IsInRole(user.Id, "Admin"))
-                        {
-                            return RedirectToAction("Dashboard", "Admin", new { area = "manage" });
-                        }
-                        if (UserManager.IsInRole(user.Id, "Expert"))
-                        {
-                            return RedirectToAction("Index", "profile", new { area = "Expert" });
+                        //if (UserManager.IsInRole(user.Id, "Admin"))
+                        //{
+                        //    return RedirectToAction("Dashboard", "Admin", new { area = "manage" });
+                        //}
+                        //if (UserManager.IsInRole(user.Id, "Expert"))
+                        //{
+                        //    return RedirectToAction("Index", "profile", new { area = "Expert" });
 
-                        }
-                        if (UserManager.IsInRole(user.Id, "member"))
-                        {
-                            return RedirectToAction("Index", "userprofile");
+                        //}
+                        //if (UserManager.IsInRole(user.Id, "member"))
+                        //{
+                        //    return RedirectToAction("Index", "userprofile");
 
-                        }
+                        //}
                         return RedirectToLocal(returnUrl);
 
                     }
@@ -172,48 +177,53 @@ namespace AlmaCMS.Controllers
         [Route("VerifyPhonelogin")]
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> VerifyPhonelogin(string phoneNumber, string code)
+        public async Task<ActionResult> VerifyPhonelogin(string phoneNumber, string code, string url)
         {
             try
             {
 
-            if (phoneNumber.Length!=11 || code.Length!=5)
-                return Json(new { Success = false, Message = "کد نامعتبر" });
+                if (phoneNumber.Length!=11 || code.Length!=5)
+                    return Json(new { Success = false, Message = "کد نامعتبر" });
 
 
-            int comparableCode = int.Parse(code);
-            var tempUser = await db.TempUserLogins.FirstOrDefaultAsync(tu => tu.PhoneNumber==phoneNumber
-            && tu.ExpirationDate>DateTime.Now);
-            if (tempUser==null)
-                return Json(new { Success = false, Message = "کد منقضی شده است" });
-            if (tempUser.Code !=comparableCode)
-                return Json(new { Success = false, Message = "کد وارد شده اشتباه است" });
+                int comparableCode = int.Parse(code);
+                var tempUser = await db.TempUserLogins.FirstOrDefaultAsync(tu => tu.PhoneNumber==phoneNumber
+                && tu.ExpirationDate>DateTime.Now);
+                if (tempUser==null)
+                    return Json(new { Success = false, Message = "کد منقضی شده است" });
+                if (tempUser.Code !=comparableCode)
+                    return Json(new { Success = false, Message = "کد وارد شده اشتباه است" });
 
-            var user = await UserManager.FindByIdAsync(tempUser.UserId);
-            db.TempUserLogins.Remove(tempUser);
-            await db.SaveChangesAsync();
-            await SignInManager.SignInAsync(user, true, true);
-            string Url = "";
-            if (UserManager.IsInRole(tempUser.UserId, "Suspend"))
-            {
-                Url = "/Index/Home";
-            }
+                ApplicationUser user = await UserManager.FindByIdAsync(tempUser.UserId);
+                db.TempUserLogins.Remove(tempUser);
+                await db.SaveChangesAsync();
+                await SignInManager.SignInAsync(user, true, true);
 
-            if (UserManager.IsInRole(tempUser.UserId, "Admin"))
-            {
-                Url = "/Manage/Admin/Dashboard";
-            }
-            if (UserManager.IsInRole(tempUser.UserId, "Expert"))
-            {
-                Url = "/Expert/profile/Index";
+                HttpCookie shoppingcartCookie = new HttpCookie("name");
+                shoppingcartCookie.Value = repUserinfo.GetByUserID(user.Id).Name;
+                Response.SetCookie(shoppingcartCookie);
+                // user.FullName = repUserinfo.GetByUserID(user.Id).Name;
+                string Url = String.IsNullOrEmpty(url) ? "/Home/Index" : url;
+                //if (UserManager.IsInRole(tempUser.UserId, "Suspend"))
+                //{
+                //    Url = "/Index/Home";
+                //}
 
-            }
-            if (UserManager.IsInRole(tempUser.UserId, "Member"))
-            {
-                Url="/userprofile/Index";
-            }
+                if (UserManager.IsInRole(tempUser.UserId, "Admin"))
+                {
+                    Url = "/Manage/Admin/Dashboard";
+                }
+                //if (UserManager.IsInRole(tempUser.UserId, "Expert"))
+                //{
+                //    Url = "/Expert/profile/Index";
 
-            return Json(new { Success = true, Message = "", Url = Url });
+                //}
+                //if (UserManager.IsInRole(tempUser.UserId, "Member"))
+                //{
+                //    Url="/userprofile/Index";
+                //}
+
+                return Json(new { Success = true, Message = "", Url = Url });
 
             }
             catch (Exception e)
@@ -337,7 +347,7 @@ namespace AlmaCMS.Controllers
                         Email = model.Email,
                         PhoneNumber=model.MobileNumber
                     });
-                    if(!result.Succeeded)
+                    if (!result.Succeeded)
                     {
                         ModelState.AddModelError("MobileNumber", "خطایی رخ داده");
                         return View(model);

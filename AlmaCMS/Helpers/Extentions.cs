@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security;
+using System.Security.Principal;
+using System.Security.Claims;
 
 namespace AlmaCMS.Helpers
 {
@@ -1202,5 +1204,13 @@ namespace AlmaCMS.Helpers
             };
         }
         #endregion
+       
+            public static string GetFullName(this IIdentity identity)
+            {
+                var claim = ((ClaimsIdentity)identity).FindFirst("fullName");
+                // Test for null to avoid issues during local testing
+                return (claim != null) ? claim.Value : string.Empty;
+            }
+        
     }
 }

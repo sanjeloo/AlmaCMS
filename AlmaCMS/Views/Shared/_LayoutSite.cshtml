@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 
 <html dir="rtl" lang="fa-IR">
 <head>
@@ -16,15 +17,6 @@
     <meta name="robots" content="@googlefolow" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    @*<meta name="description" content="@ViewBag.Descriptions" />*@
-    @*<meta name="keywords" content="@ViewBag.Keywords" />*@
-    <!--<meta name="rating" content="Safe For Kids" />
-    <meta content="index" name="googlebot" />
-    <meta name="robots" content="index, follow" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">-->
-
 
     @RenderSection("HeaderSection", false)
 
@@ -130,31 +122,6 @@
                                     <div class="whb-column whb-col-left whb-visible-lg">
                                         <div class="whb-text-element reset-mb-10 "><strong>نیاز به قطعه دارید، نگران نباشید، در کنار شما هستیم / سریع تحویل بگیرید</strong></div>
 
-                                        @if (!User.Identity.IsAuthenticated)
-                                        {
-                                            <a href="/Account/Register"><i class="pusn-login"></i> عضویت</a>
-                                            <a href="/account/login"><i class="pusn-register"></i> ورود</a>
-                                            <a href="/account/login"><i class="pusn-register"></i> ورود</a>
-                                        }
-                                        else
-                                        {
-                                            if (User.IsInRole("Member"))
-                                            {
-                                                <a href="/profile"><i class="pusn-login"></i> @User.Identity.Name</a>
-                                                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
-                                            }
-                                            else if (User.IsInRole("Expert"))
-                                            {
-                                                <a href="/Expert/Profile"><i class="pusn-login"></i> @User.Identity.Name</a>
-                                                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
-                                            }
-                                            else if (User.IsInRole("Admin"))
-                                            {
-                                                <a href="/Manage/Admin/dashboard"><i class="pusn-login"></i> @User.Identity.Name</a>
-                                                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
-                                            }
-                                        }
-
                                     </div>
                                 </div>
                             </div>
@@ -242,17 +209,17 @@
                                     {
                                         if (User.IsInRole("Member"))
                                         {
-                                            <a href="/profile"><i class="pusn-login"></i> @User.Identity.Name</a>
+                                            <a id="nameOfUser" href="/profile"><i class="pusn-login"></i> @User.Identity.Name</a>
                                             <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
                                         }
                                         else if (User.IsInRole("Expert"))
                                         {
-                                            <a href="/Expert/Profile"><i class="pusn-login"></i> @User.Identity.Name</a>
+                                            <a id="nameOfUser" href="/Expert/Profile"><i class="pusn-login"></i> @User.Identity.Name</a>
                                             <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
                                         }
                                         else if (User.IsInRole("Admin"))
                                         {
-                                            <a href="/Manage/Admin/dashboard"><i class="pusn-login"></i> @User.Identity.Name</a>
+                                            <a id="nameOfUser" href="/Manage/Admin/dashboard"><i class="pusn-login"></i> @User.Identity.Name</a>
                                             <a href="javascript:document.getElementById('logoutForm').submit()"><i class="pusn-register"></i> خروج</a>
                                         }
                                     }
@@ -676,7 +643,7 @@
     <div class="woodmart-close-side"></div>
     <div class="woodmart-toolbar">
         <div class="woodmart-toolbar-shop woodmart-toolbar-item wd-tools-element">
-            <a href="https://dartkala.com/cart">
+            <a href="/cart">
                 <span class="wd-tools-icon"></span>
                 <span class="woodmart-toolbar-label">
                     فروشگاه
@@ -684,7 +651,7 @@
             </a>
         </div>
         <div class="woodmart-wishlist-info-widget whb-wishlist-icon wd-tools-element" title="عضویت در سایت">
-            <a href="https://dartkala.com/Account/Register">
+            <a href="/Account/Register">
                 <span class="wishlist-icon wd-tools-icon">
                 </span>
                 <span class="woodmart-toolbar-label">
@@ -693,7 +660,7 @@
             </a>
         </div>
         <div class="woodmart-toolbar-home woodmart-toolbar-item wd-tools-element">
-            <a href="https://dartkala.com">
+            <a href="/">
                 <span class="wd-tools-icon"></span>
                 <span class="woodmart-toolbar-label">
                     خانه
@@ -701,7 +668,7 @@
             </a>
         </div>
         <div class="woodmart-header-links wd-tools-element my-account-with-icon  login-side-opener">
-            <a href="https://dartkala.com/Account/login">
+            <a href="/Account/login">
                 <span class="wd-tools-icon"></span>
                 <span class="woodmart-toolbar-label">
                     حساب کاربری من
@@ -712,7 +679,7 @@
     <div class="cart-widget-side">
         <div class="widget-heading">
             <h3 class="widget-title">سبد خرید</h3>
-            <a href="https://dartkala.com/cart" class="close-side-widget wd-cross-button wd-with-text-left">بستن</a>
+            <a href="/cart" class="close-side-widget wd-cross-button wd-with-text-left">بستن</a>
         </div>
         <div class="widget woocommerce widget_shopping_cart"><div class="widget_shopping_cart_content"></div></div>
     </div>
@@ -863,24 +830,24 @@
             <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide form-row-username">
                 برای خرید در سایت بر روی لینک زیر کلیک کرده و پس از ثبت نام در سایت، برای خرید خود اقدام کنید
                 <br />
-                <a type="submit" href="https://dartkala.com/Account/Register" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="ورود">عضویت در سایت</a>
+                <a type="submit" href="/Account/Register" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="ورود">عضویت در سایت</a>
             </p>
             <br />
             <p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide form-row-password">
                 برای ثبت سفارش به صورت عمده از طریق لینک زیر وارد شده و پس از ثبت نام و ارسال مدارک  خود، منتظر تایید مدیر سایت باشید
                 <br />
-                <a type="submit" href="https://dartkala.com/Account/Register" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="ورود">عضویت  سفارش عمده</a>
+                <a type="submit" href="/Account/Register" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="ورود">عضویت  سفارش عمده</a>
             </p>
 
             <br />
             <p class="form-row">
                 <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="9bdc2a0802" />
                 <input type="hidden" name="_wp_http_referer" value="/" />
-                <a type="submit" href="https://dartkala.com/Account/login" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="ورود">ورود به پنل کاربری</a>
+                <a type="submit" href="/Account/login" class="button woocommerce-button woocommerce-form-login__submit" name="login" value="ورود">ورود به پنل کاربری</a>
             </p>
             <br />
             <div class="login-form-footer">
-                <a href="//Account/login" class="woocommerce-LostPassword lost_password">رمز عبور را فراموش کرده اید؟</a>
+                <a href="/Account/login" class="woocommerce-LostPassword lost_password">رمز عبور را فراموش کرده اید؟</a>
             </div>
 
 
@@ -1168,6 +1135,10 @@
             debugger;
             $(this).parent().toggleClass("open")
         });
+        $(document).ready(function () {
+            var name = Cookies.get("name");
+            $('#nameOfUser').html(name)
+        })
     </script>
 </body>
 </html>

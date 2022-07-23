@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using System.Data.Entity;
+using AlmaCMS.Sms;
 
 namespace AlmaCMS.Controllers
 {
@@ -157,20 +158,21 @@ namespace AlmaCMS.Controllers
                 var t = await db.TempUserLogins.FirstOrDefaultAsync(tu => tu.PhoneNumber==phoneNumber);
                 if (t!=null)
                     db.TempUserLogins.Remove(t);
+                int code = new Random().Next(10000, 99999);
                 db.TempUserLogins.Add(new TempUserLogin
                 {
                     ExpirationDate = DateTime.Now.AddMinutes(3),
                     PhoneNumber = phoneNumber,
                     UserId= user.Id,
-                    Code = new Random().Next(10000, 99999)
-                });
+                    Code = code
+                }) ;
                 await db.SaveChangesAsync();
+                SendSms.SendVerification(phoneNumber, code.ToString());
                 return Json(new { Success = true, Message = "کد تایید ارسال شد" });
             }
             catch (Exception e)
             {
-
-                throw;
+                return Json(new { Success = false, Message = "خطایی رخ داده" });
             }
         }
 

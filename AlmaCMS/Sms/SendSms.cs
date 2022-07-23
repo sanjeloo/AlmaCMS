@@ -1,43 +1,39 @@
-﻿using SmsIrRestful;
+﻿using Kavenegar;
+using SmsIrRestful;
 using System;
 using System.Collections.Generic;
 
 namespace AlmaCMS.Sms
 {
 
-    public class SendSms
+    public static class SendSms
     {
-        private readonly string SecurityCode = "sdfguf654sdffyadtfss";
-        private readonly string ApiKey = "7b5fb5724ccebd463bc3be17";
-        private string GetToken()
-        {
-            Token tk = new Token();
-            string result = tk.GetToken(ApiKey, SecurityCode);
-            return result;
-        }
-        public bool Send(string phone, string message)
+        public static int SendVerification(string receptor , string code)
         {
             try
             {
-                var token = GetToken();
-
-                var messageSendObject = new MessageSendObject()
-                {
-                    Messages = new List<string> { message }.ToArray(),
-                    MobileNumbers = new List<string> { phone }.ToArray(),
-                    LineNumber = "30004005330330",
-                    SendDateTime = null,
-                    CanContinueInCaseOfError = true
-                };
-
-                MessageSendResponseObject messageSendResponseObject = new MessageSend().Send(token, messageSendObject);
-
-                return messageSendResponseObject.IsSuccessful;
+                var api = new KavenegarApi("6A5968516B63326F34433763567A6E424C38657039686A5555343944494A345A724F314C6C746D7A6A6D453D");
+                var result = api.VerifyLookup(receptor, code, "Verification");
+                return result.Status;
             }
-            catch (System.Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
-                return false;
+                Console.Write("Message : " + ex.Message);
+                return -1;
+            }
+        }
+        public static int Send(string receptor , string message)
+        {
+            try
+            {
+                var api = new KavenegarApi("6A5968516B63326F34433763567A6E424C38657039686A5555343944494A345A724F314C6C746D7A6A6D453D");
+                var result = api.Send("2000500666", receptor, message);
+                return result.Status;
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Message : " + ex.Message);
+                return -1;
             }
         }
     }
